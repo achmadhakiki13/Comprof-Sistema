@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Datapilar - Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --color-accent: #d21b29;
+            --transition: all 0.3s ease;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #000000;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            scrollbar-width: none; /* Firefox */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* NAVBAR & MOBILE MENU */
+        .nav_cus {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            background-color: rgba(13, 16, 24, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hamburger-icon {
+            position: relative;
+            width: 24px;
+            height: 18px;
+        }
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+        .hamburger-icon span:nth-child(4) { top: 16px; }
+
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
+        #mobile-menu {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 80%;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 100;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding-top: 5rem;
+        }
+        #mobile-menu.is-active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .mobile-menu-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 1.125rem;
+            transition: var(--transition);
+        }
+        .mobile-menu-link:hover { color: var(--color-accent); }
+        .plus-icon {
+            transition: transform 0.3s ease;
+        }
+        .plus-icon.open {
+            transform: rotate(45deg);
+        }
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding-left: 1rem;
+        }
+
+        /* CSS BARU UNTUK ANIMASI SCROLL */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .explore-btn {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    border-radius: 9999px;
+    color: #e5e7eb;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+.explore-btn:hover {
+    background-color: #E31A22;
+    border-color: #E31A22;
+    color: white;
+}
+.explore-btn .arrow {
+    display: inline-block;
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+.explore-btn:hover .arrow {
+    transform: translateX(4px);
+}
+    </style>
+</head>
+<body>
+    <nav class="nav_cus">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html">
+                    <div>
+                        <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
+                    </div>
+                </a>
+                <div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="about.html" class="hover:text-red-500 transition">About Us</a>
+                        <a href="solutions.html" class="hover:text-red-500 transition">Solutions</a>
+                        <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
+                        <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                        <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                    </div>
+                    <div class="flex items-center md:hidden">
+                        <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
+                            <div class="hamburger-icon">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <div id="mobile-menu">
+        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="products">
+                    <span> Our Partners</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="products-submenu" class="submenu">
+                    <li><a href="#" class="mobile-menu-link text-base">V - Key</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Imperva</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Knowbe4</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Big ID</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Sentinel One</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Ping Identity</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Protegrity</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Ridge Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Soti</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Synopsys</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Tanium</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Vectra</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Datavisor</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">IBM</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Pentera</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Thales</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                    <span>Services & Solutions</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="solutions-submenu" class="submenu">
+                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+                </ul>
+            </li>
+            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <section id="exceptional-work-section" class="py-24 sm:py-32 bg-black relative scroll-animate">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center md:justify-end">
+                <div class="w-full md:w-1/2 lg:w-7/12 text-center md:text-left">
+                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                        Exceptional Work, Outstanding People
+                    </h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-300">
+                        We frequently engage with experienced professionals in technology and cybersecurity, and our communication showcases our up to date expertise and capabilities.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-full h-[100px] overflow-hidden pointer-events-none">
+            <canvas id="waveCanvas" class="w-full h-full"></canvas>
+        </div>
+    </section>
+
+    <section class="bg-black text-white py-20 sm:py-24 scroll-animate">
+        <div class="max-w-4xl px-6 lg:px-8">
+            <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+                Begin Your Professional Journey Now
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-gray-300">
+                Our organization is built by forward-thinking entrepreneurs who are driven to innovate, push limits, and grow the business through collaboration, discipline, and strong work ethics.
+            </p>
+            <p class="mt-6 text-lg leading-8 text-gray-300">
+                We also recognize the importance of the communities where we live and operate and believe that true growth involves giving back to the environment around us. Our dedication to clients and cybersecurity is powered by a diverse team of individuals with unique backgrounds, creative perspectives, and rich experiences — all coming together to deliver excellence in everything we do.
+            </p>
+            <p class="mt-6 text-lg leading-8 text-gray-300">
+                Think you have what it takes to be part of our talented team? We're actively hiring across a variety of business areas, including Sales, Consulting, Support, and Technical roles. Take the first step in your professional journey with us.
+            </p>
+            <div class="mt-10">
+                <a href="contactus.html" class="explore-btn">
+                    JOIN US <span class="arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // --- 1. Mobile Menu Logic ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const submenuToggles = mobileMenu ? mobileMenu.querySelectorAll('[data-submenu-toggle]') : [];
+
+    const toggleMobileMenu = () => {
+        if (mobileMenu) {
+            const isActive = mobileMenu.classList.toggle('is-active');
+            if (hamburgerIcon) {
+                hamburgerIcon.classList.toggle('open', isActive);
+            }
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+    };
+
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const submenuId = toggle.dataset.submenuToggle + '-submenu';
+            const submenu = document.getElementById(submenuId);
+            const plusIcon = toggle.querySelector('.plus-icon');
+            if (submenu) {
+                if (plusIcon) plusIcon.classList.toggle('open');
+                if (submenu.style.maxHeight) {
+                    submenu.style.maxHeight = null;
+                } else {
+                    submenu.style.maxHeight = submenu.scrollHeight + "px";
+                    submenu.style.paddingTop = '8px';
+                    submenu.style.paddingBottom = '8px';
+                }
+            }
+        });
+    });
+
+    // --- 2. Wave Canvas Animation Logic (Diperbaiki & Ditingkatkan) ---
+   const canvas = document.getElementById("waveCanvas");
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+
+    // --- Variabel Warna Diubah ke Merah ---
+    const lineColor = "rgba(210, 27, 41, 1)"; // Warna utama garis (Merah)
+    const glowColor = "rgba(210, 27, 41, 0.7)"; // Warna efek 'glow' (Merah)
+    const lineCount = 100; 
+    const minHeight = 20;  
+    const maxHeight = 150; 
+    const mouseInfluenceRadius = 150; 
+    const mouseHeightBoost = 75; 
+
+    let lines = [];
+    let mouse = {
+        x: undefined,
+        y: undefined
+    };
+
+    canvas.addEventListener('mousemove', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = event.clientX - rect.left;
+        mouse.y = event.clientY - rect.top;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        mouse.x = undefined;
+        mouse.y = undefined;
+    });
+    
+    class Line {
+        constructor(x, y, width, speed) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.speed = speed;
+            this.height = minHeight;
+            this.angle = Math.random() * Math.PI * 2;
+        }
+
+        update() {
+            this.angle += this.speed;
+            
+            const baseAnimHeight = (Math.sin(this.angle) + 1) / 2 * (maxHeight - minHeight);
+            let targetHeight = minHeight + baseAnimHeight;
+
+            if (mouse.x !== undefined) {
+                const dx = this.x - mouse.x;
+                const distance = Math.sqrt(dx * dx);
+
+                if (distance < mouseInfluenceRadius) {
+                    const influence = 1 - (distance / mouseInfluenceRadius);
+                    targetHeight += mouseHeightBoost * influence;
+                }
+            }
+            this.height += (targetHeight - this.height) * 0.1;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.shadowColor = glowColor;
+            ctx.shadowBlur = 10;
+            
+            const gradient = ctx.createLinearGradient(this.x, this.y, this.x, this.y - this.height);
+            // --- Warna Gradient Diubah ke Merah Transparan ---
+            gradient.addColorStop(0, "rgba(210, 27, 41, 0)"); // Transparan di bawah
+            gradient.addColorStop(1, lineColor); // Warna solid di atas
+
+            ctx.strokeStyle = gradient;
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.x, this.y - this.height);
+            ctx.stroke();
+        }
+    }
+
+    function init() {
+        lines = [];
+        const gap = canvas.width / (lineCount + 1);
+        for (let i = 0; i < lineCount; i++) {
+            const lineWidth = 2;
+            const x = gap * (i + 1);
+            const y = canvas.height;
+            const speed = 0.01 + Math.random() * 0.02;
+            lines.push(new Line(x, y, lineWidth, speed));
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        
+        lines.forEach(line => {
+            line.update();
+            line.draw();
+        });
+        
+        requestAnimationFrame(animate);
+    }
+
+    function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        init();
+    }
+    
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    animate();
+}
+
+    // --- 3. Scroll Animation Logic (BARU) ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    const elementsToAnimate = document.querySelectorAll('.scroll-animate');
+    elementsToAnimate.forEach(el => observer.observe(el));
+});
+</script>
+</body>
+</html>

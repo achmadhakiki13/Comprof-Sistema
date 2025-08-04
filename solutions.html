@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Datapilar - Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <style>
+        /* === PENGATURAN DASAR & VARIABEL === */
+        :root {
+            --color-accent: #d21b29;
+            --color-accent-hover: #E31A22;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #000000;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            scrollbar-width: none; /* Firefox */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, etc. */
+        }
+
+        /* === GAYA NAVBAR & MENU MOBILE === */
+        .nav_cus {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            background-color: rgba(13, 16, 24, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .nav_cus.scrolled {
+            background-color: rgba(13, 16, 24, 0.85);
+        }
+        .hamburger-icon {
+            position: relative;
+            width: 24px;
+            height: 18px;
+        }
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            border-radius: 9px;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+        .hamburger-icon span:nth-child(4) { top: 16px; }
+
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) { top: 8px; width: 0%; left: 50%; }
+        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
+        #mobile-menu {
+            position: fixed;
+            right: 0; top: 0; bottom: 0;
+            width: 80%;
+            max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 100;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding-top: 5rem;
+            overflow-y: auto;
+        }
+        #mobile-menu.is-active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .mobile-menu-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 1.125rem;
+            transition: color 0.3s ease;
+        }
+        .mobile-menu-link:hover { color: var(--color-accent); }
+        .plus-icon {
+            transition: transform 0.3s ease;
+        }
+        .plus-icon.open { transform: rotate(45deg); }
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding-left: 1rem;
+        }
+
+        /* === GAYA MONITOR === */
+        .monitor-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .monitor {
+            width: 90vw;
+            max-width: 750px;
+            aspect-ratio: 16 / 9;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            padding: 1.5%;
+            box-shadow: 0 15px 35px rgba(94, 0, 0, 0.4);
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .screen {
+            width: 100%; height: 100%;
+            background-color: #000;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: inset 0 0 15px rgba(213, 26, 26, 0.5);
+        }
+        .screen video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .stand {
+            width: 8%; max-width: 60px; height: 60px;
+            background: linear-gradient(to bottom, #4d0000, #1a1a1a);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .base {
+            width: 28%; max-width: 250px; height: 12px;
+            background: #1e1e1e;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+        }
+        .section-divider {
+            width: 80%; max-width: 900px; height: 2px;
+            background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+            box-shadow: 0 0 15px 1px rgba(210, 27, 41, 0.5);
+            border-radius: 2px;
+        }
+
+        /* === GAYA TOMBOL KUSTOM === */
+        .explore-btn {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(210, 27, 41, 0.6);
+            border-radius: 9999px;
+            color: #e5e7eb;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .explore-btn:hover {
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+            color: white;
+        }
+        .explore-btn .arrow {
+            display: inline-block;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .explore-btn:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* === ANIMASI INTERAKTIF SAAT SCROLL (BARU) === */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition-delay: var(--delay, 0s);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Efek tambahan saat cursor mouse di atas kartu */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: scale(1.03); /* Sedikit membesar */
+            box-shadow: 0 10px 30px rgba(210, 27, 41, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="nav_cus">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html">
+                    <div>
+                        <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
+                    </div>
+                </a>
+                <div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="about.html" class="hover:text-[--color-accent] transition-colors">About Us</a>
+                        <a href="solutions.html" class="hover:text-[--color-accent] transition-colors">Solutions</a>
+                        <a href="careers.html" class="hover:text-[--color-accent] transition-colors">Careers</a>
+                        <a href="#blog-page" class="hover:text-[--color-accent] transition-colors">Blog</a>
+                        <a href="contactus.html" class="hover:text-[--color-accent] transition-colors">Contact Us</a>
+                    </div>
+                    <div class="flex items-center md:hidden">
+                        <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
+                            <div class="hamburger-icon">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <div id="mobile-menu">
+        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="products">
+                    <span> Our Partners</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="products-submenu" class="submenu">
+                    <li><a href="#" class="mobile-menu-link text-base">V - Key</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Imperva</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Knowbe4</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Big ID</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Sentinel One</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Ping Identity</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Protegrity</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Ridge Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Soti</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Synopsys</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Tanium</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Vectra</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Datavisor</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">IBM</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Pentera</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Thales</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                    <span>Services & Solutions</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="solutions-submenu" class="submenu">
+                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+                </ul>
+            </li>
+            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <section id="solutions-section" class="bg-black pt-28 pb-16 sm:pt-32 sm:pb-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center mb-16">
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl scroll-reveal">Services & Solution</h2>
+                <p class="mt-4 text-lg leading-8 text-gray-300 scroll-reveal" style="--delay: 0.1s;">
+                    Empower your cybersecurity with our top-tier solutions for unmatched safety and resilience.
+                </p>
+            </div>
+            <div class="monitor-container scroll-reveal" style="--delay: 0.2s;">
+                <div class="monitor">
+                    <div class="screen">
+                        <video autoplay loop muted playsinline>
+                            <source src="asset/Gif/bgcareers.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="stand"></div>
+                <div class="base"></div>
+                <div class="section-divider"></div>
+            </div>
+        </div>
+    </section>
+    
+   <section id="proactive-support" class="bg-black py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-4xl text-center mb-16 scroll-reveal">
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+                Our Services
+            </h2>
+            <p class="mt-4 text-lg text-gray-400">
+                Strengthen your security posture with our expert services designed to mitigate risk, ensure compliance, and protect your digital assets.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Integrate diverse security products into a unified, effective, and centralized defense system.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Managed Security Services</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    24/7 monitoring, management, and incident response for your security infrastructure by our expert team (SOC).
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Application Security</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+            <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="bg-gray-700/50 p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
+                </div>
+                <p class="text-gray-400 text-sm flex-grow">
+                    Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    
+    <section id="streamlined-solutions-section" class="bg-black pt-10 pb-20 sm:pt-12 sm:pb-24">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-5xl scroll-reveal">
+                    Our Solutions</h2>
+                    <p class="mt-4 text-lg leading-8 text-gray-300 scroll-reveal" style="--delay: 0.1s;">
+                    We are partnering with the world class best technology in order provide world class enterprise cyber security solution to its customers</p>
+            </div>
+            <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+                <div class="text-center p-4 scroll-reveal" style="--delay: 0s;">
+                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                        <i class="fa-solid fa-user-lock text-3xl text-[--color-accent]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Customer Identity & Management Access</h3>
+                    <p class="text-sm text-gray-400">
+                        Secure and manage user identities, ensuring authorized access while providing a seamless user experience.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="text-center p-4 scroll-reveal" style="--delay: 0.1s;">
+                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                        <i class="fa-solid fa-network-wired text-3xl text-[--color-accent]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Web Application & API Protection (WAAP)</h3>
+                    <p class="text-sm text-gray-400">
+                        Comprehensive defense against threats targeting your web applications and APIs, including bots and injection attacks.
+                    </p>
+                    <div class="mt-4">
+                        <a href="Waap.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="text-center p-4 scroll-reveal" style="--delay: 0.2s;">
+                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                        <i class="fa-solid fa-database text-3xl text-[--color-accent]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Data Security</h3>
+                    <p class="text-sm text-gray-400">
+                        Implementing robust encryption and access controls to safeguard sensitive information across all platforms.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="text-center p-4 scroll-reveal" style="--delay: 0s;">
+                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                        <i class="fa-solid fa-user-shield text-3xl text-[--color-accent]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Privacy Data Protection</h3>
+                    <p class="text-sm text-gray-400">
+                        Ensuring compliance with global privacy regulations and protecting personal data from unauthorized access and breaches.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="text-center p-4 scroll-reveal" style="--delay: 0.1s;">
+                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                        <i class="fa-solid fa-desktop text-3xl text-[--color-accent]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">End Point Protection</h3>
+                    <p class="text-sm text-gray-400">
+                        Advanced security for all network endpoints, including laptops, desktops, and mobile devices, against malware and intrusions.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="text-center p-4 scroll-reveal" style="--delay: 0.2s;">
+                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                        <i class="fa-solid fa-user-secret text-3xl text-[--color-accent]"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Fraud Prevention</h3>
+                    <p class="text-sm text-gray-400">
+                        Real-time monitoring and advanced analytics to detect and prevent fraudulent activities and transactions.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // --- 1. LOGIKA MENU MOBILE & SUBMENU ---
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburgerBtn && mobileMenu) {
+                const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+                const closeMenuBtn = document.getElementById('close-menu-btn');
+                
+                const toggleMobileMenu = () => {
+                    const isActive = mobileMenu.classList.toggle('is-active');
+                    if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                };
+
+                hamburgerBtn.addEventListener('click', toggleMobileMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+                const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+                submenuToggles.forEach(toggle => {
+                    toggle.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const submenuId = toggle.dataset.submenuToggle + '-submenu';
+                        const submenu = document.getElementById(submenuId);
+                        const plusIcon = toggle.querySelector('.plus-icon');
+
+                        if (submenu && plusIcon) {
+                            plusIcon.classList.toggle('open');
+                            submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
+                        }
+                    });
+                });
+            }
+
+            // --- 2. LOGIKA EFEK NAVBAR SAAT SCROLL ---
+            const navbar = document.querySelector('.nav_cus');
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            // --- 3. LOGIKA ANIMASI SAAT SCROLL (INTERSECTION OBSERVER) ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Jika elemen masuk ke layar, tambahkan kelas .visible untuk FADE IN
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } 
+                    // Jika elemen keluar dari layar, hapus kelas .visible untuk FADE OUT
+                    else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Memicu animasi saat 10% elemen terlihat
+            });
+
+            // Terapkan observer ke semua elemen yang ingin dianimasikan
+            const elementsToAnimate = document.querySelectorAll('.scroll-reveal');
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
