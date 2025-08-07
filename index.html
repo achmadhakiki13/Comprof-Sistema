@@ -7,7 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <!-- EDIT: Imported thinner font weight (400) for Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700;800&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <style>
         /* =================================
         1. GLOBAL & BASE SETTINGS
@@ -23,17 +24,15 @@ body, html {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #000000;
+    background-color: #030305; 
     font-family: 'Inter', 'Roboto', sans-serif;
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    /* Menghilangkan scrollbar untuk Firefox */
     scrollbar-width: none;
 }
 
-/* Menghilangkan scrollbar untuk Chrome, Safari, dan Opera */
 body::-webkit-scrollbar {
     display: none;
 }
@@ -126,58 +125,185 @@ body::-webkit-scrollbar {
     padding-left: 1rem;
 }
 
-/* =================================
-        4. SCROLL ANIMATION & HERO
-================================= */
-.fade-in-on-scroll {
+/* NEW: Styles for the solutions dropdown */
+.solutions-dropdown {
     opacity: 0;
-    transform: translateY(2rem);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
-.fade-in-on-scroll.is-visible {
+.group:hover .solutions-dropdown {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
 }
-#hero {
+
+
+/* =================================
+        3. TYPOGRAPHY OVERRIDES
+================================= */
+.hero-headline,
+#about-cta-section h2,
+.cta-card h3,
+#portfolio-section h2,
+#blog-page h1,
+.footer-brand h3 {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* =================================
+        NEW HERO SECTION STYLES
+================================= */
+#new-hero {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
-    padding: 0 1.5rem;
+    background-color: #030305;
     overflow: hidden;
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    padding: 0 clamp(2rem, 8vw, 8rem);
 }
-#hero-video {
-    position: absolute;
-    inset: 0;
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-w-7xl;
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    opacity: 0.6;
 }
-#hero-overlay {
+
+/* EDIT: Widened container slightly to prevent unwanted wrapping on large screens */
+.text-content {
+    max-width: 65%; 
+}
+
+.hero-headline {
+    font-size: clamp(3rem, 7vw, 5rem);
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.hero-headline .line {
+    display: block;
+}
+
+.hero-headline .highlight {
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--color-accent), #ff6a88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.hero-subheadline {
+    margin-top: 2rem; 
+    max-width: 36rem;
+    font-size: 1.125rem;
+    color: #d1d5db;
+    line-height: 1.75;
+}
+
+.hero-cta {
+    margin-top: 3rem; 
+}
+
+.glowing-shape {
     position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    top: 50%;
+    right: 0;
+    width: 900px;
+    height: 900px;
+    transform: translate(40%, -50%);
+    background: radial-gradient(circle, rgba(210, 27, 41, 0.4) 0%, rgba(210, 27, 41, 0) 60%);
+    border-radius: 50%;
+    pointer-events: none;
     z-index: 1;
 }
-#hero .content-wrapper {
-    position: relative;
-    z-index: 2;
-    width: 100%;
+
+@keyframes slow-pulse {
+    from {
+        opacity: 0.7;
+        transform: translate(40%, -50%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate(45%, -48%) scale(1.05);
+    }
 }
-#hero h1 {
-    font-size: 2.5rem;
+
+@media (max-width: 1024px) {
+    .text-content {
+        max-width: 80%; /* Adjusted for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    #new-hero {
+        text-align: center;
+        padding: 0 1.5rem;
+    }
+    .text-content {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-cta {
+        display: flex;
+        justify-content: center;
+    }
+    .glowing-shape {
+        width: 600px;
+        height: 600px;
+        transform: translate(25%, -50%);
+        opacity: 0.5;
+    }
+}
+
+/* =================================
+        HERO ENTRY ANIMATION
+================================= */
+.animate-in {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-in.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-headline.animate-in {
+    transition-delay: 0.2s;
+}
+.hero-subheadline.animate-in {
+    transition-delay: 0.4s;
+}
+.hero-cta.animate-in {
+    transition-delay: 0.6s;
+}
+
+.glowing-shape.animate-in {
+    opacity: 0;
+    transform: translate(40%, -50%) scale(0.8);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    transition-delay: 0.1s;
+}
+
+.glowing-shape.animate-in.visible {
+    opacity: 1;
+    transform: translate(45%, -48%) scale(1.05);
+    animation: slow-pulse 10s infinite alternate;
 }
 
 /* =================================
         5. ABOUT & CTA SECTION
 ================================= */
 #about-cta-section {
-    background-color: rgb(0, 0, 0);
+    background-color: #000000;
     position: relative;
     z-index: 1;
 } 
@@ -189,7 +315,6 @@ body::-webkit-scrollbar {
     left: 0;
     width: 100%;
     height: 200px;
-    
     pointer-events: none;
 }
 
@@ -260,14 +385,11 @@ body::-webkit-scrollbar {
         7. PORTFOLIO SECTION
 ================================= */
 #portfolio-section {
-    background-color: #000000;
+    background: linear-gradient(to bottom, #000000 0%, #ffffff 15%, #ffffff 85%, #000000 100%);
     position: relative;
     overflow: hidden;
-    
 }
-#portfolio-section h2, #portfolio-section p {
-    color: #ffffff;
-}
+
 .portfolio-scroller {
     width: 100%;
     display: flex;
@@ -302,12 +424,63 @@ body::-webkit-scrollbar {
     transform: scale(1.05);
 }
 
+/* NEW Styles for Partner Section */
+.partner-card {
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 1rem; /* 16px */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 130px; /* Adjusted height */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.partner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+.partner-card-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+}
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+.btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #a31623; /* Darker red */
+}
+.btn-secondary {
+    background-color: transparent;
+    color: #111827;
+}
+.btn-secondary:hover {
+    background-color: #f3f4f6; /* light gray */
+}
+/* END New Styles */
+
+
 /* =================================
         8. BLOG SECTION
 ================================= */
 #blog-page {
-    background-color: #7f0000;
-    background-image: linear-gradient(to bottom, rgb(255, 255, 255), transparent);
+    background-color: #000000;
 }
 
 /* =================================
@@ -397,11 +570,12 @@ body::-webkit-scrollbar {
     color: #b0b0b0;
 }
 
+
+
 /* =================================
         10. MEDIA QUERIES FOR RESPONSIVENESS
 ================================= */
 @media (min-width: 768px) {
-    #hero h1 { font-size: 3.75rem; }
     .footer-brand, .footer-contact, .footer-social { flex: 1 1 300px; text-align: left; }
     .footer-contact .contact-row { justify-content: flex-start; }
     .footer-social { text-align: center; }
@@ -410,10 +584,11 @@ body::-webkit-scrollbar {
     .portfolio-scroller img { height: 40px; }
 }
 @media (min-width: 1024px) {
-    #hero h1 { font-size: 4.5rem; }
+    /* No specific override needed for hero h1 anymore due to clamp() */
 }
     </style>
 </head>
+
 <body>
 <nav class="nav_cus">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -428,7 +603,72 @@ body::-webkit-scrollbar {
             <div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="about.html" class="hover:text-red-500 transition">About Us</a>
-                    <a href="solutions.html" class="hover:text-red-500 transition">Solutions</a>
+                    
+                    <!-- Solutions Dropdown Start -->
+                    <div class="relative group">
+                        <a href="solutions.html" class="hover:text-red-500 transition flex items-center gap-1">
+                            Solutions
+                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </a>
+                        <div class="solutions-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
+                            <div class="grid grid-cols-2 gap-x-16">
+                                <!-- Services Column -->
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Services</h3>
+                                    <ul class="space-y-3 text-sm">
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                            <span>Penetration Testing</span>
+                                        </a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            <span>Audit, Risk & Compliance</span>
+                                        </a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                            <span>Personal Data Protection</span>
+                                        </a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                                            <span>Security Solutions Integration</span>
+                                        </a></li>
+                                         <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <span>Managed Security Services</span>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                                <!-- Solutions Column -->
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Solutions</h3>
+                                    <ul class="space-y-3 text-sm">
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                            <span>Customer Identity & Access</span>
+                                        </a></li>
+                                        <li><a href="Waap.html" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9"></path></svg>
+                                            <span>Web App & API Protection</span>
+                                        </a></li>
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
+                                            <span>Data Security</span>
+                                        </a></li>
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.789-2.756 9.362A1 1 0 0010.244 22h3.512a1 1 0 00.992-1.638C13.009 17.789 12 14.517 12 11zM12 11V3m0 8a3 3 0 100-6 3 3 0 000 6z"></path></svg>
+                                            <span>Privacy Data Protection</span>
+                                        </a></li>
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                            <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                            <span>End Point Protection</span>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Solutions Dropdown End -->
+
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
                     <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
@@ -498,75 +738,26 @@ body::-webkit-scrollbar {
         </ul>
     </div>
 
-<section class="relative bg-gray-900">
-    <div class="absolute inset-0">
-        <img src="asset/background.png" alt="Team collaborating at a desk" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-black opacity-70"></div>
-    </div>
-
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-        <div class="grid grid-cols-1 md:grid-cols-2 items-end">
-            
-            <div>
-                <div class="text-left">
-                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl md:text-5xl">
-                        Our Focus Goes Beyond More Compliance
-                    </h2>
-                    <p class="mt-6 max-w-3xl text-lg text-gray-300">
-                        We are dedicated to helping clients protect their data and cybersecurity to the highest international standards.
-                    </p>
-                </div>
-        
-                <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
-                    <div class="bg-white rounded-xl p-4 text-center shadow-md">
-                        <img src="asset/icons/customer-access.png" alt="Customer Access" class="h-12 mx-auto mb-2">
-                        <p class="text-sm font-semibold text-gray-800 leading-tight">
-                        Customer Identity &<br>Access Management
-                        </p>
-                    </div>
-        
-                    <div class="bg-white rounded-xl p-4 text-center shadow-md">
-                        <img src="asset/icons/api-protection.png" alt="WAAP" class="h-12 mx-auto mb-2">
-                        <p class="text-sm font-semibold text-gray-800 leading-tight">
-                        Web Application & API<br>Protection (WAAP)
-                        </p>
-                    </div>
-        
-                    <div class="bg-white rounded-xl p-4 text-center shadow-md">
-                        <img src="asset/icons/privacy-protection.png" alt="Privacy Protection" class="h-12 mx-auto mb-2">
-                        <p class="text-sm font-semibold text-gray-800 leading-tight">
-                        Privacy Data Protection
-                        </p>
-                    </div>
-        
-                    <div class="bg-white rounded-xl p-4 text-center shadow-md">
-                        <img src="asset/icons/endpoint-protection.png" alt="Endpoint Protection" class="h-12 mx-auto mb-2">
-                        <p class="text-sm font-semibold text-gray-800 leading-tight">
-                        End Point Protection
-                        </p>
-                    </div>
-        
-                    <div class="bg-white rounded-xl p-4 text-center shadow-md">
-                        <img src="asset/icons/data-security.png" alt="Data Security" class="h-12 mx-auto mb-2">
-                        <p class="text-sm font-semibold text-gray-800 leading-tight">
-                        Data Security
-                        </p>
-                    </div>
-        
-                    <div class="bg-white rounded-xl p-4 text-center shadow-md">
-                        <img src="asset/icons/fraud-prevention.png" alt="Fraud Prevention" class="h-12 mx-auto mb-2">
-                        <p class="text-sm font-semibold text-gray-800 leading-tight">
-                        Fraud Prevention
-                        </p>
-                    </div>
-                </div>
+<section id="new-hero">
+    <div class="hero-content">
+        <div class="text-content">
+            <!-- EDIT: Wrapped each line in a span to control line breaks -->
+            <h1 class="hero-headline animate-in">
+                <span class="line">Enabling The Future,</span>
+                <span class="line highlight">Through Innovation.</span>
+            </h1>
+            <p class="hero-subheadline animate-in">
+                We helps businesses in Indonesia stay safe from cyber threats and fraud. We protect digital transactions, secure data, and support business growth with trusted solutions.
+            </p>
+            <div class="hero-cta animate-in">
+                <a href="contactus.html" class="btn btn-primary">Get a Security Strategy Session</a>
             </div>
-            <div>
         </div>
     </div>
+    <div class="glowing-shape animate-in"></div>
 </section>
 
-    <section id="about-cta-section" class="py-24 sm:py-32">
+    <!-- <section id="about-cta-section" class="py-24 sm:py-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="about-content fade-in-on-scroll">
@@ -600,9 +791,85 @@ body::-webkit-scrollbar {
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    <!-- <section id="offerings-section" class="py-24 sm:py-32">
+   <!-- Portfolio Section -->
+<section id="portfolio-section" class="py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center fade-in-on-scroll">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-black">Our Valued Portfolio</h2>
+      <p class="mt-4 text-lg leading-8 text-gray-700">We are proud to have collaborated with a diverse range of leading companies.</p>
+    </div>
+    <div class="portfolio-scroller mt-16">
+      <ul class="scroller-inner">
+        <li><img src="asset/Portfolio/Hibank.png" alt="Hibank logo"></li>
+        <li><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo"></li>
+        <li><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo"></li>
+        <li><img src="asset/Portfolio/smbc.png" alt="SMBC logo"></li>
+        <li><img src="asset/Portfolio/jalin.png" alt="Jalin logo"></li>
+        <li><img src="asset/Portfolio/goto.png" alt="GoTo logo"></li>
+        <li><img src="asset/Portfolio/panin.png" alt="PaninBank logo"></li>
+        <li><img src="asset/Portfolio/kbru.png" alt="KBRU logo"></li>
+        <li><img src="asset/Portfolio/app.png" alt="APP logo"></li>
+        <li><img src="asset/Portfolio/nano.png" alt="Nanobank logo"></li>
+        <li><img src="asset/Portfolio/lotus.png" alt="Lotus logo"></li>
+        <li><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo"></li>
+      </ul>
+      <ul class="scroller-inner" aria-hidden="true">
+        <li><img src="asset/Portfolio/Hibank.png" alt="Hibank logo"></li>
+        <li><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo"></li>
+        <li><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo"></li>
+        <li><img src="asset/Portfolio/smbc.png" alt="SMBC logo"></li>
+        <li><img src="asset/Portfolio/jalin.png" alt="Jalin logo"></li>
+        <li><img src="asset/Portfolio/goto.png" alt="GoTo logo"></li>
+        <li><img src="asset/Portfolio/panin.png" alt="PaninBank logo"></li>
+        <li><img src="asset/Portfolio/kbru.png" alt="KBRU logo"></li>
+        <li><img src="asset/Portfolio/app.png" alt="APP logo"></li>
+        <li><img src="asset/Portfolio/nano.png" alt="Nanobank logo"></li>
+        <li><img src="asset/Portfolio/lotus.png" alt="Lotus logo"></li>
+        <li><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo"></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Partner Section (Separated from Portfolio) -->
+<section id="partner-section" class="py-24 sm:py-32 bg-black">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center fade-in-on-scroll">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-white">Our Partners</h2>
+      <p class="mt-4 text-lg leading-8 text-gray-300">
+        We are partnering with a world-class technology principal to deliver world-class enterprise solutions to our customers, leveraging the cutting-edge principles of zero trust security.
+      </p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="partner-card"><img src="asset/Partner/synopsys.png" alt="Synopsys" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/imperva.png" alt="Imperva" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/pingidentity.png" alt="Ping Identity" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/vkey.png" alt="V-Key" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/sentinelone.png" alt="SentinelOne" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/tanium.png" alt="Tanium" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/bigid.png" alt="BigID" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/vectra.png" alt="Vectra" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/ridgesecurity.png" alt="Ridge Security" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/thales.png" alt="Thales" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/knowbe4.png" alt="KnowBe4" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/pentera.png" alt="Pentera" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/soti.png" alt="Soti" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/ibm.png" alt="IBM" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/datavisor.png" alt="Datavisor" class="partner-card-logo"></div>
+      <div class="partner-card"><img src="asset/Partner/protegrity.png" alt="Protegrity" class="partner-card-logo"></div>
+    </div>
+
+    <div class="mt-16 flex justify-center items-center gap-4">
+      <a href="#" class="btn btn-primary">Full Directory</a>
+      <a href="#" class="btn btn-secondary text-white hover:bg-gray-800">Get Started &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section id="offerings-section" class="py-24 sm:py-32">
         <div class="mx-auto max-w-2xl text-center mb-16 px-6 lg:px-8 fade-in-on-scroll">
             <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Explore Solutions with Sistema</h2>
             <p class="mt-4 text-lg leading-8 text-gray-300">
@@ -655,94 +922,10 @@ body::-webkit-scrollbar {
                 </article>
             </div>
         </div>
-    </section> -->
-
-    <section id="portfolio-section" class="py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center fade-in-on-scroll">
-                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Our Valued Portfolio</h2>
-                <p class="mt-4 text-lg leading-8">We are proud to have collaborated with a diverse range of leading companies.</p>
-            </div>
-            <div class="portfolio-scroller mt-16">
-                <ul class="scroller-inner">
-                    <li><img src="asset/Portfolio/Hibank.png" alt="Hibank logo"></li>
-                    <li><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo"></li>
-                    <li><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo"></li>
-                    <li><img src="asset/Portfolio/smbc.png" alt="SMBC logo"></li>
-                    <li><img src="asset/Portfolio/jalin.png" alt="Jalin logo"></li>
-                    <li><img src="asset/Portfolio/goto.png" alt="GoTo logo"></li>
-                    <li><img src="asset/Portfolio/panin.png" alt="PaninBank logo"></li>
-                    <li><img src="asset/Portfolio/kbru.png" alt="KBRU logo"></li>
-                    <li><img src="asset/Portfolio/app.png" alt="APP logo"></li>
-                    <li><img src="asset/Portfolio/nano.png" alt="Nanobank logo"></li>
-                    <li><img src="asset/Portfolio/lotus.png" alt="Lotus logo"></li>
-                    <li><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo"></li>
-                </ul>
-                <ul class="scroller-inner" aria-hidden="true">
-                    <li><img src="asset/Portfolio/Hibank.png" alt="Hibank logo"></li>
-                    <li><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo"></li>
-                    <li><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo"></li>
-                    <li><img src="asset/Portfolio/smbc.png" alt="SMBC logo"></li>
-                    <li><img src="asset/Portfolio/jalin.png" alt="Jalin logo"></li>
-                    <li><img src="asset/Portfolio/goto.png" alt="GoTo logo"></li>
-                    <li><img src="asset/Portfolio/panin.png" alt="PaninBank logo"></li>
-                    <li><img src="asset/Portfolio/kbru.png" alt="KBRU logo"></li>
-                    <li><img src="asset/Portfolio/app.png" alt="APP logo"></li>
-                    <li><img src="asset/Portfolio/nano.png" alt="Nanobank logo"></li>
-                    <li><img src="asset/Portfolio/lotus.png" alt="Lotus logo"></li>
-                    <li><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo"></li>
-                </ul>
-            </div>
-
-            <div class="mx-auto max-w-2xl text-center pt-20 fade-in-on-scroll">
-                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Our Partners</h2>
-                <p class="mt-4 text-lg leading-8">
-                    We are partnering with a world-class technology principal to deliver world-class enterprise solutions to our customers,
-                    leveraging the cutting-edge principles of zero trust security
-                </p>
-            </div>
-            <div class="portfolio-scroller mt-16">
-                <ul class="scroller-inner">
-                    <li><img src="asset/Partner/bigid.png" alt="big id"></li>
-                    <li><img src="asset/Partner/datavisor.png" alt="datavisor"></li>
-                    <li><img src="asset/Partner/ibm.png" alt="ibm"></li>
-                    <li><img src="asset/Partner/imperva.png" alt="imperva"></li>
-                    <li><img src="asset/Partner/knowbe4.png" alt="knowbe4"></li>
-                    <li><img src="asset/Partner/pentera.png" alt="pentera"></li>
-                    <li><img src="asset/Partner/pingidentity.png" alt="pingidentity"></li>
-                    <li><img src="asset/Partner/protegrity.png" alt="protegrity"></li>
-                    <li><img src="asset/Partner/ridgesecurity.png" alt="ridgesecurity"></li>
-                    <li><img src="asset/Partner/sentinelone.png" alt="sentinelone"></li>
-                    <li><img src="asset/Partner/soti.png" alt="soti"></li>
-                    <li><img src="asset/Partner/synopsys.png" alt="synopsys"></li>
-                    <li><img src="asset/Partner/tanium.png" alt="tanium"></li>
-                    <li><img src="asset/Partner/thales.png" alt="thales"></li>
-                    <li><img src="asset/Partner/vectra.png" alt="vectra"></li>
-                    <li><img src="asset/Partner/vkey.png" alt="vkey"></li>
-                </ul>
-                <ul class="scroller-inner" aria-hidden="true">
-                    <li><img src="asset/Partner/bigid.png" alt="big id"></li>
-                    <li><img src="asset/Partner/datavisor.png" alt="datavisor"></li>
-                    <li><img src="asset/Partner/ibm.png" alt="ibm"></li>
-                    <li><img src="asset/Partner/imperva.png" alt="imperva"></li>
-                    <li><img src="asset/Partner/knowbe4.png" alt="knowbe4"></li>
-                    <li><img src="asset/Partner/pentera.png" alt="pentera"></li>
-                    <li><img src="asset/Partner/pingidentity.png" alt="pingidentity"></li>
-                    <li><img src="asset/Partner/protegrity.png" alt="protegrity"></li>
-                    <li><img src="asset/Partner/ridgesecurity.png" alt="ridgesecurity"></li>
-                    <li><img src="asset/Partner/sentinelone.png" alt="sentinelone"></li>
-                    <li><img src="asset/Partner/soti.png" alt="soti"></li>
-                    <li><img src="asset/Partner/synopsys.png" alt="synopsys"></li>
-                    <li><img src="asset/Partner/tanium.png" alt="tanium"></li>
-                    <li><img src="asset/Partner/thales.png" alt="thales"></li>
-                    <li><img src="asset/Partner/vectra.png" alt="vectra"></li>
-                    <li><img src="asset/Partner/vkey.png" alt="vkey"></li>
-                </ul>
-            </div>
-        </div>
     </section>
 
- <section id="blog-page" class="py-24 sm:py-32">
+
+ <!-- <section id="blog-page" class="py-24 sm:py-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <header class="max-w-4xl mx-auto text-center mb-16 fade-in-on-scroll">
@@ -752,7 +935,7 @@ body::-webkit-scrollbar {
         <div id="latest-article-container" class="max-w-5xl mx-auto">
             </div>
     </div>
-</section>
+</section> -->
 
     <footer id="contact" class="footer">
         <div class="footer-top">
@@ -912,6 +1095,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById('latest-article-container');
         if(container) container.innerHTML = '<p class="text-center">Could not load articles.</p>';
       });
+
+    // --- 5. Hero Entry Animation Trigger ---
+    const animatedHeroElements = document.querySelectorAll('.animate-in');
+    // Use a short delay to ensure initial styles are applied before animating
+    setTimeout(() => {
+        animatedHeroElements.forEach(el => {
+            el.classList.add('visible');
+        });
+    }, 100);
 });
 </script>
 </body>
