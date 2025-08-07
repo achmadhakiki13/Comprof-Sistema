@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Penetration Testing & Red Teaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+       :root {
+           --color-accent: #d21b29;
+           --transition-fast: all 0.3s ease;
+           --transition-slow: all 0.5s ease;
+       }
+       html {
+           scroll-behavior: smooth;
+       }
+       body, html {
+           margin: 0;
+           padding: 0;
+           width: 100%;
+           background-color: #000000;
+           font-family: 'Inter', 'Roboto', sans-serif;
+           color: white;
+           -webkit-font-smoothing: antialiased;
+           -moz-osx-font-smoothing: grayscale;
+           overflow-x: hidden;
+           scrollbar-width: none; /* Firefox */
+       }
+       body::-webkit-scrollbar {
+           display: none; /* Chrome, Safari */
+       }
+       body.no-scroll {
+           overflow: hidden;
+       }
+
+       /* NAVBAR & MOBILE MENU */
+       .nav_cus {
+           position: fixed; /* Diubah ke fixed */
+           top: 0;
+           left: 0;
+           width: 100%;
+           z-index: 1000;
+           background-color: transparent;
+           transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom-color 0.4s ease;
+           border-bottom: 1px solid transparent;
+       }
+       /* State saat di-scroll */
+       .nav_cus.scrolled {
+           background-color: rgba(0, 0, 0, 0.5);
+           backdrop-filter: blur(10px);
+           -webkit-backdrop-filter: blur(10px);
+           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+       }
+
+       .hamburger-icon {
+           position: relative; width: 24px; height: 18px;
+       }
+       .hamburger-icon span {
+           display: block; position: absolute; height: 2px; width: 100%;
+           background: white; border-radius: 9px; opacity: 1; left: 0;
+           transform: rotate(0deg); transition: .25s ease-in-out;
+       }
+       .hamburger-icon span:nth-child(1) { top: 0px; }
+       .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+       .hamburger-icon span:nth-child(4) { top: 16px; }
+       .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+           top: 8px; width: 0%; left: 50%;
+       }
+       .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+       .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+       #mobile-menu {
+           position: fixed; right: 0; top: 0; bottom: 0;
+           width: 80%; max-width: 400px;
+           background-color: rgba(0, 0, 0, 0.7);
+           backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+           z-index: 101;
+           transform: translateX(100%); opacity: 0;
+           transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+           display: flex; flex-direction: column; padding-top: 5rem;
+           overflow-y: auto; -webkit-overflow-scrolling: touch;
+       }
+       #mobile-menu.is-active {
+           transform: translateX(0); opacity: 1;
+       }
+       .mobile-menu-link {
+           display: flex; justify-content: space-between; align-items: center;
+           padding: 12px 0; font-size: 1.125rem; transition: var(--transition-fast);
+       }
+       .mobile-menu-link:hover { color: var(--color-accent); }
+       .plus-icon { transition: transform 0.3s ease; }
+       .plus-icon.open { transform: rotate(45deg); }
+       .submenu {
+           max-height: 0; overflow: hidden;
+           transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+           padding-left: 1rem;
+       }
+       .text-pentest-accent { color: #3b82f6; } /* Blue-500 */
+       .text-redteam-accent { color: #ef4444; } /* Red-500 */
+       
+       /* Existing good styles */
+       .service-section {
+           background-color: #111827;
+           border: 1px solid #1f2937;
+           border-radius: 1rem;
+           padding: 2rem;
+           margin-bottom: 4rem;
+       }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="nav_cus">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20"> <a href="index.html">
+                    <img src="asset/Sistema Datapilar Tees Width Logo Red.png" alt="Logo" class="h-10">
+                </a>
+                <div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="about.html" class="hover:text-red-500 transition">About Us</a>
+                        <a href="solutions.html" class="hover:text-red-500 transition">Solutions</a>
+                        <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
+                        <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                        <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                    </div>
+                    <div class="flex items-center md:hidden">
+                        <button id="hamburger-btn" class="ml-4 p-2">
+                            <div class="hamburger-icon"><span></span><span></span><span></span><span></span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu">
+        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                    <span>Services & Solutions</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="solutions-submenu" class="submenu">
+                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+                </ul>
+            </li>
+            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+    
+     <div class="container mx-auto px-4 py-16 md:py-24">
+
+        <header class="text-center mb-20">
+            <h1 data-aos="fade-up" class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+                Penetration Testing & Red Teaming Services
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="100" class="max-w-3xl mx-auto text-lg text-slate-400">
+                Proactively fortify your digital assets against evolving cyber threats with our comprehensive security testing services.
+            </p>
+        </header>
+
+        <section class="service-section" data-aos="fade-right">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-4"><i class="fa-solid fa-magnifying-glass-chart text-pentest-accent"></i> <span class="text-white">Penetration Testing (Pentest):</span> <span class="text-pentest-accent">Finding Vulnerabilities</span></h2>
+            <p class="text-slate-400 mb-6">Penetration Testing is a focused and structured simulated cyberattack service. Its goal is to find as many security vulnerabilities as possible within a predefined scope, such as a web application, mobile app, or network infrastructure.</p>
+            
+            <h3 class="text-xl font-semibold text-white mb-4">Main Objectives of Our Pentest Service:</h3>
+            <ul class="space-y-3 mb-6">
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-bug text-pentest-accent mt-1"></i><div><strong>Vulnerability Identification:</strong> Find technical weaknesses like misconfigurations, code bugs, or system flaws before hackers exploit them.</div></li>
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-shield-check text-pentest-accent mt-1"></i><div><strong>Security Validation:</strong> Ensure that your existing security controls are working effectively.</div></li>
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-triangle-exclamation text-pentest-accent mt-1"></i><div><strong>Prioritized Remediation:</strong> Provide a detailed report on the risk level of each vulnerability so your team can prioritize the most urgent fixes.</div></li>
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-file-contract text-pentest-accent mt-1"></i><div><strong>Compliance Fulfillment:</strong> Help meet the security requirements of various regulatory and industry standards.</div></li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-white mb-2">How We Do It:</h3>
+            <p class="text-slate-400 mb-6">Our ethical hackers will systematically attempt to exploit your systems within an agreed-upon scope (white-box, grey-box, or black-box). The result is a comprehensive report listing vulnerabilities, their severity, and technical recommendations for remediation.</p>
+            <p class="italic text-slate-500"><strong>Analogy:</strong> Penetration Testing is like a building inspector checking every door, window, and lock to ensure none are easily breached.</p>
+        </section>
+
+        <section class="service-section" data-aos="fade-left">
+            <h2 class="text-3xl font-bold mb-6 flex items-center gap-4"><i class="fa-solid fa-user-secret text-redteam-accent"></i> <span class="text-white">Red Teaming:</span> <span class="text-redteam-accent">Testing Your Defenses</span></h2>
+            <p class="text-slate-400 mb-6">Red Teaming is a broader, deeper, and more realistic simulated cyberattack. Its goal is not just to find technical flaws, but to test your organization's **entire defense capability**—including technology, processes, and people—against a real-world attack.</p>
+
+            <h3 class="text-xl font-semibold text-white mb-4">Main Objectives of Our Red Teaming Service:</h3>
+            <ul class="space-y-3 mb-6">
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-bullseye text-redteam-accent mt-1"></i><div><strong>Real-World Threat Simulation:</strong> Emulate the tactics, techniques, and procedures (TTPs) used by sophisticated hackers to achieve a specific objective (e.g., steal sensitive data).</div></li>
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-people-arrows text-redteam-accent mt-1"></i><div><strong>Test Detection & Response (Blue Team):</strong> Assess how effectively your internal security team (Blue Team) detects suspicious activity and responds to incidents in a timely manner.</div></li>
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-comment-slash text-redteam-accent mt-1"></i><div><strong>Identify Non-Technical Gaps:</strong> Uncover security weaknesses in the human element (via social engineering or phishing) and internal procedures.</div></li>
+                <li class="flex items-start gap-3 list-item p-2 rounded-md"><i class="fa-solid fa-chart-line text-redteam-accent mt-1"></i><div><strong>Improve Organizational Readiness:</strong> Provide a holistic view of your security posture and train your team for actual attack scenarios.</div></li>
+            </ul>
+
+            <h3 class="text-xl font-semibold text-white mb-2">How We Do It:</h3>
+            <p class="text-slate-400 mb-6">Our Red Team will operate stealthily over a longer period, attempting various attack vectors to achieve set objectives without being detected. At the end of the simulation, we will work with your team to dissect the entire attack chain and provide insights for improvement.</p>
+            <p class="italic text-slate-500"><strong>Analogy:</strong> Red Teaming is like a simulated bank heist designed to test how quickly the police arrive, how effective the alarms are, and how the guards respond under pressure.</p>
+        </section>
+
+        <section data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Which Service is Right for You?</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-left text-sm text-slate-300 bg-gray-900 rounded-lg">
+                    <thead class="bg-gray-800 text-xs text-slate-400 uppercase tracking-wider">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Aspect</th>
+                            <th scope="col" class="px-6 py-3 text-pentest-accent">Penetration Testing</th>
+                            <th scope="col" class="px-6 py-3 text-redteam-accent">Red Teaming</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-800">
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-white">Objective</td>
+                            <td class="px-6 py-4">Find "as many" vulnerabilities as possible.</td>
+                            <td class="px-6 py-4">Achieve a "specific goal" and test defenses.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-white">Focus</td>
+                            <td class="px-6 py-4">Technical flaws in systems/apps.</td>
+                            <td class="px-6 py-4">Technology, People, and Processes (entire organization).</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-white">Method</td>
+                            <td class="px-6 py-4">Structured and sometimes known to the internal team.</td>
+                            <td class="px-6 py-4">Realistic, stealthy, and often covert.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-white">Duration</td>
+                            <td class="px-6 py-4">Relatively short (days/weeks).</td>
+                            <td class="px-6 py-4">Long-term (weeks/months).</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-medium text-white">Ideal For</td>
+                            <td class="px-6 py-4">Organizations wanting to validate security on specific assets or meet compliance standards.</td>
+                            <td class="px-6 py-4">Mature organizations wanting to test their incident response readiness.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    
+    <footer class="text-center py-8 mt-12 border-t border-gray-800">
+        <p class="text-sm text-slate-500">Don't wait for an attack. Test your defenses proactively.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Navbar Scroll Effect ---
+            const nav = document.querySelector('.nav_cus');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // --- Mobile Menu Logic ---
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.querySelector('.hamburger-icon');
+            const body = document.body;
+
+            hamburgerBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('is-active');
+                hamburgerIcon.classList.add('open');
+                body.classList.add('no-scroll');
+            });
+
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('is-active');
+                hamburgerIcon.classList.remove('open');
+                body.classList.remove('no-scroll');
+            });
+            
+            // Submenu toggle
+            const submenuToggles = document.querySelectorAll('[data-submenu-toggle]');
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const submenuId = toggle.dataset.submenuToggle;
+                    const submenu = document.getElementById(`${submenuId}-submenu`);
+                    const plusIcon = toggle.querySelector('.plus-icon');
+
+                    if (submenu.style.maxHeight) {
+                        submenu.style.maxHeight = null;
+                        plusIcon.classList.remove('open');
+                    } else {
+                        submenu.style.maxHeight = submenu.scrollHeight + "px";
+                        plusIcon.classList.add('open');
+                    }
+                });
+            });
+
+            // --- GSAP Animations ---
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Animate hero section
+            gsap.from('.hero-section > *', {
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+
+            // Animate service sections
+            gsap.utils.toArray('.pentest-section, .redteam-section, .comparison-section').forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    opacity: 0,
+                    y: 100,
+                    duration: 1.2,
+                    ease: 'power3.out'
+                });
+            });
+            
+            // Stagger table rows
+             gsap.from(".comparison-section table tbody tr", {
+                scrollTrigger: {
+                    trigger: ".comparison-section table",
+                    start: "top 80%",
+                },
+                opacity: 0,
+                y: 20,
+                stagger: 0.1,
+                ease: "power3.out"
+            });
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Solutions Integration</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        :root {
+            --color-accent: #d21b29;
+            --transition-fast: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #000000;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            scrollbar-width: none; /* Firefox */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* NAVBAR & MOBILE MENU */
+            .nav_cus {
+            position: static;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: transparent; /* Diubah menjadi transparan */
+            /* Properti di bawah ini dihapus */
+            /* backdrop-filter: blur(10px); */
+            /* -webkit-backdrop-filter: blur(10px); */
+            /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
+        }
+        .hamburger-icon {
+            position: relative; width: 24px; height: 18px;
+        }
+        .hamburger-icon span {
+            display: block; position: absolute; height: 2px; width: 100%;
+            background: white; border-radius: 9px; opacity: 1; left: 0;
+            transform: rotate(0deg); transition: .25s ease-in-out;
+        }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+        .hamburger-icon span:nth-child(4) { top: 16px; }
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+            top: 8px; width: 0%; left: 50%;
+        }
+        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+        #mobile-menu {
+            position: fixed; right: 0; top: 0; bottom: 0;
+            width: 80%; max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 101;
+            transform: translateX(100%); opacity: 0;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            display: flex; flex-direction: column; padding-top: 5rem;
+            overflow-y: auto; -webkit-overflow-scrolling: touch;
+        }
+        #mobile-menu.is-active {
+            transform: translateX(0); opacity: 1;
+        }
+        .mobile-menu-link {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; font-size: 1.125rem; transition: var(--transition-fast);
+        }
+        .mobile-menu-link:hover { color: var(--color-accent); }
+        .plus-icon { transition: transform 0.3s ease; }
+        .plus-icon.open { transform: rotate(45deg); }
+        .submenu {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding-left: 1rem;
+        }
+
+        .text-accent {
+            color: #a31623; /* Cyan-400 */
+        }
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #7f0000;
+        }
+
+        /* --- CSS FOR FADE IN ANIMATION --- */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #d21b29; /* Warna merah aksen */
+            background-color: rgba(31, 41, 55, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background-color: rgba(210, 27, 41, 0.5);
+            color: white;
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .swiper-pagination-bullet {
+            background-color: #4b5563; /* gray-600 */
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #d21b29; /* Warna merah aksen */
+        }
+
+        .site-footer {
+            background-color: #242a30; /* Warna latar belakang footer */
+            color: #a9a9a9;             /* Warna teks */
+            padding: 40px 0 20px;      /* Padding atas untuk memberi ruang pada garis */
+            text-align: center;
+            position: relative;        /* Diperlukan agar pseudo-element ::before bisa diposisikan */
+            font-size: 14px;
+        }
+
+        /* Membuat garis dengan efek fade out menggunakan pseudo-element ::before */
+        .site-footer::before {
+            content: '';               /* Wajib ada untuk menampilkan pseudo-element */
+            position: absolute;
+            top: 20px;                 /* Jarak garis dari atas footer */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;                /* Lebar garis (tidak sampai ujung) */
+            height: 1px;               /* Ketebalan garis */
+            
+            /* Ini adalah bagian terpenting: membuat gradasi dari transparan ke putih, lalu kembali ke transparan */
+            background: linear-gradient(to right, 
+                rgba(255, 255, 255, 0),    /* Mulai dari transparan di kiri */
+                rgba(255, 255, 255, 0.4) 50%, /* Warna solid (sedikit transparan) di tengah */
+                rgba(255, 255, 255, 0)     /* Kembali transparan di kanan */
+            );
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="nav_cus">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html">
+                    <img src="asset/Sistema Datapilar Tees Width Logo Red.png" alt="Logo" class="h-10">
+                </a>
+                <div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="about.html" class="hover:text-red-500 transition">About Us</a>
+                        <a href="solutions.html" class="hover:text-red-500 transition">Solutions</a>
+                        <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
+                        <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                        <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                    </div>
+                    <div class="flex items-center md:hidden">
+                        <button id="hamburger-btn" class="ml-4 p-2">
+                            <div class="hamburger-icon"><span></span><span></span><span></span><span></span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu">
+        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                    <span>Services & Solutions</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="solutions-submenu" class="submenu">
+                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+                </ul>
+            </li>
+            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 md:py-24">
+
+        <header class="text-center mb-20 md:mb-28">
+            
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 scroll-reveal">
+                Security Solutions <span class="text-accent">Integration</span>
+            </h1>
+            
+            <p class="max-w-3xl mx-auto text-lg text-slate-400 scroll-reveal" style="transition-delay: 200ms;">
+                Connecting your disparate security products into a single, intelligent, and unified ecosystem to break down silos, automate actions, and gain complete visibility.
+            </p>
+        </header>
+
+        <section id="problem" class="mb-20 md:mb-28">
+            <h2 class="text-3xl font-bold text-white text-center mb-12 scroll-reveal">The Problem: Too Many Tools, Not Enough Context</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="card p-6 scroll-reveal">
+                    <h3 class="font-semibold text-white mb-3">A Stack of Siloed Technology</h3>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-fire-wall text-accent"></i> Firewall</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-desktop text-accent"></i> Endpoint Protection (EPP/EDR)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-accent"></i> Intrusion Detection Systems (IDS/IPS)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-chart-simple text-accent"></i> SIEM</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-cloud text-accent"></i> Cloud Security Platforms</li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6 scroll-reveal" style="transition-delay: 200ms;">
+                    <h3 class="font-semibold text-white mb-3">Creates Serious Issues</h3>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-bell-slash text-accent mt-1"></i><div><strong>Alert Fatigue:</strong> Analysts are overwhelmed by thousands of disconnected alerts.</div></li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-eye-slash text-accent mt-1"></i><div><strong>Blind Spots:</strong> Threats slip through the cracks between non-communicating tools.</div></li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-person-running text-accent mt-1"></i><div><strong>Slow Incident Response:</strong> Manually switching between consoles wastes critical time during an attack.</div></li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-battery-empty text-accent mt-1"></i><div><strong>Low Efficiency:</strong> Complex workflows drain limited security resources.</div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="mb-20 md:mb-28">
+    <h2 class="text-3xl font-bold text-white text-center mb-12 scroll-reveal">How Our Integration Service Works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="card p-6 text-center scroll-reveal">
+            <i class="fa-solid fa-code-merge text-3xl text-accent mb-4"></i>
+            <h3 class="text-lg font-semibold text-white mb-2">API-Based Integration</h3>
+            <p class="text-sm text-slate-400">We leverage vendor APIs to enable automated data exchange and actions between systems.</p>
+        </div>
+        <div class="card p-6 text-center scroll-reveal" style="transition-delay: 200ms;">
+            <i class="fa-solid fa-brain text-3xl text-accent mb-4"></i>
+            <h3 class="text-lg font-semibold text-white mb-2">Centralized Platforms (SOAR/XDR)</h3>
+            <p class="text-sm text-slate-400">We implement a central "brain" to collect data from all sources and orchestrate automated responses.</p>
+        </div>
+        <div class="card p-6 text-center scroll-reveal" style="transition-delay: 400ms;">
+            <i class="fa-solid fa-file-invoice text-3xl text-accent mb-4"></i>
+            <h3 class="text-lg font-semibold text-white mb-2">Data Standardization</h3>
+            <p class="text-sm text-slate-400">We normalize data into a common format for easy correlation and analysis in a central platform like a SIEM.</p>
+        </div>
+    </div>
+
+    <!-- === Tombol Contact Us sekarang ada di dalam section === -->
+    <div class="text-center mt-16 scroll-reveal" style="transition-delay: 600ms;">
+        <a href="contactus.html" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
+            Contact Us
+        </a>
+    </div>
+</section>
+    </div>
+
+    <section id="proactive-support" class="bg-black py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8">
+        <div class="relative">
+            <div class="swiper service-carousel">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.</p>
+                            <div class="mt-4"><a href="PeneterationTesting.html" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
+                            <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.</p>
+                            <div class="mt-4"><a href="Personaldata.html" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Integrate diverse security products into a unified, effective, and centralized defense system.</p>
+                            <div class="mt-4"><a href="SecuritySolution.html" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Managed Security Services</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">24/7 monitoring, management, and incident response for your security infrastructure by our expert team (SOC).</p>
+                            <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Application Security</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.</p>
+                            <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.</p>
+                            <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide h-auto pb-12">
+                        <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-gray-700/50 p-3 rounded-lg">
+                                    <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
+                            </div>
+                            <p class="text-gray-400 text-sm flex-grow">Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.</p>
+                            <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination !bottom-0"></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-[#242a30] text-white">
+    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        
+        <div class="mb-10">
+            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo White.png" alt="Logo Sistema">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Location Office</h3>
+                <div class="space-y-2 text-slate-300">
+                    <p>Menara Batavia, Lantai 26</p>
+                    <p>Jl. K.H. Mas Mansyur No.Kav.126</p>
+                    <p>Jakarta Pusat, 10220</p>
+                    <p>Indonesia</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
+                        </svg>
+                        <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
+                    </a>
+                    <a href="mailto:marketing@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        <span>marketing@sistema.co.id</span>
+                    </a>
+                </div>
+            </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                    <div class="space-y-3 text-slate-300">
+                        <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            <span>Sistema Datapilar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <div class="site-footer">
+            <p>&copy; Copyright. PT Sistema Datapilar</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Memicu animasi saat 10% elemen terlihat
+            });
+
+            const elementsToReveal = document.querySelectorAll('.scroll-reveal');
+            elementsToReveal.forEach(el => {
+                observer.observe(el);
+            });
+
+            const swiper = new Swiper('.service-carousel', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            
+            // Responsive breakpoints
+            breakpoints: {
+                // Untuk layar medium, tampilkan 2 slide
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                },
+                // Untuk layar besar, tampilkan 3 slide
+                1280: { 
+                    slidesPerView: 3,
+                    spaceBetween: 40
+                }
+            },
+
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            
+            const toggleMobileMenu = () => {
+                const isActive = mobileMenu.classList.toggle('is-active');
+                hamburgerIcon.classList.toggle('open', isActive);
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            };
+
+            hamburgerBtn.addEventListener('click', toggleMobileMenu);
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', toggleMobileMenu);
+            }
+
+            // --- 2. LOGIKA SUBMENU PADA MENU MOBILE ---
+            const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const submenuId = toggle.dataset.submenuToggle + '-submenu';
+                    const submenu = document.getElementById(submenuId);
+                    const plusIcon = toggle.querySelector('.plus-icon');
+
+                    if (submenu) {
+                        plusIcon.classList.toggle('open');
+                        if (submenu.style.maxHeight) {
+                            submenu.style.maxHeight = null;
+                        } else {
+                            submenu.style.maxHeight = submenu.scrollHeight + "px";
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
