@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Identity & Access Management (CIAM)</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+              :root {
+    --color-accent: #d21b29;
+    --transition: all 0.3s ease;
+}
+html {
+    scroll-behavior: smooth;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #000000;
+    font-family: 'Inter', 'Roboto', sans-serif;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    /* Menghilangkan scrollbar untuk Firefox */
+    scrollbar-width: none;
+}
+
+/* Menghilangkan scrollbar untuk Chrome, Safari, dan Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* =================================
+    2. NAVBAR & MOBILE MENU
+================================= */
+.nav_cus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    background-color: rgba(13, 16, 24, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hamburger-icon {
+    position: relative;
+    width: 24px;
+    height: 18px;
+}
+.hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+.hamburger-icon span:nth-child(1) { top: 0px; }
+.hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+.hamburger-icon span:nth-child(4) { top: 16px; }
+
+.hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+.hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+.hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
+#mobile-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 400px;
+    /* Perubahan di sini: Mengurangi opacity background untuk membuatnya transparan */
+    background-color: rgba(0, 0, 0, 0.6); /* Mengubah 0.9 menjadi 0.6 untuk transparansi */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 100;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    overflow-y: auto;
+}
+#mobile-menu.is-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.mobile-menu-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 1.125rem;
+    transition: var(--transition);
+}
+.mobile-menu-link:hover { color: var(--color-accent); }
+.plus-icon {
+    transition: transform 0.3s ease;
+}
+.plus-icon.open {
+    transform: rotate(45deg);
+}
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding-left: 1rem;
+}
+
+ .explore-btn {
+            display: inline-block; padding: 0.75rem 1.5rem;
+            border-radius: 9999px; font-weight: 600;
+            background-color: transparent;
+            border: 1px solid rgba(210, 27, 41, 0.5);
+            color: #e5e7eb;
+            transition: var(--transition-fast);
+        }
+        .explore-btn:hover {
+            background-color: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(210, 27, 41, 0.3);
+        }
+        .explore-btn .arrow {
+            display: inline-block; margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .explore-btn:hover .arrow {
+            transform: translateX(4px);
+        }
+
+/* =================================
+    4. SCROLL ANIMATION & HERO
+================================= */
+.fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+        .text-accent {
+            color: #a31623; /* Cyan-400 */
+        }
+        .bg-accent {
+            background-color: #7f0000
+        }
+        .border-accent {
+            border-color: #7f0000;
+        }
+        .hover-bg-accent-dark:hover {
+            background-color: #7f0000; /* Cyan-500 */
+        }
+        .card {
+            background-color: #161b22; /* Slightly lighter dark */
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #7f0000;
+        }
+        .border-accent {
+            border-color: #38bdf8;
+        }
+        .card {
+            background-color: #0f172a; /* slate-900 */
+            border: 1px solid #1e293b; /* slate-800 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(56 189 248 / 0.1), 0 8px 10px -6px rgb(56 189 248 / 0.1);
+        }
+
+        
+
+        .compact-carousel .swiper-pagination {
+        position: static;
+        margin-top: 2rem;
+    }
+    .compact-carousel .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        background-color: #4a4a4a;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+    .compact-carousel .swiper-pagination-bullet-active {
+        width: 24px;
+        border-radius: 5px;
+        background-color: #dc2626;
+        opacity: 1;
+    }
+
+    .compact-carousel .swiper-button-prev,
+    .compact-carousel .swiper-button-next {
+        width: 44px; /* Ukuran panah diperkecil */
+        height: 44px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+    .compact-carousel .swiper-button-prev:hover,
+    .compact-carousel .swiper-button-next:hover {
+        background-color: rgba(220, 38, 38, 0.8);
+        border-color: transparent;
+    }
+
+    .compact-carousel .swiper-button-prev::after,
+    .compact-carousel .swiper-button-next::after {
+        font-size: 18px; /* Ukuran ikon panah diperkecil */
+    }
+
+    /* Posisi panah agar tidak menutupi konten */
+    .compact-carousel .swiper-button-prev {
+        left: 0px;
+    }
+    .compact-carousel .swiper-button-next {
+        right: 0px;
+    }
+    </style>
+</head>
+<body class="antialiased">
+
+     <nav class="nav_cus">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html">
+                    <img src="asset/Sistema Datapilar Tees Width Logo Red.png" alt="Logo" class="h-10">
+                </a>
+                <div>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="about.html" class="hover:text-red-500 transition">About Us</a>
+                        <a href="solutions.html" class="hover:text-red-500 transition">Solutions</a>
+                        <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
+                        <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                        <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                    </div>
+                    <div class="flex items-center md:hidden">
+                        <button id="hamburger-btn" class="ml-4 p-2">
+                            <div class="hamburger-icon"><span></span><span></span><span></span><span></span></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-menu">
+        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                    <span>Services & Solutions</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="solutions-submenu" class="submenu">
+                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+                </ul>
+            </li>
+            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 md:py-24">
+
+        <header class="text-center mb-20 md:mb-28">
+            <h1 data-aos="fade-up" class="text-4xl md:text-5xl font-extrabold text-white mb-4">
+                Customer Identity & Access Management (CIAM)
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="100" class="max-w-3xl mx-auto text-lg text-slate-400">
+                CIAM is the bridge between a seamless customer experience and robust cybersecurity, designed specifically for the modern digital world.
+            </p>
+        </header>
+
+        <section id="components" class="mb-20 md:mb-28">
+            <h2 data-aos="fade-up" class="text-3xl font-bold text-white text-center mb-12">Key Components and Functions of CIAM</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div data-aos="fade-up" class="card rounded-2xl p-6 bg-[#FFFFFF0D]">
+                    <i class="fa-solid fa-right-to-bracket text-2xl text-accent mb-4"></i>
+                    <h3 class="text-lg font-semibold text-white mb-2">Seamless Registration & Login</h3>
+                    <p class="text-sm text-slate-400">Provides <strong>Self-Service Registration</strong> and <strong>Social Login</strong> (Google, Facebook) to reduce friction for new users.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="card rounded-2xl p-6 bg-[#FFFFFF0D]">
+                    <i class="fa-solid fa-key text-2xl text-accent mb-4"></i>
+                    <h3 class="text-lg font-semibold text-white mb-2">Single Sign-On (SSO)</h3>
+                    <p class="text-sm text-slate-400">Allows customers to log in once to access multiple connected applications and services without re-authenticating.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="card rounded-2xl p-6 bg-[#FFFFFF0D]">
+                    <i class="fa-solid fa-shield-halved text-2xl text-accent mb-4"></i>
+                    <h3 class="text-lg font-semibold text-white mb-2">Multi-Factor Authentication (MFA)</h3>
+                    <p class="text-sm text-slate-400">Adds an extra layer of security with two-step verification (e.g., password + OTP code) to prevent account takeovers.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="card rounded-2xl p-6 bg-[#FFFFFF0D]">
+                    <i class="fa-solid fa-user-pen text-2xl text-accent mb-4"></i>
+                    <h3 class="text-lg font-semibold text-white mb-2">Self-Service Profile Management</h3>
+                    <p class="text-sm text-slate-400">Gives customers control to manage their personal data, change passwords, and set communication preferences.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400" class="card rounded-2xl p-6 bg-[#FFFFFF0D]">
+                    <i class="fa-solid fa-user-check text-2xl text-accent mb-4"></i>
+                    <h3 class="text-lg font-semibold text-white mb-2">Consent & Privacy Management</h3>
+                    <p class="text-sm text-slate-400">Ensures compliance with regulations (like GDPR) by transparently managing user consent.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="500" class="card rounded-2xl p-6 bg-[#FFFFFF0D]">
+                    <i class="fa-solid fa-database text-2xl text-accent mb-4"></i>
+                    <h3 class="text-lg font-semibold text-white mb-2">Centralized Directory</h3>
+                    <p class="text-sm text-slate-400">Stores all customer identity data in a single, secure, and scalable database, creating a 360° view.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="importance" class="bg-[#FFFFFF0D] rounded-2xl p-8 md:p-12 border border-slate-800">
+    <h2 data-aos="fade-up" class="text-3xl font-bold text-white text-center mb-12">Why is CIAM So Important?</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div data-aos="fade-right" data-aos-delay="100">
+            <h3 class="text-2xl font-semibold text-white mb-6">Benefits for Business</h3>
+            <ul class="space-y-4">
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Stronger Security:</strong> Protects customer data and brand reputation.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Increased Acquisition:</strong> Easy registration process improves conversion rates.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>High Scalability:</strong> Capable of handling millions of users without issues.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Regulatory Compliance:</strong> Helps adhere to data privacy regulations.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Centralized Data:</strong> Enables data analysis for marketing personalization.</span></li>
+            </ul>
+        </div>
+
+        <div data-aos="fade-left" data-aos-delay="200">
+            <h3 class="text-2xl font-semibold text-white mb-6">Advantages for Customers</h3>
+            <ul class="space-y-4">
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Seamless Experience:</strong> Just one login (SSO) for all services.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Guaranteed Account Security:</strong> Peace of mind thanks to security features like MFA.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Full Control Over Data:</strong> Easily manage personal information.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Fast & Convenient Access:</strong> A simple and straightforward login process.</span></li>
+                <li class="flex items-start"><i class="fa-solid fa-circle-check text-accent mt-1 mr-3"></i><span><strong>Personalized Experience:</strong> Receive more relevant and tailored offers.</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-10">
+        <a href="contactus.html" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
+            Contact US 
+            </a>
+    </div>
+    
+</section>
+
+<section id="core-security-compact" class="bg-black py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    
+        <div class="swiper compact-carousel relative px-10">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide h-auto">
+                    <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
+                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-user-lock text-5xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Customer Identity & Management Access</h3>
+                        <p class="text-gray-400 text-sm flex-grow">Secure and manage user identities, ensuring authorized access while providing a seamless user experience.</p>
+                        <a href="CustomerID.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide h-auto">
+                    <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
+                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-network-wired text-5xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Web Application & API Protection</h3>
+                        <p class="text-gray-400 text-sm flex-grow">Comprehensive defense against threats targeting your web applications and APIs, including bots and injection attacks.</p>
+                        <a href="Waap.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide h-auto">
+                    <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
+                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-database text-5xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Data Security</h3>
+                        <p class="text-gray-400 text-sm flex-grow">Implementing robust encryption and access controls to safeguard sensitive information across all platforms.</p>
+                        <a href="Datasecurity.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide h-auto">
+                    <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
+                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-user-shield text-5xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Privacy Data Protection</h3>
+                        <p class="text-gray-400 text-sm flex-grow">Ensuring compliance with global privacy regulations and protecting personal data from unauthorized access and breaches.</p>
+                        <a href="Privacydata.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide h-auto">
+                    <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
+                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-desktop text-5xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">End Point Protection</h3>
+                        <p class="text-gray-400 text-sm flex-grow">Advanced security for all network endpoints, including laptops, desktops, and mobile devices, against malware and intrusions.</p>
+                        <a href="Endpoint.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide h-auto">
+                    <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
+                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-user-secret text-5xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-2">Fraud Prevention</h3>
+                        <p class="text-gray-400 text-sm flex-grow">Real-time monitoring and advanced analytics to detect and prevent fraudulent activities and transactions.</p>
+                        <a href="Fraud.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+
+
+    </div>
+    
+<footer class="bg-black text-white">
+    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        
+        <div class="mb-10">
+            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo White.png" alt="Logo Sistema">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Location Office</h3>
+                <div class="space-y-2 text-slate-300">
+                    <p>Menara Batavia, Lantai 26</p>
+                    <p>Jl. K.H. Mas Mansyur No.Kav.126</p>
+                    <p>Jakarta Pusat, 10220</p>
+                    <p>Indonesia</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
+                        </svg>
+                        <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
+                    </a>
+                    <a href="mailto:kontak@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        <span>marketing@sistema.co.id</span>
+                    </a>
+                </div>
+            </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                    <div class="space-y-3 text-slate-300">
+                        <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            <span>Sistema Datapilar</span>
+                        </a>
+                    </div>
+                </div>
+
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-400">
+            <p>&copy; Copyright. PT Sistema Datapilar</p>
+        </div>
+
+    </div>
+</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    // --- 1. Mobile Menu Logic ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const submenuToggles = mobileMenu ? mobileMenu.querySelectorAll('[data-submenu-toggle]') : [];
+
+    const toggleMobileMenu = () => {
+        if (mobileMenu) {
+            const isActive = mobileMenu.classList.toggle('is-active');
+            if (hamburgerIcon) {
+                hamburgerIcon.classList.toggle('open', isActive);
+            }
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+    };
+
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    }
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
+
+    // --- 2. Submenu Toggle Logic ---
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const submenuId = toggle.dataset.submenuToggle + '-submenu';
+            const submenu = document.getElementById(submenuId);
+            const plusIcon = toggle.querySelector('.plus-icon');
+
+            if (submenu) {
+                if (plusIcon) {
+                    plusIcon.classList.toggle('open');
+                }
+
+                if (submenu.style.maxHeight) {
+                    submenu.style.maxHeight = null;
+                    submenu.style.paddingTop = '0';
+                    submenu.style.paddingBottom = '0';
+                } else {
+                    submenu.style.maxHeight = submenu.scrollHeight + "px";
+                    submenu.style.paddingTop = '8px';
+                    submenu.style.paddingBottom = '8px';
+                }
+            }
+        });
+    });
+
+    AOS.init({
+            duration: 700, // values from 0 to 3000, with step 50ms
+            once: true, // whether animation should happen only once - while scrolling down
+        });
+
+        const swiperCompact = new Swiper('.compact-carousel', {
+        loop: true,
+        spaceBetween: 15, // Jarak antar slide dikurangi
+        slidesPerView: 1,
+        grabCursor: true,
+        
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20 // Jarak antar slide dikurangi
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30 // Jarak antar slide dikurangi
+            }
+        }
+    });
+});
+    </script>
+</body>
+</html>

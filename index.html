@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Datapilar - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <style>
+        /* =================================
+        1. GLOBAL & BASE SETTINGS
+================================= */
+:root {
+    --color-accent: #d21b29;
+    --transition: all 0.3s ease;
+}
+html {
+    scroll-behavior: smooth;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #000000;
+    font-family: 'Inter', 'Roboto', sans-serif;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    /* Menghilangkan scrollbar untuk Firefox */
+    scrollbar-width: none;
+}
+
+/* Menghilangkan scrollbar untuk Chrome, Safari, dan Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* =================================
+        2. NAVBAR & MOBILE MENU
+================================= */
+.nav_cus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    background-color: rgba(13, 16, 24, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hamburger-icon {
+    position: relative;
+    width: 24px;
+    height: 18px;
+}
+.hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+.hamburger-icon span:nth-child(1) { top: 0px; }
+.hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+.hamburger-icon span:nth-child(4) { top: 16px; }
+
+.hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+.hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+.hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
+#mobile-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 100;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    overflow-y: auto;
+}
+#mobile-menu.is-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.mobile-menu-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 1.125rem;
+    transition: var(--transition);
+}
+.mobile-menu-link:hover { color: var(--color-accent); }
+.plus-icon {
+    transition: transform 0.3s ease;
+}
+.plus-icon.open {
+    transform: rotate(45deg);
+}
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding-left: 1rem;
+}
+
+/* =================================
+        4. SCROLL ANIMATION & HERO
+================================= */
+.fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+#hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 1.5rem;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+#hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.6;
+}
+#hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+#hero .content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+#hero h1 {
+    font-size: 2.5rem;
+}
+
+/* =================================
+        5. ABOUT & CTA SECTION
+================================= */
+#about-cta-section {
+    background-color: rgb(0, 0, 0);
+    position: relative;
+    z-index: 1;
+} 
+
+#about-cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    
+    pointer-events: none;
+}
+
+.cta-card {
+    background: linear-gradient(145deg, rgba(210, 27, 41, 0.2), rgba(40, 20, 20, 0.2));
+    border: 1px solid rgba(255, 80, 80, 0.2);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* =================================
+        6. OFFERINGS SECTION
+================================= */
+#offerings-section {
+    background-color: #000000;
+    position: relative;
+    z-index: 1;
+    padding: 4rem 1.5rem;
+    background: linear-gradient(to bottom, #7f0000, transparent);
+}
+.offering-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.offering-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+.card-media video {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+.explore-btn {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    border-radius: 9999px;
+    color: #e5e7eb;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+.explore-btn:hover {
+    background-color: #E31A22;
+    border-color: #E31A22;
+    color: white;
+}
+.explore-btn .arrow {
+    display: inline-block;
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+.explore-btn:hover .arrow {
+    transform: translateX(4px);
+}
+
+
+/* =================================
+        7. PORTFOLIO SECTION
+================================= */
+#portfolio-section {
+    background-color: #000000;
+    position: relative;
+    overflow: hidden;
+    
+}
+#portfolio-section h2, #portfolio-section p {
+    color: #ffffff;
+}
+.portfolio-scroller {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.scroller-inner {
+    display: flex;
+    flex-shrink: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    animation: infinite-scroll 80s linear infinite;
+}
+@keyframes infinite-scroll {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-100%); }
+}
+.portfolio-scroller li {
+    padding: 0 20px;
+}
+.portfolio-scroller img {
+    height: 50px;
+    max-width: none;
+    opacity: 0.8;
+    transition: 0.3s ease;
+}
+.portfolio-scroller li:hover img {
+    filter: grayscale(0) brightness(1);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* =================================
+        8. BLOG SECTION
+================================= */
+#blog-page {
+    background-color: #7f0000;
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255), transparent);
+}
+
+/* =================================
+        9. FOOTER
+================================= */
+.footer {
+    background-color: #000;
+    color: #fff;
+    line-height: 1.5;
+    position: relative;
+    z-index: 20;
+}
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 60px 20px;
+    max-width: 1280px;
+    margin: auto;
+    gap: 40px;
+}
+.footer-brand, .footer-contact, .footer-social {
+    flex: 1 1 100%;
+    text-align: center;
+}
+.footer-brand h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.footer-brand .highlight {
+    color: var(--color-accent);
+}
+.footer-contact .contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    gap: 12px;
+}
+.footer-contact .btn-email {
+    display: inline-block;
+    background-color: var(--color-accent);
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+.footer-contact .btn-email:hover {
+    background-color: #a31623;
+}
+.footer-social h4 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+.footer-social .highlight {
+    color: var(--color-accent);
+}
+.linkedin-link {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #242a30;
+    padding: 10px;
+    transition: var(--transition);
+}
+.linkedin-link:hover {
+    background-color: var(--color-accent);
+    transform: scale(1.1);
+}
+.linkedin-icon {
+    display: block;
+    width: 36px;
+    height: 36px;
+    fill: #fff;
+}
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    background-color: #242a30;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #b0b0b0;
+}
+
+/* =================================
+        10. MEDIA QUERIES FOR RESPONSIVENESS
+================================= */
+@media (min-width: 768px) {
+    #hero h1 { font-size: 3.75rem; }
+    .footer-brand, .footer-contact, .footer-social { flex: 1 1 300px; text-align: left; }
+    .footer-contact .contact-row { justify-content: flex-start; }
+    .footer-social { text-align: center; }
+    .footer-bottom { flex-direction: row; justify-content: space-between; gap: 20px; }
+    .portfolio-scroller li { padding: 0 40px; }
+    .portfolio-scroller img { height: 40px; }
+}
+@media (min-width: 1024px) {
+    #hero h1 { font-size: 4.5rem; }
+}
+    </style>
+</head>
+<body>
+<nav class="nav_cus">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            
+            <a href="index.html">
+                <div>
+                    <img src="asset/Sistema Datapilar Tees Width Logo Red.png" alt="Logo" class="h-10">
+                </div>
+            </a>
+            
+            <div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="hover:text-red-500 transition">About Us</a>
+                    <a href="solutions.html" class="hover:text-red-500 transition">Solutions</a>
+                    <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
+                    <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                    <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                </div>
+                
+                <div class="flex items-center md:hidden">
+                    <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
+                        <div class="hamburger-icon">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</nav>
+
+    <div id="mobile-menu">
+        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="products">
+                    <span> Our Partners</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="products-submenu" class="submenu">
+                    <li><a href="#" class="mobile-menu-link text-base">V - Key</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Imperva</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Knowbe4</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Big ID</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Sentinel One</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Ping Identity</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Protegrity</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Ridge Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Soti</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Synopsys</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Tanium</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Vectra</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Datavisor</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">IBM</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Pentera</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Thales</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                    <span>Services & Solutions</span>
+                    <span class="plus-icon">+</span>
+                </a>
+                <ul id="solutions-submenu" class="submenu">
+                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+                </ul>
+            </li>
+            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        </ul>
+    </div>
+
+<section class="relative bg-cover bg-center bg-no-repeat" style="background-image: url('asset/background.png');">
+  <!-- Overlay hitam semi-transparan -->
+  <div class="absolute inset-0 bg-black opacity-60"></div>
+
+  <!-- Konten utama -->
+  <div class="relative max-w-7xl mx-auto px-4 py-20 lg:py-28">
+    <!-- Judul dan deskripsi di kiri bawah -->
+    <div class="pt-10 text-left text-white mb-10 max-w-3xl">
+      <h2 class="text-3xl md:text-4xl font-bold mb-2">Our Focus Goes Beyond More Compliance</h2>
+      <p class="text-gray-300 text-sm md:text-base">
+        We are dedicated to helping clients protect their data and cybersecurity to the highest international standards.
+      </p>
+    </div>
+
+    <!-- FEATURE ICONS -->
+    <div class="pt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-x-2 gap-y-8 padding-top-5">
+  
+      <!-- ITEM 1 -->
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="asset/Solution/Customer Identity & Access Management.png" alt="Customer Access" class="h-12 mx-auto mb-2">
+        <p class="text-sm font-semibold text-gray-800 leading-tight">
+          Customer Identity &<br>Access Management
+        </p>
+      </div>
+
+      <!-- ITEM 2 -->
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="asset/Solution/Web Application & API Protection (WAAP).png" alt="WAAP" class="h-12 mx-auto mb-2">
+        <p class="text-sm font-semibold text-gray-800 leading-tight">
+          Web Application & API<br>Protection (WAAP)
+        </p>
+      </div>
+
+      <!-- ITEM 3 -->
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="asset/Solution/Rpivacy Data P.png" alt="Privacy Protection" class="h-12 mx-auto mb-2">
+        <p class="text-sm font-semibold text-gray-800 leading-tight">
+          Privacy Data Protection
+        </p>
+      </div>
+
+      <!-- ITEM 4 -->
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="asset/Solution/End Point Protection.png" alt="Endpoint Protection" class="h-12 mx-auto mb-2">
+        <p class="text-sm font-semibold text-gray-800 leading-tight">
+          End Point Protection
+        </p>
+      </div>
+
+      <!-- ITEM 5 -->
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="asset/Solution/Data Security.png" alt="Data Security" class="h-12 mx-auto mb-2">
+        <p class="text-sm font-semibold text-gray-800 leading-tight">
+          Data Security
+        </p>
+      </div>
+
+      <!-- ITEM 6 -->
+      <div class="bg-white rounded-xl p-4 text-center shadow-md">
+        <img src="asset/Solution/Fraud Prevention.png" alt="Fraud Prevention" class="h-12 mx-auto mb-2">
+        <p class="text-sm font-semibold text-gray-800 leading-tight">
+          Fraud Prevention
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bg-black">
+    <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 text-center">
+        
+        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Enabling The Future Through Innovation
+        </h2>
+
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
+            PT Sistema Datapilar is a trusted provider of cyber payment security and fraud prevention solutions, serving businesses in Indonesia. We empower organizations to protect their digital transactions, secure customer data, and mitigate fraud risks.
+        </p>
+
+        <div class="mt-10">
+            <a href="#" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
+                About Us
+            </a>
+        </div>
+
+    </div>
+</section>
+
+    <section id="offerings-section" class="py-24 sm:py-32">
+        <div class="mx-auto max-w-2xl text-center mb-16 px-6 lg:px-8 fade-in-on-scroll">
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Explore Solutions with Sistema</h2>
+            <p class="mt-4 text-lg leading-8 text-gray-300">
+                Enhance your cybersecurity with Sistema advanced solutions and proven expertise.
+            </p>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <article class="offering-card fade-in-on-scroll">
+                    <div class="card-media">
+                        <video src="asset/Gif/data.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Our Partners</h3>
+                        <p class="text-gray-300 text-sm flex-grow">
+                            Advanced security products for unrivalled protection in today's digital landscape.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="offering-card fade-in-on-scroll">
+                    <div class="card-media">
+                        <video src="asset/Gif/world.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Our Services</h3>
+                        <p class="text-gray-300 text-sm flex-grow">
+                            Customised services to enhance your organization's cybersecurity posture.
+                        </p>
+                        <div class="mt-4">
+                            <a href="solutions.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="offering-card fade-in-on-scroll">
+                    <div class="card-media">
+                        <video src="asset/Gif/cyber.mp4" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold text-white mb-2">Our Solutions</h3>
+                        <p class="text-gray-300 text-sm flex-grow">
+                            Tailor-made solutions ensuring the utmost security for your digital infrastructure.
+                        </p>
+                        <div class="mt-4">
+                            <a href="solutions.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio-section" class="py-5 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center fade-in-on-scroll">
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Our Valued Portfolio</h2>
+                <p class="mt-4 text-lg leading-8">We are proud to have collaborated with a diverse range of leading companies.</p>
+            </div>
+            <div class="portfolio-scroller mt-16">
+                <ul class="scroller-inner">
+                    <li><img src="asset/Portfolio/Hibank.png" alt="Hibank logo"></li>
+                    <li><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo"></li>
+                    <li><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo"></li>
+                    <li><img src="asset/Portfolio/smbc.png" alt="SMBC logo"></li>
+                    <li><img src="asset/Portfolio/jalin.png" alt="Jalin logo"></li>
+                    <li><img src="asset/Portfolio/goto.png" alt="GoTo logo"></li>
+                    <li><img src="asset/Portfolio/panin.png" alt="PaninBank logo"></li>
+                    <li><img src="asset/Portfolio/kbru.png" alt="KBRU logo"></li>
+                    <li><img src="asset/Portfolio/app.png" alt="APP logo"></li>
+                    <li><img src="asset/Portfolio/nano.png" alt="Nanobank logo"></li>
+                    <li><img src="asset/Portfolio/lotus.png" alt="Lotus logo"></li>
+                    <li><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo"></li>
+                </ul>
+                <ul class="scroller-inner" aria-hidden="true">
+                    <li><img src="asset/Portfolio/Hibank.png" alt="Hibank logo"></li>
+                    <li><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo"></li>
+                    <li><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo"></li>
+                    <li><img src="asset/Portfolio/smbc.png" alt="SMBC logo"></li>
+                    <li><img src="asset/Portfolio/jalin.png" alt="Jalin logo"></li>
+                    <li><img src="asset/Portfolio/goto.png" alt="GoTo logo"></li>
+                    <li><img src="asset/Portfolio/panin.png" alt="PaninBank logo"></li>
+                    <li><img src="asset/Portfolio/kbru.png" alt="KBRU logo"></li>
+                    <li><img src="asset/Portfolio/app.png" alt="APP logo"></li>
+                    <li><img src="asset/Portfolio/nano.png" alt="Nanobank logo"></li>
+                    <li><img src="asset/Portfolio/lotus.png" alt="Lotus logo"></li>
+                    <li><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo"></li>
+                </ul>
+            </div>
+
+            <div class="mx-auto max-w-2xl text-center pt-20 fade-in-on-scroll">
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Our Partners</h2>
+                <p class="mt-4 text-lg leading-8">
+                    We are partnering with a world-class technology principal to deliver world-class enterprise solutions to our customers,
+                    leveraging the cutting-edge principles of zero trust security
+                </p>
+            </div>
+            <div class="portfolio-scroller mt-16">
+                <ul class="scroller-inner">
+                    <li><img src="asset/Partner/bigid.png" alt="big id"></li>
+                    <li><img src="asset/Partner/datavisor.png" alt="datavisor"></li>
+                    <li><img src="asset/Partner/ibm.png" alt="ibm"></li>
+                    <li><img src="asset/Partner/imperva.png" alt="imperva"></li>
+                    <li><img src="asset/Partner/knowbe4.png" alt="knowbe4"></li>
+                    <li><img src="asset/Partner/pentera.png" alt="pentera"></li>
+                    <li><img src="asset/Partner/pingidentity.png" alt="pingidentity"></li>
+                    <li><img src="asset/Partner/protegrity.png" alt="protegrity"></li>
+                    <li><img src="asset/Partner/ridgesecurity.png" alt="ridgesecurity"></li>
+                    <li><img src="asset/Partner/sentinelone.png" alt="sentinelone"></li>
+                    <li><img src="asset/Partner/soti.png" alt="soti"></li>
+                    <li><img src="asset/Partner/synopsys.png" alt="synopsys"></li>
+                    <li><img src="asset/Partner/tanium.png" alt="tanium"></li>
+                    <li><img src="asset/Partner/thales.png" alt="thales"></li>
+                    <li><img src="asset/Partner/vectra.png" alt="vectra"></li>
+                    <li><img src="asset/Partner/vkey.png" alt="vkey"></li>
+                </ul>
+                <ul class="scroller-inner" aria-hidden="true">
+                    <li><img src="asset/Partner/bigid.png" alt="big id"></li>
+                    <li><img src="asset/Partner/datavisor.png" alt="datavisor"></li>
+                    <li><img src="asset/Partner/ibm.png" alt="ibm"></li>
+                    <li><img src="asset/Partner/imperva.png" alt="imperva"></li>
+                    <li><img src="asset/Partner/knowbe4.png" alt="knowbe4"></li>
+                    <li><img src="asset/Partner/pentera.png" alt="pentera"></li>
+                    <li><img src="asset/Partner/pingidentity.png" alt="pingidentity"></li>
+                    <li><img src="asset/Partner/protegrity.png" alt="protegrity"></li>
+                    <li><img src="asset/Partner/ridgesecurity.png" alt="ridgesecurity"></li>
+                    <li><img src="asset/Partner/sentinelone.png" alt="sentinelone"></li>
+                    <li><img src="asset/Partner/soti.png" alt="soti"></li>
+                    <li><img src="asset/Partner/synopsys.png" alt="synopsys"></li>
+                    <li><img src="asset/Partner/tanium.png" alt="tanium"></li>
+                    <li><img src="asset/Partner/thales.png" alt="thales"></li>
+                    <li><img src="asset/Partner/vectra.png" alt="vectra"></li>
+                    <li><img src="asset/Partner/vkey.png" alt="vkey"></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+ <section id="blog-page" class="py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <header class="max-w-4xl mx-auto text-center mb-16 fade-in-on-scroll">
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">Blogs</h1>
+        </header>
+
+        <div id="latest-article-container" class="max-w-5xl mx-auto">
+            </div>
+    </div>
+</section>
+
+    <footer id="contact" class="footer">
+        <div class="footer-top">
+            <div class="footer-brand fade-in-on-scroll"><h3>WE <span class="highlight">ARE</span><br />SISTEMA <span class="highlight">DATAPILAR</span></h3></div>
+            <div class="footer-contact fade-in-on-scroll">
+                <div class="contact-row"><span class="icon-phone">📞</span><span>(021) 5722381 / (021) 5722382</span></div>
+                <div class="contact-row"><span class="icon-email">✉️</span><a href="mailto:info@sistemadatapilar.com" class="btn-email">Email us</a></div>
+                <div class="contact-row"><span class="icon-map">📍</span><span>Menara Batavia Lt. 26<br>Jl. KH. Mas Mansyur Kav. 126,<br>Jakarta 10220, Indonesia</span></div>
+            </div>
+            <div class="footer-social fade-in-on-scroll">
+                <h4>FOLLOW <span class="highlight">US!</span></h4>
+                <a href="https://www.linkedin.com/company/pt-sistema-datapilar/" target="_blank" rel="noopener" class="linkedin-link"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" class="linkedin-icon"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.292c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 10.292h-3v-4.5c0-1.379-1.121-2.5-2.5-2.5s-2.5 1.121-2.5 2.5v4.5h-3v-9h3v1.3c.969-1.108 2.539-1.8 4.152-1.8 3.038 0 5.348 2.555 5.348 5.7v4.8z"/></svg></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© Copyright PT Sistema Datapilar 2025</span>
+            <div class="language-select flex items-center">
+                <span class="flag-us mr-2">🇺🇸</span> English
+            </div>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // --- 1. Mobile Menu Logic ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const submenuToggles = mobileMenu ? mobileMenu.querySelectorAll('[data-submenu-toggle]') : [];
+
+    const toggleMobileMenu = () => {
+        if (mobileMenu) {
+            const isActive = mobileMenu.classList.toggle('is-active');
+            if (hamburgerIcon) {
+                hamburgerIcon.classList.toggle('open', isActive);
+            }
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+    };
+
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    }
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
+
+    // --- 2. Submenu Toggle Logic ---
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const submenuId = toggle.dataset.submenuToggle + '-submenu';
+            const submenu = document.getElementById(submenuId);
+            const plusIcon = toggle.querySelector('.plus-icon');
+
+            if (submenu) {
+                if (plusIcon) {
+                    plusIcon.classList.toggle('open');
+                }
+                if (submenu.style.maxHeight) {
+                    submenu.style.maxHeight = null;
+                } else {
+                    submenu.style.maxHeight = submenu.scrollHeight + "px";
+                }
+            }
+        });
+    });
+
+    // --- 3. Staggered Animation Logic ---
+    const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Logic for counter animation
+                if (entry.target.classList.contains('counter')) {
+                    const counter = entry.target;
+                    if (counter.dataset.animated) return;
+                    counter.dataset.animated = 'true';
+
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000;
+                    let start = 0;
+                    const stepTime = 16; // roughly 60fps
+                    const totalSteps = Math.round(duration / stepTime);
+                    const increment = target / totalSteps;
+
+                    const updateCounter = () => {
+                        start += increment;
+                        if (start < target) {
+                            counter.textContent = Math.floor(start).toLocaleString() + '+';
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString() + '+';
+                        }
+                    };
+                    updateCounter();
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const elementsToAnimate = document.querySelectorAll('.fade-in-on-scroll, .offering-card, .counter');
+    elementsToAnimate.forEach((el, index) => {
+        el.style.transitionDelay = `${index * 100}ms`;
+        animationObserver.observe(el);
+    });
+
+    // --- 4. Dynamic Blog Loading (DIUBAH UNTUK MENAMPILKAN SEMUA) ---
+    fetch('blogs.json')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => {
+        const container = document.getElementById('latest-article-container');
+        if (container && data.length > 0) {
+            // Kosongkan container sebelum mengisi
+            container.innerHTML = ''; 
+
+            // Gunakan loop untuk menampilkan setiap post
+            data.forEach(post => {
+                const articleHTML = `
+                    <a href="${post.url}" class="group block fade-in-on-scroll mb-12 last:mb-0">
+                        <article class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                            <div class="article-image-wrapper overflow-hidden rounded-lg">
+                                <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105">
+                            </div>
+                            <div class="article-content">
+                                <h2 class="text-2xl lg:text-3xl font-bold text-white leading-tight mb-3">${post.title}</h2>
+                                <p class="text-sm text-gray-200 font-medium mb-4">| ${post.source}</p>
+                                <p class="text-base text-gray-200 leading-relaxed mb-6">${post.excerpt}</p>
+                                <p class="text-sm text-gray-300 mb-8">${post.date}</p>
+                                <div class="mt-4">
+                                    <a href="${post.url}" class="explore-btn">Read More <span class="arrow">&rarr;</span></a>
+                                </div>
+                            </div>
+                        </article>
+                    </a>`;
+                // Tambahkan HTML artikel ke dalam container
+                container.innerHTML += articleHTML;
+            });
+            
+            // Terapkan animasi pada semua elemen blog yang baru dibuat
+            const newBlogElements = container.querySelectorAll('.fade-in-on-scroll');
+            newBlogElements.forEach((el, index) => {
+                el.style.transitionDelay = `${(elementsToAnimate.length + index) * 100}ms`;
+                animationObserver.observe(el);
+            });
+        }
+      })
+      .catch(error => {
+        console.error('Failed to load blog posts:', error);
+        const container = document.getElementById('latest-article-container');
+        if(container) container.innerHTML = '<p class="text-center">Could not load articles.</p>';
+      });
+});
+</script>
+</body>
+</html>

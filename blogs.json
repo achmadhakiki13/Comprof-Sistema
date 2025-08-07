@@ -1,0 +1,26 @@
+[
+  {
+    "title": "V-Key: Revolutionising Universal Digital Identities with V-Key ID",
+    "source": "V - KEY",
+    "date": "2 Juli 2025",
+    "image": "asset/Blogs/V-key Revolutionising.png",
+    "excerpt": "Online transactions have become an essential part of our lives, and ensuring the security and trustworthiness of digital identities have become more important. From financial transactions to healthcare services, e-commerce, and government interactions, our reliance on digital platforms needs robust and reliable digital identity solutions.",
+    "url": "https://www.v-key.com/resource/revolutionising-universal-digital-identities-with-v-key-id/"
+  },
+  {
+    "title": "Cybersecurity Trends 2025: Preparing for the Next Digital Threats",
+    "source": "Sistema Datapilar",
+    "date": "9 Juli 2025",
+    "image": "asset/Blogs/cybersecurity-trends.png",
+    "excerpt": "With AI-driven threats, deepfake frauds, and evolving ransomware attacks, 2025 marks a critical year for redefining how businesses handle cybersecurity. This article explores what's ahead and how to prepare.",
+    "url": "https://sistema.co.id/blog/cybersecurity-trends-2025"
+  },
+  {
+    "title": "How Zero Trust Architecture Is Shaping the Future of Enterprise Security",
+    "source": "TechSecure",
+    "date": "6 Juli 2025",
+    "image": "asset/Blogs/zero-trust-architecture.png",
+    "excerpt": "Zero Trust isn't just a buzzword — it's a fundamental shift in how organizations defend their networks. Learn why adopting ZTNA is becoming essential in today's hybrid work environment.",
+    "url": "https://techsecure.com/blog/zero-trust-architecture"
+  }
+]
