@@ -161,6 +161,33 @@
         .compact-carousel .swiper-button-next {
             right: 0px;
         }
+
+        .site-footer {
+            background-color: #242a30; /* Warna latar belakang footer */
+            color: #a9a9a9;             /* Warna teks */
+            padding: 40px 0 20px;      /* Padding atas untuk memberi ruang pada garis */
+            text-align: center;
+            position: relative;        /* Diperlukan agar pseudo-element ::before bisa diposisikan */
+            font-size: 14px;
+        }
+
+        /* Membuat garis dengan efek fade out menggunakan pseudo-element ::before */
+        .site-footer::before {
+            content: '';               /* Wajib ada untuk menampilkan pseudo-element */
+            position: absolute;
+            top: 20px;                 /* Jarak garis dari atas footer */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;                /* Lebar garis (tidak sampai ujung) */
+            height: 1px;               /* Ketebalan garis */
+            
+            /* Ini adalah bagian terpenting: membuat gradasi dari transparan ke putih, lalu kembali ke transparan */
+            background: linear-gradient(to right, 
+                rgba(255, 255, 255, 0),    /* Mulai dari transparan di kiri */
+                rgba(255, 255, 255, 0.4) 50%, /* Warna solid (sedikit transparan) di tengah */
+                rgba(255, 255, 255, 0)     /* Kembali transparan di kanan */
+            );
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -169,7 +196,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html">
-                    <img src="asset/Sistema Datapilar Tees Width Logo Red.png" alt="Logo" class="h-10">
+                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10">
                 </a>
                 <div>
                     <div class="hidden md:flex items-center space-x-8">
@@ -363,11 +390,11 @@
 </section>
     </div>
     
-        <footer class="bg-black text-white">
+<footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
         
         <div class="mb-10">
-            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo White.png" alt="Logo Sistema">
+            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema">
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -391,11 +418,17 @@
                         </svg>
                         <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
                     </a>
-                    <a href="mailto:kontak@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                    <a href="mailto:marketing@sistema.co.id" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                         </svg>
                         <span>marketing@sistema.co.id</span>
+                    </a>
+                    <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        <span>info@sistema.co.id</span>
                     </a>
                 </div>
             </div>
@@ -411,13 +444,10 @@
                         </a>
                     </div>
                 </div>
-
-        </div>
-        
-        <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-slate-400">
+            </div>
+        <div class="site-footer">
             <p>&copy; Copyright. PT Sistema Datapilar</p>
         </div>
-
     </div>
 </footer>
 
