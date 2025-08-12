@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <!-- Added Outfit font to match index.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700;800&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <style>
+        /* =================================
+        1. GLOBAL & BASE SETTINGS
+        ================================= */
         :root {
             --color-accent: #d21b29;
+            --transition: all 0.3s ease;
             --transition-fast: all 0.3s ease;
             --transition-slow: all 0.5s ease;
         }
@@ -34,18 +39,27 @@
             display: none; /* Chrome, Safari, Opera */
         }
 
-        /* NAVBAR & MOBILE MENU */
+        /* =================================
+        2. NAVBAR & MOBILE MENU (Synced with index.html)
+        ================================= */
         .nav_cus {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 100;
+            z-index: 50;
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+            border-bottom: 1px solid transparent; /* Start with a transparent border */
+        }
+
+        /* Class added on scroll */
+        .nav_cus.nav-scrolled {
             background-color: rgba(13, 16, 24, 0.5);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
+
         .hamburger-icon {
             position: relative;
             width: 24px;
@@ -66,6 +80,7 @@
         .hamburger-icon span:nth-child(1) { top: 0px; }
         .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
         .hamburger-icon span:nth-child(4) { top: 16px; }
+
         .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
             top: 8px;
             width: 0%;
@@ -73,6 +88,7 @@
         }
         .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
         .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
         #mobile-menu {
             position: fixed;
             right: 0;
@@ -80,13 +96,13 @@
             bottom: 0;
             width: 80%;
             max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            z-index: 101;
+            z-index: 100;
             transform: translateX(100%);
             opacity: 0;
-            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
             padding-top: 5rem;
@@ -102,7 +118,7 @@
             align-items: center;
             padding: 12px 0;
             font-size: 1.125rem;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
         .mobile-menu-link:hover { color: var(--color-accent); }
         .plus-icon {
@@ -118,7 +134,22 @@
             padding-left: 1rem;
         }
 
-        /* ANIMASI & SECTION STYLING */
+        .solutions-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .group:hover .solutions-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+
+        /* =================================
+        3. ABOUT PAGE SPECIFIC STYLES
+        ================================= */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -129,11 +160,12 @@
             transform: translateY(0);
         }
         .section-title {
-            font-size: clamp(2.5em, 5vw, 3.5em); /* Ukuran font responsif */
+            font-size: clamp(2.5em, 5vw, 3.5em);
             font-weight: bold;
             color: #e50000;
             line-height: 1.1;
             margin-bottom: 50px;
+            font-family: 'Outfit', sans-serif; /* Added font family */
         }
         .section-title .highlight {
             color: #ffffff;
@@ -175,6 +207,7 @@
             color: #ffffff;
             margin-bottom: 20px;
             font-weight: 600;
+            font-family: 'Outfit', sans-serif; /* Added font family */
         }
         .sistema-description {
             font-size: 1.1em;
@@ -207,18 +240,6 @@
         }
         .explore-btn:hover .arrow {
             transform: translateX(4px);
-        }
-
-        .solutions-dropdown {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-        }
-        .group:hover .solutions-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
         }
 
         /* VMM SECTION */
@@ -267,21 +288,109 @@
             color: #d1d5db;
         }
 
+        /* VALUES SECTION */
+        .values-section {
+            text-align: center;
+        }
+        .values-section h2 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 50px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+        .values-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .value-card {
+            background-color: #ffffff;
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+        }
+        .value-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .value-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .card-image {
+            width: 100%;
+            height: 220px;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 30px;
+            text-align: left;
+            flex-grow: 1;
+        }
+        .card-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a2a45;
+            margin-bottom: 10px;
+        }
+        .card-content p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        /* FOOTER */
+         .site-footer {
+            background-color: #242a30;
+            color: #a9a9a9;
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+            font-size: 14px;
+        }
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0)
+            );
+        }
+
         /* RESPONSIVE DESIGN */
         @media (max-width: 992px) {
-            .about-xynexis-content-wrapper, .vmm-item {
+            .about-sistema-content-wrapper, .vmm-item {
                 flex-direction: column;
             }
-            .xynexis-text-side {
+            .sistema-text-side {
                 padding: 40px 20px;
                 text-align: center;
             }
-            .xynexis-description {
+            .sistema-description {
                 max-width: none;
                 margin-left: auto;
                 margin-right: auto;
             }
-            .xynexis-image-side {
+            .sistema-image-side {
                 width: 100%;
                 min-height: 350px;
             }
@@ -290,8 +399,16 @@
                 gap: 1.5rem;
             }
         }
+        @media (max-width: 768px) {
+            .values-section h2 {
+                font-size: 2.2rem;
+            }
+            .value-card {
+                width: calc(50% - 20px);
+            }
+        }
         @media (max-width: 600px) {
-            .about-xynexis-section, .vmm-section {
+            .about-sistema-section, .vmm-section {
                 padding: 60px 0;
             }
             .vmm-description-visible {
@@ -305,159 +422,35 @@
                 font-size: 2rem;
             }
         }
-
-        /* Bagian utama 'Our Values' */
-.values-section {
-    /* padding: 80px 20px; */
-    text-align: center;
-}
-
-.values-section h2 {
-    font-size: 2.8rem;
-    color: #ffffff;
-    margin-bottom: 50px;
-    font-weight: 700;
-}
-
-/* --- Grid untuk Kartu --- */
-.values-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px; /* Jarak antar kartu */
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* --- Desain Kartu --- */
-.value-card {
-    background-color: #ffffff;
-    width: 350px;
-    border-radius: 15px; /* Sudut membulat */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); /* Bayangan halus */
-    overflow: hidden; /* Memastikan gambar tetap di dalam sudut membulat */
-    display: flex;
-    flex-direction: column;
-    
-    /* Pengaturan untuk Animasi Scroll */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-/* State saat kartu terlihat di layar (untuk JS) */
-.value-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- Interaksi Hover --- */
-.value-card:hover {
-    transform: translateY(-10px) scale(1.03); /* Sedikit terangkat dan membesar */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Styling Gambar --- */
-.card-image {
-    width: 100%;
-    height: 220px; /* Tinggi gambar konsisten */
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Gambar mengisi area tanpa distorsi */
-}
-
-/* --- Styling Konten Kartu --- */
-.card-content {
-    padding: 30px;
-    text-align: left;
-    flex-grow: 1; /* Memastikan tinggi konten sama jika diperlukan */
-}
-
-.card-content h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1a2a45;
-    margin-bottom: 10px;
-}
-
-.card-content p {
-    font-size: 0.95rem;
-    color: #555;
-}
-
-/* --- Desain Responsif --- */
-@media (max-width: 768px) {
-    .values-section h2 {
-        font-size: 2.2rem;
-    }
-    .value-card {
-        width: calc(50% - 20px); /* 2 kartu per baris di tablet */
-    }
-}
-
-@media (max-width: 500px) {
-    .value-card {
-        width: 100%; /* 1 kartu per baris di ponsel */
-        max-width: 350px;
-    }
-}
-
- .site-footer {
-            background-color: #242a30; /* Warna latar belakang footer */
-            color: #a9a9a9;             /* Warna teks */
-            padding: 40px 0 20px;      /* Padding atas untuk memberi ruang pada garis */
-            text-align: center;
-            position: relative;        /* Diperlukan agar pseudo-element ::before bisa diposisikan */
-            font-size: 14px;
+        @media (max-width: 500px) {
+            .value-card {
+                width: 100%;
+                max-width: 350px;
+            }
         }
-
-        /* Membuat garis dengan efek fade out menggunakan pseudo-element ::before */
-        .site-footer::before {
-            content: '';               /* Wajib ada untuk menampilkan pseudo-element */
-            position: absolute;
-            top: 20px;                 /* Jarak garis dari atas footer */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;                /* Lebar garis (tidak sampai ujung) */
-            height: 1px;               /* Ketebalan garis */
-            
-            /* Ini adalah bagian terpenting: membuat gradasi dari transparan ke putih, lalu kembali ke transparan */
-            background: linear-gradient(to right, 
-                rgba(255, 255, 255, 0),    /* Mulai dari transparan di kiri */
-                rgba(255, 255, 255, 0.4) 50%, /* Warna solid (sedikit transparan) di tengah */
-                rgba(255, 255, 255, 0)     /* Kembali transparan di kanan */
-            );
-        }
-
     </style>
 </head>
 <body class="bg-black text-white">
+
+<!-- NAV & MOBILE MENU (Copied from index.html) -->
 <nav class="nav_cus">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            
             <a href="index.html">
                 <div>
-                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10">
+                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10" onerror="this.style.display='none'">
                 </div>
             </a>
-            
             <div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="about.html" class="hover:text-red-500 transition">About Us</a>
-                    
-                    <!-- Solutions Dropdown Start -->
                     <div class="relative group">
                         <a href="solutions.html" class="hover:text-red-500 transition flex items-center gap-1">
                             Solutions
                             <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </a>
-                        <div class="solutions-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
+                        <div class="solutions-dropdown absolute top-full left-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
                             <div class="grid grid-cols-2 gap-x-16">
-                                <!-- Services Column -->
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Services</h3>
                                     <ul class="space-y-3 text-sm">
@@ -477,13 +470,12 @@
                                             <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
                                             <span>Security Solutions Integration</span>
                                         </a></li>
-                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
+                                         <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors">
                                             <svg class="w-5 h-5 text-red-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             <span>Managed Security Services</span>
                                         </a></li>
                                     </ul>
                                 </div>
-                                <!-- Solutions Column -->
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Solutions</h3>
                                     <ul class="space-y-3 text-sm">
@@ -512,13 +504,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Solutions Dropdown End -->
-
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
-                    <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                    <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
                 </div>
-                
                 <div class="flex items-center md:hidden">
                     <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
                         <div class="hamburger-icon">
@@ -527,61 +516,60 @@
                     </button>
                 </div>
             </div>
-            
         </div>
     </div>
 </nav>
 
-   <div id="mobile-menu">
-        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
-        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
-            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
-            <li>
-                <a href="#" class="mobile-menu-link" data-submenu-toggle="products">
-                    <span> Our Partners</span>
-                    <span class="plus-icon">+</span>
-                </a>
-                <ul id="products-submenu" class="submenu">
-                    <li><a href="#" class="mobile-menu-link text-base">V - Key</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Imperva</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Knowbe4</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Big ID</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Sentinel One</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Ping Identity</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Protegrity</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Ridge Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Soti</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Synopsys</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Tanium</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Vectra</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Datavisor</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">IBM</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Pentera</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Thales</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
-                    <span>Services & Solutions</span>
-                    <span class="plus-icon">+</span>
-                </a>
-                <ul id="solutions-submenu" class="submenu">
-                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
-                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
-                </ul>
-            </li>
-            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
-            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
-            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
-        </ul>
-    </div>
+<div id="mobile-menu">
+    <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+    <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+        <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+        <li>
+            <a href="#" class="mobile-menu-link" data-submenu-toggle="products">
+                <span> Our Partners</span>
+                <span class="plus-icon">+</span>
+            </a>
+            <ul id="products-submenu" class="submenu">
+                <li><a href="#" class="mobile-menu-link text-base">V - Key</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Imperva</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Knowbe4</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Big ID</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Sentinel One</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Ping Identity</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Protegrity</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Ridge Security</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Soti</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Synopsys</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Tanium</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Vectra</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Datavisor</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">IBM</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Pentera</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Thales</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                <span>Services & Solutions</span>
+                <span class="plus-icon">+</span>
+            </a>
+            <ul id="solutions-submenu" class="submenu">
+                <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+                <li><a class="text-base font-light px-3 py-2">Services</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
+                <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+            </ul>
+        </li>
+        <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+        <li><a href="blogs.html" class="mobile-menu-link">Blog</a></li>
+        <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+    </ul>
+</div>
 
     <main>
         <section class="about-sistema-section pt-32">
@@ -600,7 +588,7 @@
                             With special focus providing Cyber Security solution, Payment Security solution and professional services to help institutions achieves its business goals.
                         </p>
                         <div class="mt-10">
-                            <a href="#" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
+                            <a href="contactus.html" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
                             Contact US 
                             </a>
                         </div>
@@ -650,86 +638,73 @@
                 </div>
             </div>
         </section>
+        
         <section class="bg-black py-16 sm:py-20">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Values</h2>
-    </div>
-
-    <div class="mt-12">
-      
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Customer.png" alt="Tim berkolaborasi dengan klien">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+              <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl values-section">Our Values</h2>
+            </div>
+            <div class="mt-12">
+              <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl value-card">
+                  <div class="h-56 w-full card-image">
+                    <img class="h-full w-full object-cover" src="asset/Value/Customer.png" alt="Tim berkolaborasi dengan klien" onerror="this.src='https://placehold.co/350x220/ffffff/cccccc?text=Customer+First'">
+                  </div>
+                  <div class="flex-grow p-6 card-content">
+                    <h3 class="text-xl font-semibold text-slate-900">Customer First</h3>
+                    <p class="mt-3 text-base text-gray-600">The company is customer oriented and continuously strive to contribute to the customer's vision and mission.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl value-card">
+                  <div class="h-56 w-full card-image">
+                    <img class="h-full w-full object-cover" src="asset/Value/Trust.png" alt="Jabat tangan sebagai simbol kepercayaan" onerror="this.src='https://placehold.co/350x220/ffffff/cccccc?text=Trust'">
+                  </div>
+                  <div class="flex-grow p-6 card-content">
+                    <h3 class="text-xl font-semibold text-slate-900">Trust</h3>
+                    <p class="mt-3 text-base text-gray-600">Trust is earned through building and giving trust to others, hard work, patience and perseverance.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl value-card">
+                  <div class="h-56 w-full card-image">
+                    <img class="h-full w-full object-cover" src="asset/Value/Professionalism.png" alt="Seorang profesional bekerja dengan fokus" onerror="this.src='https://placehold.co/350x220/ffffff/cccccc?text=Professionalism'">
+                  </div>
+                  <div class="flex-grow p-6 card-content">
+                    <h3 class="text-xl font-semibold text-slate-900">Professionalism</h3>
+                    <p class="mt-3 text-base text-gray-600">Evert best effort to exceed standards and aim for excellence in all areas.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mx-auto lg:w-2/3">
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl value-card">
+                  <div class="h-56 w-full card-image">
+                    <img class="h-full w-full object-cover" src="asset/Value/Intergrity.png" alt="Diskusi tim yang jujur dan terbuka" onerror="this.src='https://placehold.co/350x220/ffffff/cccccc?text=Integrity'">
+                  </div>
+                  <div class="flex-grow p-6 card-content">
+                    <h3 class="text-xl font-semibold text-slate-900">Integrity</h3>
+                    <p class="mt-3 text-base text-gray-600">Operated by people with strong moral principles, upholding honesty, respect, trust, and responsibility.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl value-card">
+                  <div class="h-56 w-full card-image">
+                    <img class="h-full w-full object-cover" src="asset/Value/Knowledge.jpg" alt="Berbagi pengetahuan dalam sesi belajar" onerror="this.src='https://placehold.co/350x220/ffffff/cccccc?text=Knowledge'">
+                  </div>
+                  <div class="flex-grow p-6 card-content">
+                    <h3 class="text-xl font-semibold text-slate-900">Knowledge</h3>
+                    <p class="mt-3 text-base text-gray-600">Never ending seek of knowledge, the more you learn the more you know there are more to learn; share your knowledge.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Customer First</h3>
-            <p class="mt-3 text-base text-gray-600">The company is customer oriented and continuously strive to contribute to the customer's vision and mission.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Trust.png" alt="Jabat tangan sebagai simbol kepercayaan">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Trust</h3>
-            <p class="mt-3 text-base text-gray-600">Trust is earned through building and giving trust to others, hard work, patience and perseverance.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Professionalism.png" alt="Seorang profesional bekerja dengan fokus">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Professionalism</h3>
-            <p class="mt-3 text-base text-gray-600">Evert best effort to exceed standards and aim for excellence in all areas.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mx-auto lg:w-2/3">
-        
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Intergrity.png" alt="Diskusi tim yang jujur dan terbuka">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Integrity</h3>
-            <p class="mt-3 text-base text-gray-600">Operated by people with strong moral principles, upholding honesty, respect, trust, and responsibility.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Knowledge.jpg" alt="Berbagi pengetahuan dalam sesi belajar">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Knowledge</h3>
-            <p class="mt-3 text-base text-gray-600">Never ending seek of knowledge, the more you learn the more you know there are more to learn; share your knowledge.</p>
-          </div>
-        </div>
-        
-      </div>
-
-    </div>
-  </div>
-</section>
+        </section>
     </main>
 
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
-        
         <div class="mb-10">
-            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema">
+            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema" onerror="this.style.display='none'">
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
             <div>
                 <h3 class="text-lg font-bold mb-4">Location Office</h3>
                 <div class="space-y-2 text-slate-300">
@@ -739,21 +714,14 @@
                     <p>Indonesia</p>
                 </div>
             </div>
-
             <div>
                 <h3 class="text-lg font-bold mb-4">Contact Us</h3>
                 <div class="space-y-3 text-slate-300">
-                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
+                    <a href="tel:+62215722381" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
                         </svg>
                         <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
-                    </a>
-                    <a href="mailto:marketing@sistema.co.id" class="flex items-center hover:text-white transition-colors">
-                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                        <span>marketing@sistema.co.id</span>
                     </a>
                     <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -763,107 +731,86 @@
                     </a>
                 </div>
             </div>
-
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
-                    <div class="space-y-3 text-slate-300">
-                        <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
-                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                            </svg>
-                            <span>Sistema Datapilar</span>
-                        </a>
-                    </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        <span>Sistema Datapilar</span>
+                    </a>
                 </div>
             </div>
+        </div>
         <div class="site-footer">
             <p>&copy; Copyright. PT Sistema Datapilar</p>
         </div>
     </div>
 </footer>
 
+    <!-- SCRIPT (Synced with index.html and merged with about.html scripts) -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // --- 1. PENGELOLA MENU MOBILE ---
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
-            
-            const toggleMobileMenu = () => {
-                const isActive = mobileMenu.classList.toggle('is-active');
-                hamburgerIcon.classList.toggle('open', isActive);
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            };
-
-            hamburgerBtn.addEventListener('click', toggleMobileMenu);
-            if (closeMenuBtn) {
-                closeMenuBtn.addEventListener('click', toggleMobileMenu);
+            // --- NAVBAR SCROLL TRANSITION ---
+            const nav = document.querySelector('.nav_cus');
+            if (nav) {
+                const handleNavScroll = () => {
+                    if (window.scrollY > 50) {
+                        nav.classList.add('nav-scrolled');
+                    } else {
+                        nav.classList.remove('nav-scrolled');
+                    }
+                };
+                window.addEventListener('scroll', handleNavScroll);
+                handleNavScroll(); // Run on load
             }
 
-            // --- 2. LOGIKA SUBMENU PADA MENU MOBILE ---
-            const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+            // --- MOBILE MENU LOGIC ---
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const submenuToggles = mobileMenu ? mobileMenu.querySelectorAll('[data-submenu-toggle]') : [];
+
+            const toggleMobileMenu = () => {
+                if (mobileMenu) {
+                    const isActive = mobileMenu.classList.toggle('is-active');
+                    if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                }
+            };
+
+            if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMobileMenu);
+            if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
             submenuToggles.forEach(toggle => {
                 toggle.addEventListener('click', (event) => {
                     event.preventDefault();
-                    const submenuId = toggle.dataset.submenuToggle + '-submenu';
-                    const submenu = document.getElementById(submenuId);
+                    const submenu = document.getElementById(toggle.dataset.submenuToggle + '-submenu');
                     const plusIcon = toggle.querySelector('.plus-icon');
-
                     if (submenu) {
-                        plusIcon.classList.toggle('open');
-                        if (submenu.style.maxHeight) {
-                            submenu.style.maxHeight = null;
-                        } else {
-                            submenu.style.maxHeight = submenu.scrollHeight + "px";
-                        }
+                        if (plusIcon) plusIcon.classList.toggle('open');
+                        submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
                     }
                 });
             });
 
-            // --- 3. ANIMASI SAAT SCROLL (LEBIH EFISIEN) ---
+            // --- INTERSECTION OBSERVER FOR SCROLL ANIMATIONS ---
             const animationObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry, index) => {
+                entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Menambahkan delay untuk efek staggered (muncul satu per satu)
-                        const delay = entry.target.style.transitionDelay ? parseInt(entry.target.style.transitionDelay) : 0;
-                        setTimeout(() => {
-                           entry.target.classList.add('is-visible');
-                        }, delay);
-                        
-                        observer.unobserve(entry.target); // Berhenti mengamati setelah animasi berjalan
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // Animasi berjalan saat 10% elemen terlihat
+                threshold: 0.1
             });
-            
-            // Mengamati semua elemen dengan kelas .animate-on-scroll
-            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll, .value-card');
             elementsToAnimate.forEach(el => animationObserver.observe(el));
         });
-
-        const cards = document.querySelectorAll('.value-card');
-
-    // Buat observer untuk mendeteksi saat elemen masuk ke viewport
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            // Jika kartu terlihat di layar
-            if (entry.isIntersecting) {
-                // Tambahkan kelas 'visible' untuk memicu animasi CSS
-                entry.target.classList.add('visible');
-                // Berhenti mengamati kartu ini agar animasi tidak berulang
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1 // Animasi terpicu saat 10% dari kartu terlihat
-    });
-
-    // Minta observer untuk mengamati setiap kartu
-    cards.forEach(card => {
-        observer.observe(card);
-    });
     </script>
 </body>
 </html>

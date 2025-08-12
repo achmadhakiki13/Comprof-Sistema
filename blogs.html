@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Datapilar - Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700;800&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-accent: #d21b29;
+            --transition: all 0.3s ease;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: #030305;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            color: white;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        .nav_cus {
+            position: sticky; /* Sticky navbar for this page */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            background-color: rgba(13, 16, 24, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hamburger-icon {
+            position: relative; width: 24px; height: 18px;
+        }
+        .hamburger-icon span {
+            display: block; position: absolute; height: 2px; width: 100%;
+            background: white; border-radius: 9px; opacity: 1; left: 0;
+            transform: rotate(0deg); transition: .25s ease-in-out;
+        }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+        .hamburger-icon span:nth-child(4) { top: 16px; }
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+            top: 8px; width: 0%; left: 50%;
+        }
+        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+        #mobile-menu {
+            position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px;
+            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            z-index: 100; transform: translateX(100%); opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto;
+        }
+        #mobile-menu.is-active { transform: translateX(0); opacity: 1; }
+        .mobile-menu-link {
+            display: flex; justify-content: space-between; align-items: center; padding: 12px 0;
+            font-size: 1.125rem; transition: var(--transition);
+        }
+        .mobile-menu-link:hover { color: var(--color-accent); }
+        .plus-icon { transition: transform 0.3s ease; }
+        .plus-icon.open { transform: rotate(45deg); }
+        .submenu {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding-left: 1rem;
+        }
+        .solutions-dropdown {
+            opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .group:hover .solutions-dropdown {
+            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+        }
+        .site-footer {
+            background-color: #242a30; color: #a9a9a9; padding: 40px 0 20px;
+            text-align: center; position: relative; font-size: 14px;
+        }
+        .site-footer::before {
+            content: ''; position: absolute; top: 20px; left: 50%;
+            transform: translateX(-50%); width: 80%; height: 1px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0));
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+<nav class="nav_cus">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <a href="index.html">
+                <div>
+                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10" onerror="this.style.display='none'">
+                </div>
+            </a>
+            <div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="hover:text-red-500 transition">About Us</a>
+                    <div class="relative group">
+                        <a href="solutions.html" class="hover:text-red-500 transition flex items-center gap-1">
+                            Solutions
+                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </a>
+                        <div class="solutions-dropdown absolute top-full left-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
+                            <div class="grid grid-cols-2 gap-x-16">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Services</h3>
+                                    <ul class="space-y-3 text-sm">
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Penetration Testing</span></a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Audit, Risk & Compliance</span></a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Personal Data Protection</span></a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Security Solutions Integration</span></a></li>
+                                        <li><a href="solutions.html#proactive-support" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Managed Security Services</span></a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Solutions</h3>
+                                    <ul class="space-y-3 text-sm">
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Customer Identity & Access</span></a></li>
+                                        <li><a href="Waap.html" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Web App & API Protection</span></a></li>
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Data Security</span></a></li>
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>Privacy Data Protection</span></a></li>
+                                        <li><a href="solutions.html#streamlined-solutions-section" class="flex items-center gap-3 text-gray-300 hover:text-red-500 transition-colors"><span>End Point Protection</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
+                    <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
+                    <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
+                        <div class="hamburger-icon"><span></span><span></span><span></span><span></span></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile-menu">
+    <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+    <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+        <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+        <li>
+            <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
+                <span>Services & Solutions</span>
+                <span class="plus-icon">+</span>
+            </a>
+            <ul id="solutions-submenu" class="submenu">
+                 <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
+            </ul>
+        </li>
+        <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+        <li><a href="blogs.html" class="mobile-menu-link">Blog</a></li>
+        <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center text-center px-4">
+    <div class="w-full max-w-4xl">
+        <h1 class="text-5xl md:text-7xl font-bold text-white" style="font-family: 'Outfit', sans-serif;">Blog</h1>
+        <p class="mt-6 text-xl md:text-2xl text-gray-300">This page is currently under construction.</p>
+        <p class="mt-2 text-lg text-gray-400">Please check back later for exciting updates!</p>
+        <a href="index.html" class="mt-8 inline-block bg-red-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-red-700 transition-colors duration-300">
+            Go Back Home
+        </a>
+    </div>
+</main>
+
+<footer class="bg-[#242a30] text-white">
+    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        <div class="mb-10">
+            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema" onerror="this.style.display='none'">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-lg font-bold mb-4">Location Office</h3>
+                <div class="space-y-2 text-slate-300">
+                    <p>Menara Batavia, Lantai 26</p>
+                    <p>Jl. K.H. Mas Mansyur No.Kav.126</p>
+                    <p>Jakarta Pusat, 10220</p>
+                    <p>Indonesia</p>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
+                        <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
+                    </a>
+                    <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                        <span>info@sistema.co.id</span>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                        <span>Sistema Datapilar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="site-footer">
+            <p>&copy; Copyright. PT Sistema Datapilar</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Mobile Menu Logic
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const submenuToggles = mobileMenu ? mobileMenu.querySelectorAll('[data-submenu-toggle]') : [];
+
+    const toggleMobileMenu = () => {
+        if (mobileMenu) {
+            const isActive = mobileMenu.classList.toggle('is-active');
+            if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        }
+    };
+
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault();
+            const submenu = document.getElementById(toggle.dataset.submenuToggle + '-submenu');
+            const plusIcon = toggle.querySelector('.plus-icon');
+            if (submenu) {
+                if (plusIcon) plusIcon.classList.toggle('open');
+                submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

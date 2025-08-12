@@ -45,11 +45,19 @@ body::-webkit-scrollbar {
     left: 0;
     width: 100%;
     z-index: 50;
+    /* MODIFIED: Added transition for smooth background change */
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+    border-bottom: 1px solid transparent; /* Start with a transparent border */
+}
+
+/* NEW: Class added on scroll */
+.nav_cus.nav-scrolled {
     background-color: rgba(13, 16, 24, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1); /* Use border-color for transition */
 }
+
 .hamburger-icon {
     position: relative;
     width: 24px;
@@ -614,7 +622,7 @@ body::-webkit-scrollbar {
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10">
+                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10" onerror="this.style.display='none'">
                 </div>
             </a>
             <div>
@@ -681,7 +689,7 @@ body::-webkit-scrollbar {
                         </div>
                     </div>
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
-                    <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                    <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
                 </div>
                 <div class="flex items-center md:hidden">
@@ -773,18 +781,18 @@ body::-webkit-scrollbar {
       </div>
       
       <div class="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/Hibank.png" alt="Hibank logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/smbc.png" alt="SMBC logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/jalin.png" alt="Jalin logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/goto.png" alt="GoTo logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/panin.png" alt="PaninBank logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/kbru.png" alt="KBRU logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/app.png" alt="APP logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/nano.png" alt="Nanobank logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/lotus.png" alt="Lotus logo" class="portfolio-card-logo"></div>
-        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo" class="portfolio-card-logo"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/Hibank.png" alt="Hibank logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Hibank'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/telkomsel.png" alt="Telkomsel logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Telkomsel'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/sinarmas.png" alt="Sinarmas logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Sinarmas'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/smbc.png" alt="SMBC logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=SMBC'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/jalin.png" alt="Jalin logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Jalin'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/goto.png" alt="GoTo logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=GoTo'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/panin.png" alt="PaninBank logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=PaninBank'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/kbru.png" alt="KBRU logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=KBRU'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/app.png" alt="APP logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=APP'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/nano.png" alt="Nanobank logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Nanobank'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/lotus.png" alt="Lotus logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Lotus'"></div>
+        <div class="portfolio-card fade-in-on-scroll"><img src="asset/Portfolio/artajasa.png" alt="Artajasa logo" class="portfolio-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Artajasa'"></div>
       </div>
       
       <div class="mt-16 text-center fade-in-on-scroll">
@@ -807,7 +815,7 @@ body::-webkit-scrollbar {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <article class="offering-card fade-in-on-scroll">
                 <div class="card-media">
-                    <video src="asset/Gif/world.mp4" autoplay loop muted playsinline></video>
+                    <img src="asset/our_services.png" alt="Our Services" class="w-full h-48 object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold text-white mb-2">Our Services</h3>
@@ -821,7 +829,7 @@ body::-webkit-scrollbar {
             </article>
             <article class="offering-card fade-in-on-scroll">
                 <div class="card-media">
-                    <video src="asset/Gif/cyber.mp4" autoplay loop muted playsinline></video>
+                    <img src="asset/our_solutions.png" alt="Our Solutions" class="w-full h-48 object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl font-bold text-white mb-2">Our Solutions</h3>
@@ -847,22 +855,30 @@ body::-webkit-scrollbar {
     </div>
 
     <div class="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/synopsys.png" alt="Synopsys" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/imperva.png" alt="Imperva" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/pingidentity.png" alt="Ping Identity" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/vkey.png" alt="V-Key" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/sentinelone.png" alt="SentinelOne" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/tanium.png" alt="Tanium" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/bigid.png" alt="BigID" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/vectra.png" alt="Vectra" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/ridgesecurity.png" alt="Ridge Security" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/thales.png" alt="Thales" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/knowbe4.png" alt="KnowBe4" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/pentera.png" alt="Pentera" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/soti.png" alt="Soti" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/ibm.png" alt="IBM" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/datavisor.png" alt="Datavisor" class="partner-card-logo"></div>
-      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/protegrity.png" alt="Protegrity" class="partner-card-logo"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/synopsys.png" alt="Synopsys" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Synopsys'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/imperva.png" alt="Imperva" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Imperva'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/pingidentity.png" alt="Ping Identity" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Ping Identity'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/vkey.png" alt="V-Key" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=V-Key'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/sentinelone.png" alt="SentinelOne" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=SentinelOne'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/tanium.png" alt="Tanium" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Tanium'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/bigid.png" alt="BigID" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=BigID'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/vectra.png" alt="Vectra" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Vectra'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/ridgesecurity.png" alt="Ridge Security" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Ridge Security'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/thales.png" alt="Thales" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Thales'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/knowbe4.png" alt="KnowBe4" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=KnowBe4'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/pentera.png" alt="Pentera" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Pentera'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/soti.png" alt="Soti" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Soti'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/ibm.png" alt="IBM" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=IBM'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/datavisor.png" alt="Datavisor" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Datavisor'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/protegrity.png" alt="Protegrity" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Protegrity'"></div>
+      
+      <!-- === NEW PARTNERS ADDED HERE === -->
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/oneidentity.png" alt="One Identity" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=One+Identity'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/netskope.png" alt="Netskope" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Netskope'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/menloSec.png" alt="Menlo Security" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Menlo+Security'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/groupIB.png" alt="Group-IB" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Group-IB'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/gigamon.png" alt="Gigamon" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Gigamon'"></div>
+      <div class="partner-card fade-in-on-scroll"><img src="asset/Partner/armis.png" alt="Armis" class="partner-card-logo" onerror="this.src='https://placehold.co/200x100/ffffff/cccccc?text=Armis'"></div>
     </div>
 
     <div class="mt-16 text-center fade-in-on-scroll">
@@ -874,7 +890,7 @@ body::-webkit-scrollbar {
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
         <div class="mb-10">
-            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema">
+            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema" onerror="this.style.display='none'">
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -889,17 +905,17 @@ body::-webkit-scrollbar {
             <div>
                 <h3 class="text-lg font-bold mb-4">Contact Us</h3>
                 <div class="space-y-3 text-slate-300">
-                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
+                    <a href="tel:+62215722381" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
                         </svg>
                         <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
                     </a>
-                    <a href="mailto:marketing@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                    <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                         </svg>
-                        <span>marketing@sistema.co.id</span>
+                        <span>info@sistema.co.id</span>
                     </a>
                 </div>
             </div>
@@ -923,7 +939,24 @@ body::-webkit-scrollbar {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Mobile Menu Logic
+    // --- NAVBAR SCROLL TRANSITION ---
+    const nav = document.querySelector('.nav_cus');
+    if (nav) { // Check if nav exists to prevent errors
+        const handleNavScroll = () => {
+            // Add the scrolled class when user scrolls more than 50px
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        };
+        // Add event listener for scroll
+        window.addEventListener('scroll', handleNavScroll);
+        // Run once on load in case the page is reloaded while scrolled down
+        handleNavScroll();
+    }
+
+    // --- MOBILE MENU LOGIC ---
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
     const mobileMenu = document.getElementById('mobile-menu');
@@ -953,7 +986,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Intersection Observer for animations
+    // --- ANIMATION OPTIMIZATIONS ---
+    // 1. More Robust Hero Animation Trigger
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.classList.add('visible');
+        });
+    });
+
+    // 2. Optimized Intersection Observer for Fade-in Animations
     const animationObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -961,20 +1002,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
-
-    // MODIFIED: Added .partner-card and .portfolio-card to the list of animated elements for a better staggered effect
-    const elementsToAnimate = document.querySelectorAll('.fade-in-on-scroll, .offering-card, .partner-card, .portfolio-card');
-    elementsToAnimate.forEach((el, index) => {
-        // Apply staggered delay
-        el.style.transitionDelay = `${index * 100}ms`;
-        animationObserver.observe(el);
+    }, {
+        rootMargin: '0px 0px -50px 0px', // Start animation slightly before it's fully in view
+        threshold: 0.1
     });
 
-    // Hero Entry Animation Trigger
-    setTimeout(() => {
-        document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'));
-    }, 100);
+    // We select all elements that need to be animated on scroll.
+    const elementsToAnimate = document.querySelectorAll('.fade-in-on-scroll');
+    elementsToAnimate.forEach(el => {
+        animationObserver.observe(el);
+    });
 });
 </script>
 </body>
