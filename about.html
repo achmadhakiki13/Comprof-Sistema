@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@400;700;800&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-accent: #d21b29;
             --transition-fast: all 0.3s ease;
-            --transition-slow: all 0.5s ease;
         }
         html {
             scroll-behavior: smooth;
@@ -28,13 +27,13 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
         body::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
 
-        /* NAVBAR & MOBILE MENU */
+        /* NAVBAR & DROPDOWN */
         .nav_cus {
             position: fixed;
             top: 0;
@@ -46,79 +45,125 @@
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .hamburger-icon {
-            position: relative;
-            width: 24px;
-            height: 18px;
-        }
-        .hamburger-icon span {
-            display: block;
-            position: absolute;
-            height: 2px;
-            width: 100%;
-            background: white;
-            border-radius: 9px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-        }
-        .hamburger-icon span:nth-child(1) { top: 0px; }
-        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
-        .hamburger-icon span:nth-child(4) { top: 16px; }
-        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
-            top: 8px;
-            width: 0%;
-            left: 50%;
-        }
-        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
-        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
-        #mobile-menu {
-            position: fixed;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 80%;
-            max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 101;
-            transform: translateX(100%);
+        .solutions-dropdown {
             opacity: 0;
-            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            padding-top: 5rem;
-            overflow-y: auto;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
         }
-        #mobile-menu.is-active {
-            transform: translateX(0);
+        .group:hover .solutions-dropdown {
             opacity: 1;
-        }
-        .mobile-menu-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            font-size: 1.125rem;
-            transition: var(--transition-fast);
-        }
-        .mobile-menu-link:hover { color: var(--color-accent); }
-        .plus-icon {
-            transition: transform 0.3s ease;
-        }
-        .plus-icon.open {
-            transform: rotate(45deg);
-        }
-        .submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            padding-left: 1rem;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
 
-        /* ANIMASI & SECTION STYLING */
+        /* HERO SECTION */
+        #new-hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #030305;
+            overflow: hidden;
+            padding: 0 clamp(2rem, 8vw, 8rem);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+        .text-content {
+            max-width: 65%;
+        }
+        .hero-headline {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 400;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+        .hero-headline .line {
+            display: block;
+        }
+        .hero-headline .highlight {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--color-accent), #ff6a88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subheadline {
+            margin-top: 2rem;
+            max-width: 36rem;
+            font-size: 1.125rem;
+            color: #d1d5db;
+            line-height: 1.75;
+        }
+        .hero-cta {
+            margin-top: 3rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #a31623;
+        }
+        .glowing-shape {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 900px;
+            height: 900px;
+            transform: translate(40%, -50%);
+            background: radial-gradient(circle, rgba(210, 27, 41, 0.4) 0%, rgba(210, 27, 41, 0) 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ANIMATIONS */
+        .animate-in {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .hero-headline.animate-in { transition-delay: 0.2s; }
+        .hero-subheadline.animate-in { transition-delay: 0.4s; }
+        .hero-cta.animate-in { transition-delay: 0.6s; }
+        .glowing-shape.animate-in {
+            opacity: 0;
+            transform: translate(40%, -50%) scale(0.8);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            transition-delay: 0.1s;
+        }
+        .glowing-shape.animate-in.visible {
+            opacity: 1;
+            transform: translate(45%, -48%) scale(1.05);
+            animation: slow-pulse 10s infinite alternate;
+        }
+        @keyframes slow-pulse {
+            from { opacity: 0.7; transform: translate(40%, -50%) scale(0.95); }
+            to { opacity: 1; transform: translate(45%, -48%) scale(1.05); }
+        }
+
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -128,323 +173,145 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .section-title {
-            font-size: clamp(2.5em, 5vw, 3.5em); /* Ukuran font responsif */
-            font-weight: bold;
-            color: #e50000;
-            line-height: 1.1;
-            margin-bottom: 50px;
-        }
-        .section-title .highlight {
-            color: #ffffff;
-        }
-        .about-sistema-section {
-            background-color: #000000;
-            padding: 80px 0;
-            overflow: hidden;
-        }
-        .about-sistema-content-wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            min-height: 500px;
-            position: relative;
-        }
-        .sistema-image-side {
-            flex: 1;
-            background-image: url('asset/Logo Sistema.png');
-            background-size: 250px auto;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 500px;
-            transition: var(--transition-slow);
-            transform-style: preserve-3d;
-        }
-        .sistema-image-side:hover {
-            transform: rotateY(5deg) scale(1.02);
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
-        }
-        .sistema-text-side {
-            flex: 1;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-        .sistema-heading {
-            font-size: clamp(2em, 4vw, 3em);
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        .sistema-description {
-            font-size: 1.1em;
-            line-height: 1.7;
-            color: #b0b0d0;
-            margin-bottom: 40px;
-            max-width: 500px;
-        }
-        .explore-btn {
-            display: inline-block;
-            padding: 0.5rem 1.25rem;
-            border: 1px solid rgba(210, 27, 41, 0.5);
-            border-radius: 9999px;
-            color: #e5e7eb;
-            font-weight: 600;
-            font-size: 0.875rem;
-            transition: var(--transition-fast);
-        }
-        .explore-btn:hover {
-            background-color: var(--color-accent);
-            border-color: var(--color-accent);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(210, 27, 41, 0.3);
-        }
-        .explore-btn .arrow {
-            display: inline-block;
-            margin-left: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-        .explore-btn:hover .arrow {
-            transform: translateX(4px);
-        }
-
-        .solutions-dropdown {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-        }
-        .group:hover .solutions-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
 
         /* VMM SECTION */
         .vmm-section {
             background: #000000;
             padding: 80px 0;
         }
+
         .vmm-item {
             display: flex;
-            align-items: center;
-            gap: 2rem;
+            /* Ubah baris di bawah ini */
+            align-items: center; /* SEBELUMNYA: flex-start */
+            gap: 1.5rem;
+            
+            /* Style lainnya tetap sama */
+            background-color: #121212;
+            border: 1px solid rgba(210, 27, 41, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-        .icon-circle {
-            width: 96px;
-            height: 96px;
-            background-color: #e0e0e0;
-            border-radius: 50%;
+
+        .vmm-item:hover {
+            background-color: #1a1a1a;
+            border-color: rgba(210, 27, 41, 0.4);
+        }
+
+        /* Mengubah .icon-circle menjadi .icon-box (kotak) */
+        .icon-box {
+            width: 80px;  /* Sedikit lebih kecil agar proporsional */
+            height: 80px;
+            background-color: #2a2a2a; /* Warna latar ikon yang lebih gelap */
+            /* border-radius: 50%; -> Ganti menjadi nilai yang lebih kecil */
+            border-radius: 0.5rem; /* Membuat sudut menjadi tumpul, bukan lingkaran */
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: var(--transition-fast);
-            flex-shrink: 0;
+            flex-shrink: 0; /* Mencegah ikon menyusut */
         }
-        .vmm-item:hover .icon-circle {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+        .icon-box i {
+            color: var(--color-accent); /* Menggunakan warna aksen utama */
+            font-size: 2.25rem;
         }
-        .icon-circle i {
-            color: #B22222;
-            font-size: 2.5rem;
-            transition: color 0.3s ease;
-        }
-        .vmm-item:hover .icon-circle i {
-            color: var(--color-accent);
-        }
+
         .vmm-title {
-            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 0.5rem;
         }
+
         .vmm-description-visible {
-            font-size: 1.125rem;
+            font-size: 1rem;
             line-height: 1.7;
             color: #d1d5db;
         }
 
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 992px) {
-            .about-xynexis-content-wrapper, .vmm-item {
-                flex-direction: column;
-            }
-            .xynexis-text-side {
-                padding: 40px 20px;
-                text-align: center;
-            }
-            .xynexis-description {
-                max-width: none;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .xynexis-image-side {
-                width: 100%;
-                min-height: 350px;
-            }
+        /* Mengatur ulang tata letak untuk layar kecil (mobile) */
+        @media (max-width: 640px) {
             .vmm-item {
+                flex-direction: column; /* Ikon di atas, teks di bawah */
+                align-items: center; /* Pusatkan semuanya */
                 text-align: center;
-                gap: 1.5rem;
             }
+}
+
+        /* VALUES SECTION */
+        .values-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem; color: #ffffff; margin-bottom: 50px; font-weight: 700;
         }
-        @media (max-width: 600px) {
-            .about-xynexis-section, .vmm-section {
-                padding: 60px 0;
-            }
-            .vmm-description-visible {
-                font-size: 1rem;
-            }
-            .icon-circle {
-                width: 80px;
-                height: 80px;
-            }
-            .icon-circle i {
-                font-size: 2rem;
-            }
+        .value-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .value-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
         }
 
-        /* Bagian utama 'Our Values' */
-.values-section {
-    /* padding: 80px 20px; */
-    text-align: center;
-}
+        /* FOOTER */
+        .site-footer {
+            background-color: #242a30; color: #a9a9a9; padding: 40px 20px 20px; text-align: center;
+            position: relative; font-size: 14px; margin-top: 60px;
+        }
+        .site-footer::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%;
+            height: 1px; background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0));
+        }
 
-.values-section h2 {
-    font-size: 2.8rem;
-    color: #ffffff;
-    margin-bottom: 50px;
-    font-weight: 700;
-}
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            #new-hero { text-align: center; padding: 0 1.5rem; }
+            .text-content { max-width: 100%; margin-left: auto; margin-right: auto; }
+            .hero-cta { display: flex; justify-content: center; }
+            .glowing-shape { width: 600px; height: 600px; transform: translate(25%, -50%); opacity: 0.5; }
+            .vmm-item { flex-direction: column; text-align: center; gap: 1.5rem; }
+        }
 
-/* --- Grid untuk Kartu --- */
-.values-grid {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px; /* Jarak antar kartu */
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-/* --- Desain Kartu --- */
-.value-card {
-    background-color: #ffffff;
-    width: 350px;
-    border-radius: 15px; /* Sudut membulat */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); /* Bayangan halus */
-    overflow: hidden; /* Memastikan gambar tetap di dalam sudut membulat */
-    display: flex;
-    flex-direction: column;
-    
-    /* Pengaturan untuk Animasi Scroll */
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-/* State saat kartu terlihat di layar (untuk JS) */
-.value-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- Interaksi Hover --- */
-.value-card:hover {
-    transform: translateY(-10px) scale(1.03); /* Sedikit terangkat dan membesar */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Styling Gambar --- */
-.card-image {
-    width: 100%;
-    height: 220px; /* Tinggi gambar konsisten */
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Gambar mengisi area tanpa distorsi */
-}
-
-/* --- Styling Konten Kartu --- */
-.card-content {
-    padding: 30px;
-    text-align: left;
-    flex-grow: 1; /* Memastikan tinggi konten sama jika diperlukan */
-}
-
-.card-content h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1a2a45;
-    margin-bottom: 10px;
-}
-
-.card-content p {
-    font-size: 0.95rem;
-    color: #555;
-}
-
-/* --- Desain Responsif --- */
-@media (max-width: 768px) {
-    .values-section h2 {
-        font-size: 2.2rem;
-    }
-    .value-card {
-        width: calc(50% - 20px); /* 2 kartu per baris di tablet */
-    }
-}
-
-@media (max-width: 500px) {
-    .value-card {
-        width: 100%; /* 1 kartu per baris di ponsel */
-        max-width: 350px;
-    }
-}
-
- .site-footer {
-            background-color: #242a30; /* Warna latar belakang footer */
-            color: #a9a9a9;             /* Warna teks */
-            padding: 40px 0 20px;      /* Padding atas untuk memberi ruang pada garis */
+        .site-footer {
+            background-color: #242a30;
+            color: #a9a9a9;
+            padding: 40px 0 20px;
             text-align: center;
-            position: relative;        /* Diperlukan agar pseudo-element ::before bisa diposisikan */
+            position: relative;
             font-size: 14px;
         }
 
-        /* Membuat garis dengan efek fade out menggunakan pseudo-element ::before */
         .site-footer::before {
-            content: '';               /* Wajib ada untuk menampilkan pseudo-element */
+            content: '';
             position: absolute;
-            top: 20px;                 /* Jarak garis dari atas footer */
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;                /* Lebar garis (tidak sampai ujung) */
-            height: 1px;               /* Ketebalan garis */
-            
-            /* Ini adalah bagian terpenting: membuat gradasi dari transparan ke putih, lalu kembali ke transparan */
-            background: linear-gradient(to right, 
-                rgba(255, 255, 255, 0),    /* Mulai dari transparan di kiri */
-                rgba(255, 255, 255, 0.4) 50%, /* Warna solid (sedikit transparan) di tengah */
-                rgba(255, 255, 255, 0)     /* Kembali transparan di kanan */
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0)
             );
         }
-
     </style>
 </head>
-<body class="bg-black text-white">
+<body class="antialiased">
 <nav class="nav_cus">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            
             <a href="index.html">
                 <div>
-                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
                 </div>
             </a>
-            
             <div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="about.html" class="hover:text-red-500 transition">About Us</a>
@@ -453,7 +320,7 @@
                             Solutions
                             <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </a>
-                        <div class="solutions-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
+                        <div class="solutions-dropdown absolute top-full left-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
                             <div class="grid grid-cols-2 gap-x-16">
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Services</h3>
@@ -480,7 +347,6 @@
                                         </a></li>
                                     </ul>
                                 </div>
-                                
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Solutions</h3>
                                     <ul class="space-y-3 text-sm">
@@ -509,7 +375,6 @@
                             </div>
                         </div>
                     </div>
-
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
                     <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
@@ -522,199 +387,96 @@
                     </button>
                 </div>
             </div>
-            
         </div>
     </div>
 </nav>
 
-<div id="mobile-menu">
-        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
-        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
-            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
-            <li>
-                <a href="#" class="mobile-menu-link" data-submenu-toggle="products">
-                    <span> Our Partners</span>
-                    <span class="plus-icon">+</span>
-                </a>
-                <ul id="products-submenu" class="submenu">
-                    <li><a href="#" class="mobile-menu-link text-base">V - Key</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Imperva</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Knowbe4</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Big ID</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Sentinel One</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Ping Identity</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Protegrity</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Ridge Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Soti</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Synopsys</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Tanium</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Vectra</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Datavisor</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">IBM</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Pentera</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Thales</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
-                    <span>Services & Solutions</span>
-                    <span class="plus-icon">+</span>
-                </a>
-                <ul id="solutions-submenu" class="submenu">
-                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
-                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
-                </ul>
-            </li>
-            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
-            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
-            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
-        </ul>
-    </div>
-
-    <main>
-        <section class="about-sistema-section pt-32">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="section-title animate-on-scroll">
-                    <span class="highlight">WE </span>ARE <br>
-                    <span class="highlight">SISTEMA</span> DATAPILAR
-                </h2>
-                <div class="about-sistema-content-wrapper">
-                    <div class="sistema-image-side animate-on-scroll"></div>
-                    <div class="sistema-text-side animate-on-scroll" style="transition-delay: 200ms;">
-                        <h2 class="sistema-heading">About Sistema</h2>
-                        <p class="sistema-description">
-                            PT Sistema Datapilar is Information Technology company established In 2014. 
-                            We aim to be number one IT Cyber Security serving various industries in Indonesian business community, primarily for Financial Sector Industry (FSI) and Fintech. 
-                            With special focus providing Cyber Security solution, Payment Security solution and professional services to help institutions achieves its business goals.
-                        </p>
-                        <div class="mt-10">
-                            <a href="#" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
-                            Contact US 
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<section id="new-hero">
+    <div class="hero-content">
+        <div class="text-content">
+            <h1 class="hero-headline animate-in">
+                <span class="line">
+                    About <span class="highlight">Sistema</span>
+                </span>
+            </h1>
+            <p class="hero-subheadline animate-in">
+                PT Sistema Datapilar is a trusted provider of cybersecurity and fraud prevention solutions, serving businesses in Indonesia. With a deep understanding of the local market, we empower organizations to protect their digital transactions, secure customer data, and mitigate fraud risks. Our goal is  "Enabling the Future through Innovation"
+            </p>
+            <div class="hero-cta animate-in">
+                <a href="contactus.html" class="btn btn-primary">Get a Security Strategy Session</a>
             </div>
-        </section>
-
-        <section class="vmm-section py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col space-y-16">
-                    <div class="vmm-item animate-on-scroll">
-                        <div class="icon-circle">
-                            <i class="fas fa-binoculars"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="vmm-title">Vision</h3>
-                            <p class="vmm-description-visible">
-                                Trusted Partner in Securing Clients future through Innovative Information Technology empowerment.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="vmm-item animate-on-scroll" style="transition-delay: 200ms;">
-                        <div class="icon-circle">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="vmm-title">Mission</h3>
-                            <p class="vmm-description-visible">
-                                Continuously enhance our resources, with know-how, and expertise to deliver excellent solution and services which enable significant contribution to client's business. 
-                                <br><br>
-                                Deep collaboration with solution partners to ensure maximized solution delivery process.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="vmm-item animate-on-scroll" style="transition-delay: 400ms;">
-                        <div class="icon-circle">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="vmm-title">Motto</h3>
-                            <p class="vmm-description-visible">
-                                We are Smart people, doing technology Innovation, Striving to achieve Target, because we always Enjoy life with good Manners and positive Attitude mindset.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="bg-black py-16 sm:py-20">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    
-    <div class="text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Values</h2>
+        </div>
     </div>
-
-    <div class="mt-12">
-      
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Customer.png" alt="Tim berkolaborasi dengan klien">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Customer First</h3>
-            <p class="mt-3 text-base text-gray-600">The company is customer oriented and continuously strive to contribute to the customer's vision and mission.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Trust.png" alt="Jabat tangan sebagai simbol kepercayaan">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Trust</h3>
-            <p class="mt-3 text-base text-gray-600">Trust is earned through building and giving trust to others, hard work, patience and perseverance.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Professionalism.png" alt="Seorang profesional bekerja dengan fokus">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Professionalism</h3>
-            <p class="mt-3 text-base text-gray-600">Evert best effort to exceed standards and aim for excellence in all areas.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:mx-auto lg:w-2/3">
-        
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Intergrity.png" alt="Diskusi tim yang jujur dan terbuka">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Integrity</h3>
-            <p class="mt-3 text-base text-gray-600">Operated by people with strong moral principles, upholding honesty, respect, trust, and responsibility.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div class="h-56 w-full">
-            <img class="h-full w-full object-cover" src="asset/Value/Knowledge.jpg" alt="Berbagi pengetahuan dalam sesi belajar">
-          </div>
-          <div class="flex-grow p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Knowledge</h3>
-            <p class="mt-3 text-base text-gray-600">Never ending seek of knowledge, the more you learn the more you know there are more to learn; share your knowledge.</p>
-          </div>
-        </div>
-        
-      </div>
-
-    </div>
-  </div>
+    <div class="glowing-shape animate-in"></div>
 </section>
-    </main>
+
+<main>
+    <section class="vmm-section py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col space-y-8"> <div class="vmm-item animate-on-scroll">
+                <div class="icon-box">
+                    <i class="fas fa-binoculars"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="vmm-title">Vision</h3>
+                    <p class="vmm-description-visible">Trusted Partner in Securing Clients future through Innovative Information Technology empowerment.</p>
+                </div>
+            </div>
+
+            <div class="vmm-item animate-on-scroll" style="transition-delay: 200ms;">
+                <div class="icon-box">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="vmm-title">Mission</h3>
+                    <p class="vmm-description-visible">Continuously enhance our resources, with know-how, and expertise to deliver excellent solution and services which enable significant contribution to client's business.  Deep collaboration with solution partners to ensure maximized solution delivery process.</p>
+                </div>
+            </div>
+
+            <div class="vmm-item animate-on-scroll" style="transition-delay: 400ms;">
+                <div class="icon-box">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="vmm-title">Motto</h3>
+                    <p class="vmm-description-visible">We are Smart people, doing technology Innovation, Striving to achieve Target, because we always Enjoy life with good Manners and positive Attitude mindset.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section class="bg-black py-16 sm:py-20 values-section">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Values</h2>
+            </div>
+            <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md value-card">
+                    <div class="h-56 w-full"><img class="h-full w-full object-cover" src="https://placehold.co/600x400/1a2a45/ffffff?text=Customer+First" alt="Customer First"></div>
+                    <div class="flex-grow p-6"><h3 class="text-xl font-semibold text-slate-900">Customer First</h3><p class="mt-3 text-base text-gray-600">The company is customer oriented and continuously strive to contribute to the customer's vision and mission.</p></div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md value-card" style="transition-delay: 100ms;">
+                    <div class="h-56 w-full"><img class="h-full w-full object-cover" src="https://placehold.co/600x400/1a2a45/ffffff?text=Trust" alt="Trust"></div>
+                    <div class="flex-grow p-6"><h3 class="text-xl font-semibold text-slate-900">Trust</h3><p class="mt-3 text-base text-gray-600">Trust is earned through building and giving trust to others, hard work, patience and perseverance.</p></div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md value-card" style="transition-delay: 200ms;">
+                    <div class="h-56 w-full"><img class="h-full w-full object-cover" src="https://placehold.co/600x400/1a2a45/ffffff?text=Professionalism" alt="Professionalism"></div>
+                    <div class="flex-grow p-6"><h3 class="text-xl font-semibold text-slate-900">Professionalism</h3><p class="mt-3 text-base text-gray-600">Evert best effort to exceed standards and aim for excellence in all areas.</p></div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md value-card" style="transition-delay: 300ms;">
+                    <div class="h-56 w-full"><img class="h-full w-full object-cover" src="https://placehold.co/600x400/1a2a45/ffffff?text=Integrity" alt="Integrity"></div>
+                    <div class="flex-grow p-6"><h3 class="text-xl font-semibold text-slate-900">Integrity</h3><p class="mt-3 text-base text-gray-600">Operated by people with strong moral principles, upholding honesty, respect, trust, and responsibility.</p></div>
+                </div>
+                <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md value-card" style="transition-delay: 400ms;">
+                    <div class="h-56 w-full"><img class="h-full w-full object-cover" src="https://placehold.co/600x400/1a2a45/ffffff?text=Knowledge" alt="Knowledge"></div>
+                    <div class="flex-grow p-6"><h3 class="text-xl font-semibold text-slate-900">Knowledge</h3><p class="mt-3 text-base text-gray-600">Never ending seek of knowledge, the more you learn the more you know there are more to learn; share your knowledge.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
@@ -744,12 +506,6 @@
                         </svg>
                         <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
                     </a>
-                    <a href="mailto:marketing@sistema.co.id" class="flex items-center hover:text-white transition-colors">
-                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                        <span>marketing@sistema.co.id</span>
-                    </a>
                     <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -777,26 +533,50 @@
     </div>
 </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // --- 1. PENGELOLA MENU MOBILE ---
-            const hamburgerBtn = document.getElementById('hamburger-btn');
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. SCRIPT UNTUK ANIMASI SAAT HALAMAN DIBUKA (HERO SECTION) ---
+        // Script ini khusus untuk animasi elemen hero section saat pertama kali halaman dimuat.
+        setTimeout(() => {
+            document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'));
+        }, 100); // Penundaan 100ms sebelum animasi dimulai.
+
+        // --- 2. SCRIPT UNTUK ANIMASI SAAT SCROLL ---
+        // Observer ini akan menangani semua elemen yang perlu muncul saat di-scroll.
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Hentikan observasi setelah animasi berjalan
+                }
+            });
+        }, {
+            threshold: 0.1 // Memicu animasi saat 10% elemen terlihat
+        });
+
+        // Terapkan observer ke semua elemen yang relevan
+        const elementsToAnimateOnScroll = document.querySelectorAll('.animate-on-scroll, .value-card');
+        elementsToAnimateOnScroll.forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // --- 3. LOGIKA MENU MOBILE (NAVBAR) ---
+        // Kode ini menangani fungsionalitas buka/tutup menu mobile dan submenu.
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        if (hamburgerBtn) {
             const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
             const mobileMenu = document.getElementById('mobile-menu');
             const closeMenuBtn = document.getElementById('close-menu-btn');
-            
+
             const toggleMobileMenu = () => {
                 const isActive = mobileMenu.classList.toggle('is-active');
-                hamburgerIcon.classList.toggle('open', isActive);
+                if(hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
                 document.body.style.overflow = isActive ? 'hidden' : '';
             };
 
             hamburgerBtn.addEventListener('click', toggleMobileMenu);
-            if (closeMenuBtn) {
-                closeMenuBtn.addEventListener('click', toggleMobileMenu);
-            }
+            if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
 
-            // --- 2. LOGIKA SUBMENU PADA MENU MOBILE ---
             const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
             submenuToggles.forEach(toggle => {
                 toggle.addEventListener('click', (event) => {
@@ -806,7 +586,7 @@
                     const plusIcon = toggle.querySelector('.plus-icon');
 
                     if (submenu) {
-                        plusIcon.classList.toggle('open');
+                        if (plusIcon) plusIcon.classList.toggle('open');
                         if (submenu.style.maxHeight) {
                             submenu.style.maxHeight = null;
                         } else {
@@ -815,50 +595,9 @@
                     }
                 });
             });
-
-            // --- 3. ANIMASI SAAT SCROLL (LEBIH EFISIEN) ---
-            const animationObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        // Menambahkan delay untuk efek staggered (muncul satu per satu)
-                        const delay = entry.target.style.transitionDelay ? parseInt(entry.target.style.transitionDelay) : 0;
-                        setTimeout(() => {
-                           entry.target.classList.add('is-visible');
-                        }, delay);
-                        
-                        observer.unobserve(entry.target); // Berhenti mengamati setelah animasi berjalan
-                    }
-                });
-            }, {
-                threshold: 0.1 // Animasi berjalan saat 10% elemen terlihat
-            });
-            
-            // Mengamati semua elemen dengan kelas .animate-on-scroll
-            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-            elementsToAnimate.forEach(el => animationObserver.observe(el));
-        });
-
-        const cards = document.querySelectorAll('.value-card');
-
-    // Buat observer untuk mendeteksi saat elemen masuk ke viewport
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            // Jika kartu terlihat di layar
-            if (entry.isIntersecting) {
-                // Tambahkan kelas 'visible' untuk memicu animasi CSS
-                entry.target.classList.add('visible');
-                // Berhenti mengamati kartu ini agar animasi tidak berulang
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1 // Animasi terpicu saat 10% dari kartu terlihat
+        }
     });
+</script>
 
-    // Minta observer untuk mengamati setiap kartu
-    cards.forEach(card => {
-        observer.observe(card);
-    });
-    </script>
 </body>
 </html>
