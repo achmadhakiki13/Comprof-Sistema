@@ -56,6 +56,18 @@ body::-webkit-scrollbar {
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.solutions-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .group:hover .solutions-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
 .hamburger-icon {
     position: relative;
     width: 24px;
@@ -287,26 +299,21 @@ body::-webkit-scrollbar {
 <nav class="nav_cus">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
-            
             <a href="index.html">
                 <div>
-                    <img src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo" class="h-10">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
                 </div>
             </a>
-            
             <div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="about.html" class="hover:text-red-500 transition">About Us</a>
-                    
-                    <!-- Solutions Dropdown Start -->
                     <div class="relative group">
                         <a href="solutions.html" class="hover:text-red-500 transition flex items-center gap-1">
                             Solutions
                             <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </a>
-                        <div class="solutions-dropdown absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
+                        <div class="solutions-dropdown absolute top-full left-1/2 mt-4 bg-[#111111] border border-gray-700/80 rounded-xl shadow-2xl p-8 w-max">
                             <div class="grid grid-cols-2 gap-x-16">
-                                <!-- Services Column -->
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Services</h3>
                                     <ul class="space-y-3 text-sm">
@@ -332,7 +339,6 @@ body::-webkit-scrollbar {
                                         </a></li>
                                     </ul>
                                 </div>
-                                <!-- Solutions Column -->
                                 <div>
                                     <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Our Solutions</h3>
                                     <ul class="space-y-3 text-sm">
@@ -361,12 +367,10 @@ body::-webkit-scrollbar {
                             </div>
                         </div>
                     </div>
-
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
                     <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
                 </div>
-                
                 <div class="flex items-center md:hidden">
                     <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
                         <div class="hamburger-icon">
@@ -617,12 +621,6 @@ body::-webkit-scrollbar {
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
                         </svg>
                         <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
-                    </a>
-                    <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
-                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                        <span>info@sistema.co.id</span>
                     </a>
                     <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
