@@ -11,7 +11,8 @@
     <style>
         :root {
             --color-accent: #d21b29;
-            --transition: all 0.3s ease;
+            --color-accent-hover: #E31A22;
+            
         }
         html {
             scroll-behavior: smooth;
@@ -26,17 +27,36 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            scrollbar-width: none; /* For Firefox */
         }
+
+        /* CSS to hide the scrollbar */
+        body {
+            scrollbar-width: none; /* For Firefox */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
+        }
+
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        /* NAVBAR & MOBILE MENU */
         .nav_cus {
-            position: sticky; /* Sticky navbar for this page */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 50;
-            background-color: rgba(13, 16, 24, 0.8);
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+            border-bottom: 1px solid transparent;
+        }
+        .nav_cus.nav-scrolled {
+            background-color: rgba(13, 16, 24, 0.5);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
         .hamburger-icon {
             position: relative; width: 24px; height: 18px;
@@ -80,6 +100,80 @@
         .group:hover .solutions-dropdown {
             opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
         }
+
+        /* HERO SECTION */
+        #blog-hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #030305;
+            overflow: hidden;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        .glowing-shape {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 900px;
+            height: 900px;
+            transform: translate(40%, -50%);
+            background: radial-gradient(circle, rgba(210, 27, 41, 0.4) 0%, rgba(210, 27, 41, 0) 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes slow-pulse {
+            from { opacity: 0.7; transform: translate(40%, -50%) scale(0.95); }
+            to { opacity: 1; transform: translate(45%, -48%) scale(1.05); }
+        }
+        
+        /* BUTTON STYLE */
+        .styled-btn {
+            display: inline-block; padding: 0.75rem 1.5rem;
+            border-radius: 9999px; font-weight: 600;
+            background-color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+            color: white;
+            transition: var(--transition);
+        }
+        .styled-btn:hover {
+            background-color: var(--color-accent-hover);
+            transform: scale(1.05);
+        }
+
+        /* ANIMATIONS */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-content h1.animate-in { transition-delay: 0.2s; }
+        .hero-content p.animate-in { transition-delay: 0.4s; }
+        .hero-content .animate-in-button { transition-delay: 0.6s; }
+        .glowing-shape.animate-in {
+            opacity: 0;
+            transform: translate(40%, -50%) scale(0.8);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            transition-delay: 0.1s;
+        }
+        .glowing-shape.animate-in.visible {
+            opacity: 1;
+            transform: translate(45%, -48%) scale(1.05);
+            animation: slow-pulse 10s infinite alternate;
+        }
+
+        /* FOOTER */
         .site-footer {
             background-color: #242a30; color: #a9a9a9; padding: 40px 0 20px;
             text-align: center; position: relative; font-size: 14px;
@@ -98,7 +192,7 @@
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10" onerror="this.style.display='none'">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14" onerror="this.style.display='none'">
                 </div>
             </a>
             <div>
@@ -167,16 +261,23 @@
     </ul>
 </div>
 
-<!-- Main Content -->
-<main class="flex-grow flex flex-col items-center justify-center text-center px-4">
-    <div class="w-full max-w-4xl">
-        <h1 class="text-5xl md:text-7xl font-bold text-white" style="font-family: 'Outfit', sans-serif;">Blog</h1>
-        <p class="mt-6 text-xl md:text-2xl text-gray-300">This page is currently under construction.</p>
-        <p class="mt-2 text-lg text-gray-400">Please check back later for exciting updates!</p>
-        <a href="index.html" class="mt-8 inline-block bg-red-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-red-700 transition-colors duration-300">
-            Go Back Home
-        </a>
-    </div>
+<main class="flex-grow">
+    <section id="blog-hero">
+        <div class="hero-content">
+            <h1 class="text-5xl md:text-7xl font-outfit font-bold tracking-tight text-white animate-in">
+                Blog<span class="text-red-500">*</span>
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl md:text-2xl leading-8 text-gray-300 animate-in">
+                This page is currently under construction. Please check back later for exciting updates!
+            </p>
+            <div class="mt-10 animate-in animate-in-button">
+                <a href="index.html" class="styled-btn">
+                    Go Back Home
+                </a>
+            </div>
+        </div>
+        <div class="glowing-shape animate-in"></div>
+    </section>
 </main>
 
 <footer class="bg-[#242a30] text-white">
@@ -222,7 +323,24 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Mobile Menu Logic
+    // --- NAVBAR SCROLL TRANSITION ---
+    const nav = document.querySelector('.nav_cus');
+    if (nav) {
+        const handleNavScroll = () => {
+            // Make navbar sticky only on this page, not fixed
+            if (this.id !== 'blog-hero') { 
+                 if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            }
+        };
+        window.addEventListener('scroll', handleNavScroll);
+        handleNavScroll(); // Run on load
+    }
+
+    // --- MOBILE MENU LOGIC ---
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
     const mobileMenu = document.getElementById('mobile-menu');
@@ -243,12 +361,24 @@ document.addEventListener("DOMContentLoaded", () => {
     submenuToggles.forEach(toggle => {
         toggle.addEventListener('click', (event) => {
             event.preventDefault();
-            const submenu = document.getElementById(toggle.dataset.submenuToggle + '-submenu');
+            const submenuId = toggle.dataset.submenuToggle + '-submenu';
+            const submenu = document.getElementById(submenuId);
             const plusIcon = toggle.querySelector('.plus-icon');
             if (submenu) {
                 if (plusIcon) plusIcon.classList.toggle('open');
-                submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
+                if (submenu.style.maxHeight) {
+                    submenu.style.maxHeight = null;
+                } else {
+                    submenu.style.maxHeight = submenu.scrollHeight + "px";
+                }
             }
+        });
+    });
+
+    // --- HERO ANIMATION ---
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.classList.add('visible');
         });
     });
 });

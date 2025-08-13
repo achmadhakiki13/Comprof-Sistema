@@ -47,16 +47,23 @@
         }
 
         .nav_cus {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 50;
-        background-color: rgba(13, 16, 24, 0.5);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            /* MODIFIED: Added transition for smooth background change */
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+            border-bottom: 1px solid transparent; /* Start with a transparent border */
+        }
+
+        /* NEW: Class added on scroll */
+        .nav_cus.nav-scrolled {
+            background-color: rgba(13, 16, 24, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom-color: rgba(255, 255, 255, 0.1); /* Use border-color for transition */
+        }
 
         .solutions-dropdown {
             opacity: 0;
@@ -207,7 +214,7 @@
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14">
                 </div>
             </a>
             <div>
@@ -380,75 +387,74 @@
         </section>
         
         
-        <section id="core-security-compact" class="bg-black py-20 sm:py-28">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    
+<section id="core-security-compact" class="bg-black py-20 sm:py-28">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="swiper compact-carousel relative px-10">
             <div class="swiper-wrapper">
 
                 <div class="swiper-slide h-auto">
                     <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-user-lock text-5xl"></i>
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#950000] mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-user-lock text-3xl text-white"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-white mb-2">Customer Identity & Management Access</h3>
-                        <p class="text-gray-400 text-sm flex-grow">Secure and manage user identities, ensuring authorized access while providing a seamless user experience.</p>
-                        <a href="CustomerID.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                        <p class="text-sm text-gray-400 flex-grow">Secure and manage user identities, ensuring authorized access while providing a seamless user experience.</p>
+                        <a href="CustomerID.html" class="mt-5 inline-block rounded-full border border-[#D21B297F] px-5 py-2 text-sm text-white transition-colors duration-300 group-hover:border-red-600 group-hover:text-red-600">Explore &rarr;</a>
                     </div>
                 </div>
 
                 <div class="swiper-slide h-auto">
                     <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-network-wired text-5xl"></i>
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#950000] mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-network-wired text-3xl text-white"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-white mb-2">Web Application & API Protection</h3>
-                        <p class="text-gray-400 text-sm flex-grow">Comprehensive defense against threats targeting your web applications and APIs, including bots and injection attacks.</p>
-                        <a href="Waap.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                        <p class="text-sm text-gray-400 flex-grow">Comprehensive defense against threats targeting your web applications and APIs, including bots and injection attacks.</p>
+                        <a href="Waap.html" class="mt-5 inline-block rounded-full border border-[#D21B297F] px-5 py-2 text-sm text-white transition-colors duration-300 group-hover:border-red-600 group-hover:text-red-600">Explore &rarr;</a>
                     </div>
                 </div>
 
                 <div class="swiper-slide h-auto">
                     <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-database text-5xl"></i>
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#950000] mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-database text-3xl text-white"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-white mb-2">Data Security</h3>
-                        <p class="text-gray-400 text-sm flex-grow">Implementing robust encryption and access controls to safeguard sensitive information across all platforms.</p>
-                        <a href="Datasecurity.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                        <p class="text-sm text-gray-400 flex-grow">Implementing robust encryption and access controls to safeguard sensitive information across all platforms.</p>
+                        <a href="Datasecurity.html" class="mt-5 inline-block rounded-full border border-[#D21B297F] px-5 py-2 text-sm text-white transition-colors duration-300 group-hover:border-red-600 group-hover:text-red-600">Explore &rarr;</a>
                     </div>
                 </div>
 
                 <div class="swiper-slide h-auto">
                     <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-user-shield text-5xl"></i>
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#950000] mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-user-shield text-3xl text-white"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-white mb-2">Privacy Data Protection</h3>
-                        <p class="text-gray-400 text-sm flex-grow">Ensuring compliance with global privacy regulations and protecting personal data from unauthorized access and breaches.</p>
-                        <a href="Privacydata.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                        <p class="text-sm text-gray-400 flex-grow">Ensuring compliance with global privacy regulations and protecting personal data from unauthorized access and breaches.</p>
+                        <a href="Privacydata.html" class="mt-5 inline-block rounded-full border border-[#D21B297F] px-5 py-2 text-sm text-white transition-colors duration-300 group-hover:border-red-600 group-hover:text-red-600">Explore &rarr;</a>
                     </div>
                 </div>
 
                 <div class="swiper-slide h-auto">
                     <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-desktop text-5xl"></i>
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#950000] mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-desktop text-3xl text-white"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-white mb-2">End Point Protection</h3>
-                        <p class="text-gray-400 text-sm flex-grow">Advanced security for all network endpoints, including laptops, desktops, and mobile devices, against malware and intrusions.</p>
-                        <a href="Endpoint.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                        <p class="text-sm text-gray-400 flex-grow">Advanced security for all network endpoints, including laptops, desktops, and mobile devices, against malware and intrusions.</p>
+                        <a href="Endpoint.html" class="mt-5 inline-block rounded-full border border-[#D21B297F] px-5 py-2 text-sm text-white transition-colors duration-300 group-hover:border-red-600 group-hover:text-red-600">Explore &rarr;</a>
                     </div>
                 </div>
 
                 <div class="swiper-slide h-auto">
                     <div class="group flex h-full flex-col items-center text-center p-6 bg-[#111111] rounded-xl border border-gray-800/80 hover:border-red-600/60 hover:-translate-y-2 transition-all duration-300 ease-in-out">
-                        <div class="mb-4 text-red-600 transition-transform duration-300 group-hover:scale-110">
-                            <i class="fa-solid fa-user-secret text-5xl"></i>
+                        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#950000] mx-auto transition-transform duration-300 group-hover:scale-110">
+                            <i class="fa-solid fa-user-secret text-3xl text-white"></i>
                         </div>
                         <h3 class="text-lg font-semibold text-white mb-2">Fraud Prevention</h3>
-                        <p class="text-gray-400 text-sm flex-grow">Real-time monitoring and advanced analytics to detect and prevent fraudulent activities and transactions.</p>
-                        <a href="Fraud.html" class="mt-5 inline-block px-5 py-2 border border-[#D21B297F] rounded-full text-white text-sm group-hover:border-red-600 group-hover:text-red-600 transition-colors duration-300">Explore &rarr;</a>
+                        <p class="text-sm text-gray-400 flex-grow">Real-time monitoring and advanced analytics to detect and prevent fraudulent activities and transactions.</p>
+                        <a href="Fraud.html" class="mt-5 inline-block rounded-full border border-[#D21B297F] px-5 py-2 text-sm text-white transition-colors duration-300 group-hover:border-red-600 group-hover:text-red-600">Explore &rarr;</a>
                     </div>
                 </div>
 
@@ -456,7 +462,7 @@
 
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
-            
+
             <div class="swiper-pagination"></div>
         </div>
     </div>
@@ -602,6 +608,19 @@
             }
         }
     });
+
+    const nav = document.querySelector('.nav_cus');
+        if (nav) {
+            const handleNavScroll = () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            };
+            window.addEventListener('scroll', handleNavScroll);
+            handleNavScroll(); // Run on load
+        }
 });
     </script>
 </body>

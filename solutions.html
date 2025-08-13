@@ -36,15 +36,22 @@
 
         /* === GAYA NAVBAR & MENU MOBILE === */
         .nav_cus {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 50;
-        background-color: rgba(13, 16, 24, 0.5);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            /* MODIFIED: Added transition for smooth background change */
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+            border-bottom: 1px solid transparent; /* Start with a transparent border */
+        }
+
+        /* NEW: Class added on scroll */
+        .nav_cus.nav-scrolled {
+            background-color: rgba(13, 16, 24, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom-color: rgba(255, 255, 255, 0.1); /* Use border-color for transition */
         }
 
         .solutions-dropdown {
@@ -267,7 +274,7 @@
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14">
                 </div>
             </a>
             <div>
@@ -334,7 +341,7 @@
                         </div>
                     </div>
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
-                    <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                    <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
                 </div>
                 <div class="flex items-center md:hidden">
@@ -435,28 +442,27 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
+                    <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3><span class="text-red-500">*</span>
                 </div>
                 <p class="text-gray-400 text-sm flex-grow">
                     Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.
                 </p>
                 <div class="mt-4">
-                    <a href="PeneterationTesting.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                    <a href="" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
                 </div>
             </div>
 
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
+                    <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3><span class="text-red-500">*</span>
                 </div>
                 <p class="text-gray-400 text-sm flex-grow">
                     Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.
@@ -468,8 +474,8 @@
 
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     </div>
                     <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
                 </div>
@@ -483,8 +489,8 @@
 
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
                     </div>
                     <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
                 </div>
@@ -498,10 +504,10 @@
             
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Managed Security Services</h3>
+                    <h3 class="text-xl font-semibold text-white">Managed Security Services</h3><span class="text-red-500">*</span>
                 </div>
                 <p class="text-gray-400 text-sm flex-grow">
                     24/7 monitoring, management, and incident response for your security infrastructure by our expert team (SOC).
@@ -513,10 +519,10 @@
 
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Application Security</h3>
+                    <h3 class="text-xl font-semibold text-white">Application Security</h3><span class="text-red-500">*</span>
                 </div>
                 <p class="text-gray-400 text-sm flex-grow">
                     Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.
@@ -528,10 +534,10 @@
 
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
+                    <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3><span class="text-red-500">*</span>
                 </div>
                 <p class="text-gray-400 text-sm flex-grow">
                     Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.
@@ -543,10 +549,10 @@
 
             <div class="scroll-reveal card-hover bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col hover:border-red-600/50 hover:scale-105 hover:-translate-y-2 transition-all ease-in-out duration-300">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-gray-700/50 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-[#d21b29]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                    <div class="bg-[#950000] p-3 rounded-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
+                    <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3><span class="text-red-500">*</span>
                 </div>
                 <p class="text-gray-400 text-sm flex-grow">
                     Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.
@@ -561,89 +567,91 @@
 </section>
     
     <section id="streamlined-solutions-section" class="bg-black pt-10 pb-20 sm:pt-12 sm:pb-24">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-5xl scroll-reveal">
-                    Our Solutions</h2>
-                    <p class="mt-4 text-lg leading-8 text-gray-300 scroll-reveal" style="--delay: 0.1s;">
-                    We are partnering with the world class best technology in order provide world class enterprise cyber security solution to its customers</p>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-5xl scroll-reveal">
+                Our Solutions
+            </h2>
+            <p class="mt-4 text-lg leading-8 text-gray-300 scroll-reveal" style="--delay: 0.1s;">
+                We are partnering with the world class best technology in order provide world class enterprise cyber security solution to its customers
+            </p>
+        </div>
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div class="text-center p-4 scroll-reveal" style="--delay: 0s;">
+                <div class="inline-flex items-center justify-center p-5 mb-6 bg-[#950000] rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                    <i class="fa-solid fa-user-lock text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Customer Identity & Management Access</h3>
+                <p class="text-sm text-gray-400">
+                    Secure and manage user identities, ensuring authorized access while providing a seamless user experience.
+                </p>
+                <div class="mt-4">
+                    <a href="CustomerID.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
             </div>
-            <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-                <div class="text-center p-4 scroll-reveal" style="--delay: 0s;">
-                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
-                        <i class="fa-solid fa-user-lock text-3xl text-[--color-accent]"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Customer Identity & Management Access</h3>
-                    <p class="text-sm text-gray-400">
-                        Secure and manage user identities, ensuring authorized access while providing a seamless user experience.
-                    </p>
-                    <div class="mt-4">
-                        <a href="CustomerID.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
-                    </div>
+            <div class="text-center p-4 scroll-reveal" style="--delay: 0.1s;">
+                <div class="inline-flex items-center justify-center p-5 mb-6 bg-[#950000] rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                    <i class="fa-solid fa-network-wired text-3xl text-white"></i>
                 </div>
-                <div class="text-center p-4 scroll-reveal" style="--delay: 0.1s;">
-                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
-                        <i class="fa-solid fa-network-wired text-3xl text-[--color-accent]"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Web Application & API Protection (WAAP)</h3>
-                    <p class="text-sm text-gray-400">
-                        Comprehensive defense against threats targeting your web applications and APIs, including bots and injection attacks.
-                    </p>
-                    <div class="mt-4">
-                        <a href="Waap.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
-                    </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Web Application & API Protection (WAAP)</h3>
+                <p class="text-sm text-gray-400">
+                    Comprehensive defense against threats targeting your web applications and APIs, including bots and injection attacks.
+                </p>
+                <div class="mt-4">
+                    <a href="Waap.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
                 </div>
-                <div class="text-center p-4 scroll-reveal" style="--delay: 0.2s;">
-                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
-                        <i class="fa-solid fa-database text-3xl text-[--color-accent]"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Data Security</h3>
-                    <p class="text-sm text-gray-400">
-                        Implementing robust encryption and access controls to safeguard sensitive information across all platforms.
-                    </p>
-                    <div class="mt-4">
-                        <a href="Datasecurity.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
-                    </div>
+            </div>
+            <div class="text-center p-4 scroll-reveal" style="--delay: 0.2s;">
+                <div class="inline-flex items-center justify-center p-5 mb-6 bg-[#950000] rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                    <i class="fa-solid fa-database text-3xl text-white"></i>
                 </div>
-                <div class="text-center p-4 scroll-reveal" style="--delay: 0s;">
-                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
-                        <i class="fa-solid fa-user-shield text-3xl text-[--color-accent]"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Privacy Data Protection</h3>
-                    <p class="text-sm text-gray-400">
-                        Ensuring compliance with global privacy regulations and protecting personal data from unauthorized access and breaches.
-                    </p>
-                    <div class="mt-4">
-                        <a href="Privacydata.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
-                    </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Data Security</h3>
+                <p class="text-sm text-gray-400">
+                    Implementing robust encryption and access controls to safeguard sensitive information across all platforms.
+                </p>
+                <div class="mt-4">
+                    <a href="Datasecurity.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
                 </div>
-                <div class="text-center p-4 scroll-reveal" style="--delay: 0.1s;">
-                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
-                        <i class="fa-solid fa-desktop text-3xl text-[--color-accent]"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">End Point Protection</h3>
-                    <p class="text-sm text-gray-400">
-                        Advanced security for all network endpoints, including laptops, desktops, and mobile devices, against malware and intrusions.
-                    </p>
-                    <div class="mt-4">
-                        <a href="Endpoint.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
-                    </div>
+            </div>
+            <div class="text-center p-4 scroll-reveal" style="--delay: 0s;">
+                <div class="inline-flex items-center justify-center p-5 mb-6 bg-[#950000] rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                    <i class="fa-solid fa-user-shield text-3xl text-white"></i>
                 </div>
-                <div class="text-center p-4 scroll-reveal" style="--delay: 0.2s;">
-                    <div class="inline-flex items-center justify-center p-5 mb-6 bg-gray-900/80 rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
-                        <i class="fa-solid fa-user-secret text-3xl text-[--color-accent]"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Fraud Prevention</h3>
-                    <p class="text-sm text-gray-400">
-                        Real-time monitoring and advanced analytics to detect and prevent fraudulent activities and transactions.
-                    </p>
-                    <div class="mt-4">
-                        <a href="Fraud.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
-                    </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Privacy Data Protection</h3>
+                <p class="text-sm text-gray-400">
+                    Ensuring compliance with global privacy regulations and protecting personal data from unauthorized access and breaches.
+                </p>
+                <div class="mt-4">
+                    <a href="Privacydata.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            <div class="text-center p-4 scroll-reveal" style="--delay: 0.1s;">
+                <div class="inline-flex items-center justify-center p-5 mb-6 bg-[#950000] rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                    <i class="fa-solid fa-desktop text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3">End Point Protection</h3>
+                <p class="text-sm text-gray-400">
+                    Advanced security for all network endpoints, including laptops, desktops, and mobile devices, against malware and intrusions.
+                </p>
+                <div class="mt-4">
+                    <a href="Endpoint.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            <div class="text-center p-4 scroll-reveal" style="--delay: 0.2s;">
+                <div class="inline-flex items-center justify-center p-5 mb-6 bg-[#950000] rounded-2xl border border-gray-700 transition-all duration-300 hover:border-red-500 hover:-translate-y-1">
+                    <i class="fa-solid fa-user-secret text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3">Fraud Prevention</h3>
+                <p class="text-sm text-gray-400">
+                    Real-time monitoring and advanced analytics to detect and prevent fraudulent activities and transactions.
+                </p>
+                <div class="mt-4">
+                    <a href="Fraud.html" class="explore-btn">Explore <span class="arrow">&rarr;</span></a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">

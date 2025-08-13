@@ -39,11 +39,15 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 100;
+            z-index: 50;
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+            border-bottom: 1px solid transparent;
+        }
+        .nav_cus.nav-scrolled {
             background-color: rgba(13, 16, 24, 0.5);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
         .solutions-dropdown {
             opacity: 0;
@@ -58,14 +62,16 @@
         }
 
         /* HERO SECTION */
-        #new-hero {
+        #about-hero {
             position: relative;
             display: flex;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             background-color: #030305;
             overflow: hidden;
-            padding: 0 clamp(2rem, 8vw, 8rem);
+            padding: 0 1.5rem;
+            text-align: center;
         }
         .hero-content {
             position: relative;
@@ -74,9 +80,6 @@
             margin-left: auto;
             margin-right: auto;
             width: 100%;
-        }
-        .text-content {
-            max-width: 65%;
         }
         .hero-headline {
             font-family: 'Outfit', sans-serif;
@@ -97,7 +100,9 @@
         }
         .hero-subheadline {
             margin-top: 2rem;
-            max-width: 36rem;
+            max-width: 48rem; /* Adjusted for better centering */
+            margin-left: auto;
+            margin-right: auto;
             font-size: 1.125rem;
             color: #d1d5db;
             line-height: 1.75;
@@ -121,6 +126,7 @@
         }
         .btn-primary:hover {
             background-color: #a31623;
+            transform: scale(1.05);
         }
         .glowing-shape {
             position: absolute;
@@ -138,12 +144,12 @@
         /* ANIMATIONS */
         .animate-in {
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateY(50px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .animate-in.visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
         .hero-headline.animate-in { transition-delay: 0.2s; }
         .hero-subheadline.animate-in { transition-delay: 0.4s; }
@@ -179,44 +185,34 @@
             background: #000000;
             padding: 80px 0;
         }
-
         .vmm-item {
             display: flex;
-            /* Ubah baris di bawah ini */
-            align-items: center; /* SEBELUMNYA: flex-start */
+            align-items: center;
             gap: 1.5rem;
-            
-            /* Style lainnya tetap sama */
             background-color: #121212;
             border: 1px solid rgba(210, 27, 41, 0.2);
             padding: 1.5rem;
             border-radius: 0.75rem;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-
         .vmm-item:hover {
             background-color: #1a1a1a;
             border-color: rgba(210, 27, 41, 0.4);
         }
-
-        /* Mengubah .icon-circle menjadi .icon-box (kotak) */
         .icon-box {
-            width: 80px;  /* Sedikit lebih kecil agar proporsional */
+            width: 80px;
             height: 80px;
-            background-color: #2a2a2a; /* Warna latar ikon yang lebih gelap */
-            /* border-radius: 50%; -> Ganti menjadi nilai yang lebih kecil */
-            border-radius: 0.5rem; /* Membuat sudut menjadi tumpul, bukan lingkaran */
+            background-color: #950000;
+            border-radius: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0; /* Mencegah ikon menyusut */
+            flex-shrink: 0;
         }
-
         .icon-box i {
-            color: var(--color-accent); /* Menggunakan warna aksen utama */
+            color: white;
             font-size: 2.25rem;
         }
-
         .vmm-title {
             font-family: 'Outfit', sans-serif;
             font-size: clamp(1.8rem, 4vw, 2.2rem);
@@ -224,21 +220,18 @@
             color: #ffffff;
             margin-bottom: 0.5rem;
         }
-
         .vmm-description-visible {
             font-size: 1rem;
             line-height: 1.7;
             color: #d1d5db;
         }
-
-        /* Mengatur ulang tata letak untuk layar kecil (mobile) */
         @media (max-width: 640px) {
             .vmm-item {
-                flex-direction: column; /* Ikon di atas, teks di bawah */
-                align-items: center; /* Pusatkan semuanya */
+                flex-direction: column;
+                align-items: center;
                 text-align: center;
             }
-}
+        }
 
         /* VALUES SECTION */
         .values-section h2 {
@@ -258,26 +251,14 @@
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
         }
-
-        /* FOOTER */
-        .site-footer {
-            background-color: #242a30; color: #a9a9a9; padding: 40px 20px 20px; text-align: center;
-            position: relative; font-size: 14px; margin-top: 60px;
-        }
-        .site-footer::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%;
-            height: 1px; background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0));
-        }
-
+        
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
-            #new-hero { text-align: center; padding: 0 1.5rem; }
-            .text-content { max-width: 100%; margin-left: auto; margin-right: auto; }
-            .hero-cta { display: flex; justify-content: center; }
             .glowing-shape { width: 600px; height: 600px; transform: translate(25%, -50%); opacity: 0.5; }
             .vmm-item { flex-direction: column; text-align: center; gap: 1.5rem; }
         }
 
+        /* UPDATED FOOTER CSS */
         .site-footer {
             background-color: #242a30;
             color: #a9a9a9;
@@ -309,7 +290,7 @@
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14">
                 </div>
             </a>
             <div>
@@ -376,7 +357,7 @@
                         </div>
                     </div>
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
-                    <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
+                    <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
                     <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
                 </div>
                 <div class="flex items-center md:hidden">
@@ -391,20 +372,18 @@
     </div>
 </nav>
 
-<section id="new-hero">
+<section id="about-hero">
     <div class="hero-content">
-        <div class="text-content">
-            <h1 class="hero-headline animate-in">
-                <span class="line">
-                    About <span class="highlight">Sistema</span>
-                </span>
-            </h1>
-            <p class="hero-subheadline animate-in">
-                PT Sistema Datapilar is a trusted provider of cybersecurity and fraud prevention solutions, serving businesses in Indonesia. With a deep understanding of the local market, we empower organizations to protect their digital transactions, secure customer data, and mitigate fraud risks. Our goal is  "Enabling the Future through Innovation"
-            </p>
-            <div class="hero-cta animate-in">
-                <a href="contactus.html" class="btn btn-primary">Get a Security Strategy Session</a>
-            </div>
+        <h1 class="hero-headline animate-in">
+            <span class="line">
+                About <span class="highlight">Sistema</span>
+            </span>
+        </h1>
+        <p class="hero-subheadline animate-in">
+            PT Sistema Datapilar is a trusted provider of cybersecurity and fraud prevention solutions, serving businesses in Indonesia. With a deep understanding of the local market, we empower organizations to protect their digital transactions, secure customer data, and mitigate fraud risks. Our goal is  "Enabling the Future through Innovation"
+        </p>
+        <div class="hero-cta animate-in">
+            <a href="contactus.html" class="btn btn-primary">Get a Security Strategy Session</a>
         </div>
     </div>
     <div class="glowing-shape animate-in"></div>
@@ -450,7 +429,7 @@
     <section class="bg-black py-16 sm:py-20 values-section">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Values</h2>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Our Values<span class="text-red-500">*</span></h2>
             </div>
             <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-md value-card">
@@ -480,13 +459,10 @@
 
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
-        
         <div class="mb-10">
             <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema">
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
             <div>
                 <h3 class="text-lg font-bold mb-4">Location Office</h3>
                 <div class="space-y-2 text-slate-300">
@@ -496,11 +472,10 @@
                     <p>Indonesia</p>
                 </div>
             </div>
-
             <div>
                 <h3 class="text-lg font-bold mb-4">Contact Us</h3>
                 <div class="space-y-3 text-slate-300">
-                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
+                    <a href="tel:+62215722381" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
                         </svg>
@@ -514,19 +489,18 @@
                     </a>
                 </div>
             </div>
-
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
-                    <div class="space-y-3 text-slate-300">
-                        <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
-                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                            </svg>
-                            <span>Sistema Datapilar</span>
-                        </a>
-                    </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        <span>Sistema Datapilar</span>
+                    </a>
                 </div>
             </div>
+        </div>
         <div class="site-footer">
             <p>&copy; Copyright. PT Sistema Datapilar</p>
         </div>
@@ -534,69 +508,80 @@
 </footer>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. SCRIPT UNTUK ANIMASI SAAT HALAMAN DIBUKA (HERO SECTION) ---
-        // Script ini khusus untuk animasi elemen hero section saat pertama kali halaman dimuat.
-        setTimeout(() => {
-            document.querySelectorAll('.animate-in').forEach(el => el.classList.add('visible'));
-        }, 100); // Penundaan 100ms sebelum animasi dimulai.
+document.addEventListener("DOMContentLoaded", () => {
+    // --- NAVBAR SCROLL TRANSITION ---
+    const nav = document.querySelector('.nav_cus');
+    if (nav) {
+        const handleNavScroll = () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+        };
+        window.addEventListener('scroll', handleNavScroll);
+        handleNavScroll(); // Run on load
+    }
 
-        // --- 2. SCRIPT UNTUK ANIMASI SAAT SCROLL ---
-        // Observer ini akan menangani semua elemen yang perlu muncul saat di-scroll.
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Hentikan observasi setelah animasi berjalan
+    // --- MOBILE MENU LOGIC ---
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+
+    if (hamburgerBtn && mobileMenu) {
+        const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+        const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+
+        const toggleMobileMenu = () => {
+            const isActive = mobileMenu.classList.toggle('is-active');
+            if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        };
+
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        submenuToggles.forEach(toggle => {
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                const submenuId = toggle.dataset.submenuToggle + '-submenu';
+                const submenu = document.getElementById(submenuId);
+                const plusIcon = toggle.querySelector('.plus-icon');
+                if (submenu) {
+                    if (plusIcon) plusIcon.classList.toggle('open');
+                    submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
                 }
             });
-        }, {
-            threshold: 0.1 // Memicu animasi saat 10% elemen terlihat
         });
+    }
 
-        // Terapkan observer ke semua elemen yang relevan
-        const elementsToAnimateOnScroll = document.querySelectorAll('.animate-on-scroll, .value-card');
-        elementsToAnimateOnScroll.forEach(el => {
-            scrollObserver.observe(el);
+    // --- ANIMATIONS ---
+    // Hero Animation Trigger
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.classList.add('visible');
         });
-
-        // --- 3. LOGIKA MENU MOBILE (NAVBAR) ---
-        // Kode ini menangani fungsionalitas buka/tutup menu mobile dan submenu.
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        if (hamburgerBtn) {
-            const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
-
-            const toggleMobileMenu = () => {
-                const isActive = mobileMenu.classList.toggle('is-active');
-                if(hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            };
-
-            hamburgerBtn.addEventListener('click', toggleMobileMenu);
-            if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
-
-            const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
-            submenuToggles.forEach(toggle => {
-                toggle.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const submenuId = toggle.dataset.submenuToggle + '-submenu';
-                    const submenu = document.getElementById(submenuId);
-                    const plusIcon = toggle.querySelector('.plus-icon');
-
-                    if (submenu) {
-                        if (plusIcon) plusIcon.classList.toggle('open');
-                        if (submenu.style.maxHeight) {
-                            submenu.style.maxHeight = null;
-                        } else {
-                            submenu.style.maxHeight = submenu.scrollHeight + "px";
-                        }
-                    }
-                });
-            });
-        }
     });
+
+    // Intersection Observer for Fade-in Animations on Scroll
+    const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+    });
+
+    // Apply observer to all relevant elements
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll, .value-card');
+    elementsToAnimate.forEach(el => {
+        animationObserver.observe(el);
+    });
+});
 </script>
 
 </body>
