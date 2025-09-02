@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Solutions Integration</title>
+    <title>Our Services: Security Solutions Integration</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,47 +16,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <style>
         :root {
-            --color-accent: #d21b29;
-            --transition-fast: all 0.3s ease;
-            --transition-slow: all 0.5s ease;
+            --color-headline: #d21b29; /* Main Red Accent */
         }
-        html {
-            scroll-behavior: smooth;
-        }
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            background-color: #000000;
+        body {
             font-family: 'Inter', 'Roboto', sans-serif;
-            color: white;
+            background-color: #000000; /* Pure Black Background */
+            color: #e5e7eb; /* gray-200 */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            scrollbar-width: none; /* Firefox */
         }
-        body::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
-        }
-        body.no-scroll {
-            overflow: hidden;
-        }
-
         .nav_cus {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 50;
-            background-color: rgba(13, 16, 24, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
+            background-color: rgba(13, 16, 24, 0.5); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        .hamburger-icon { position: relative; width: 24px; height: 18px; }
+        .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: white; border-radius: 9px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out; }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+        .hamburger-icon span:nth-child(4) { top: 16px; }
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) { top: 8px; width: 0%; left: 50%; }
+        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+        #mobile-menu { position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 101; transform: translateX(100%); opacity: 0; transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        #mobile-menu.is-active { transform: translateX(0); opacity: 1; }
+        .mobile-menu-link { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 1.125rem; }
+        .plus-icon { transition: transform 0.3s ease; }
+        .plus-icon.open { transform: rotate(45deg); }
         .solutions-dropdown {
             opacity: 0;
             visibility: hidden;
@@ -68,129 +56,39 @@
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
+}
+        .submenu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding-left: 1rem; }
+        .headline { color: var(--color-headline); }
+        .text-accent { color: #d21b29; }
+        .card { background-color: rgba(10, 10, 10, 0.5); border: 1px solid #27272a; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(210, 27, 41, 0.3); }
+        .timeline-container { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline-container::after { content: ''; position: absolute; width: 3px; background-color: #27272a; top: 0; bottom: 0; left: 50%; margin-left: -1.5px; z-index: 1; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; z-index: 2; }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -12.5px; background-color: #000; border: 4px solid var(--color-headline); top: 15px; border-radius: 50%; z-index: 3; }
+        .timeline-item.right::after { left: -12.5px; }
+        .timeline-content { padding: 20px 30px; background-color: #18181b; position: relative; border-radius: 8px; border: 1px solid #27272a; }
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 15.5px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.right { left: 0%; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 2.5px; }
         }
-
-        .hamburger-icon {
-            position: relative; width: 24px; height: 18px;
-        }
-        .hamburger-icon span {
-            display: block; position: absolute; height: 2px; width: 100%;
-            background: white; border-radius: 9px; opacity: 1; left: 0;
-            transform: rotate(0deg); transition: .25s ease-in-out;
-        }
-        .hamburger-icon span:nth-child(1) { top: 0px; }
-        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
-        .hamburger-icon span:nth-child(4) { top: 16px; }
-        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
-            top: 8px; width: 0%; left: 50%;
-        }
-        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
-        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
-        #mobile-menu {
-            position: fixed; right: 0; top: 0; bottom: 0;
-            width: 80%; max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            z-index: 101;
-            transform: translateX(100%); opacity: 0;
-            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-            display: flex; flex-direction: column; padding-top: 5rem;
-            overflow-y: auto; -webkit-overflow-scrolling: touch;
-        }
-        #mobile-menu.is-active {
-            transform: translateX(0); opacity: 1;
-        }
-        .mobile-menu-link {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 12px 0; font-size: 1.125rem; transition: var(--transition-fast);
-        }
-        .mobile-menu-link:hover { color: var(--color-accent); }
-        .plus-icon { transition: transform 0.3s ease; }
-        .plus-icon.open { transform: rotate(45deg); }
-        .submenu {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            padding-left: 1rem;
-        }
-
-        .text-accent {
-            color: #a31623; /* Cyan-400 */
-        }
-        .card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: #7f0000;
-        }
-
-        /* --- CSS FOR FADE IN ANIMATION --- */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .scroll-reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: #d21b29; /* Warna merah aksen */
-            background-color: rgba(31, 41, 55, 0.5);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-        .swiper-button-next:hover,
-        .swiper-button-prev:hover {
-            background-color: rgba(210, 27, 41, 0.5);
-            color: white;
-        }
-        .swiper-button-next::after,
-        .swiper-button-prev::after {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .swiper-pagination-bullet {
-            background-color: #4b5563; /* gray-600 */
-        }
-        .swiper-pagination-bullet-active {
-            background-color: #d21b29; /* Warna merah aksen */
-        }
-
-        .site-footer {
-            background-color: #242a30; /* Warna latar belakang footer */
-            color: #a9a9a9;             /* Warna teks */
-            padding: 40px 0 20px;      /* Padding atas untuk memberi ruang pada garis */
-            text-align: center;
-            position: relative;        /* Diperlukan agar pseudo-element ::before bisa diposisikan */
-            font-size: 14px;
-        }
-
-        /* Membuat garis dengan efek fade out menggunakan pseudo-element ::before */
-        .site-footer::before {
-            content: '';               /* Wajib ada untuk menampilkan pseudo-element */
-            position: absolute;
-            top: 20px;                 /* Jarak garis dari atas footer */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;                /* Lebar garis (tidak sampai ujung) */
-            height: 1px;               /* Ketebalan garis */
-            
-            /* Ini adalah bagian terpenting: membuat gradasi dari transparan ke putih, lalu kembali ke transparan */
-            background: linear-gradient(to right, 
-                rgba(255, 255, 255, 0),    /* Mulai dari transparan di kiri */
-                rgba(255, 255, 255, 0.4) 50%, /* Warna solid (sedikit transparan) di tengah */
-                rgba(255, 255, 255, 0)     /* Kembali transparan di kanan */
-            );
-        }
-
+        .fade-in-on-load, .fade-up-on-scroll, .timeline-item .timeline-content { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-on-load { transform: translateY(30px); }
+        .fade-up-on-scroll { transform: translateY(50px); }
+        .timeline-item.left .timeline-content { transform: translateX(-100px); }
+        .timeline-item.right .timeline-content { transform: translateX(100px); }
+        .is-visible, .timeline-item.is-visible .timeline-content { opacity: 1; transform: none; }
+        .swiper-button-next, .swiper-button-prev { color: #d21b29; background-color: rgba(31, 41, 55, 0.5); width: 50px; height: 50px; border-radius: 50%; backdrop-filter: blur(5px); transition: all 0.3s ease; }
+        .swiper-button-next:hover, .swiper-button-prev:hover { background-color: rgba(210, 27, 41, 0.5); color: white; }
+        .swiper-button-next::after, .swiper-button-prev::after { font-size: 20px; font-weight: bold; }
+        .swiper-pagination-bullet { background-color: #4b5563; }
+        .swiper-pagination-bullet-active { background-color: #d21b29; }
+        .site-footer { background-color: #242a30; color: #a9a9a9; padding: 40px 0 20px; text-align: center; position: relative; font-size: 14px; }
+        .site-footer::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0)); }
     </style>
 </head>
 <body class="antialiased">
@@ -199,7 +97,7 @@
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-10">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14 pt-2">
                 </div>
             </a>
             <div>
@@ -266,8 +164,8 @@
                         </div>
                     </div>
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
-                    <a href="#blog-page" class="hover:text-red-500 transition">Blog</a>
-                    <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                    <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
+                    <a href="contactus.html" class="hover:text-red-500 transition">Support</a>
                 </div>
                 <div class="flex items-center md:hidden">
                     <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
@@ -281,101 +179,129 @@
     </div>
 </nav>
 
-    <div id="mobile-menu">
-        <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
-        <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
-            <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
-            <li>
-                <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
-                    <span>Services & Solutions</span>
-                    <span class="plus-icon">+</span>
-                </a>
-                <ul id="solutions-submenu" class="submenu">
-                    <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
-                    <li><a class="text-base font-light px-3 py-2">Services</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Personal Data Protection</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Security Solutions Integration</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Managed Security Services</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Application Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Infrastructure Security Network Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Network Security</a></li>
-                    <li><a href="#" class="mobile-menu-link text-base">Security Awareness Training</a></li>
+<div id="mobile-menu">
+    <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+    <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+        <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+        <li><a href="solutions.html" class="mobile-menu-link">Solutions</a></li>
+        <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+        <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
+        <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+    </ul>
+</div>
+
+<div class="container mx-auto px-4 py-16 md:py-24">
+    <header class="text-center mb-20 md:mb-28 pt-16">
+        <h1 id="hero-title" class="text-3xl md:text-6xl font-black text-white fade-in-on-load">
+            Security Solutions <span class="text-accent">Integration</span>
+        </h1>
+        <p id="hero-subtitle" class="max-w-3xl mx-auto text-lg text-slate-400 fade-in-on-load" style="transition-delay: 200ms;">
+            Connecting your disparate security products into a single, intelligent, and unified ecosystem to break down silos, automate actions, and gain complete visibility.
+        </p>
+    </header>
+
+    <section id="description" class="mb-20 md:mb-28">
+         <h2 class="section-title text-3xl font-bold text-white text-center mb-12">The Challenge: Too Many Tools, Not Enough Context</h2>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+             <div class="card rounded-xl p-8 fade-up-on-scroll">
+                 <h3 class="text-2xl font-bold text-white mb-4">A Stack of Siloed Technology</h3>
+                 <p class="text-slate-400">
+                    Most organizations use a variety of best-of-breed security tools that operate independently. This includes:
+                 </p>
+                 <ul class="text-sm text-slate-300 space-y-2 mt-4">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-fire-wall text-accent"></i> Firewall</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-desktop text-accent"></i> Endpoint Protection (EPP/EDR)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-accent"></i> Intrusion Detection Systems (IDS/IPS)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-chart-simple text-accent"></i> SIEM</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-cloud text-accent"></i> Cloud Security Platforms</li>
                 </ul>
-            </li>
-            <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
-            <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
-            <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
-        </ul>
-    </div>
+             </div>
+             <div class="card rounded-xl p-8 fade-up-on-scroll" style="transition-delay: 150ms;">
+                 <h3 class="text-2xl font-bold text-white mb-4">This Creates Serious Issues</h3>
+                 <p class="text-slate-400">
+                    When these tools don't communicate, they create significant problems for security teams:
+                 </p>
+                 <ul class="text-sm text-slate-300 space-y-3 mt-4">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-bell-slash text-accent mt-1"></i><div><strong>Alert Fatigue:</strong> Analysts are overwhelmed by thousands of disconnected alerts.</div></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-eye-slash text-accent mt-1"></i><div><strong>Blind Spots:</strong> Threats slip through the cracks between non-communicating tools.</div></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-person-running text-accent mt-1"></i><div><strong>Slow Incident Response:</strong> Manually switching between consoles wastes critical time during an attack.</div></li>
+                 </ul>
+             </div>
+         </div>
+    </section>
 
-    <div class="container mx-auto px-4 py-16 md:py-24">
+    <section id="importance" class="mb-20 md:mb-28">
+        <h2 class="section-title text-3xl font-bold text-white text-center mb-12">Why is Integration Crucial?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-sitemap text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Gain Full Visibility</h3>
+                <p class="text-sm text-slate-400 flex-grow">Combine data from all security tools to see the complete attack chain and eliminate dangerous blind spots.</p>
+            </div>
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-rocket text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Accelerate Response</h3>
+                <p class="text-sm text-slate-400 flex-grow">Automate repetitive tasks and orchestrate actions across multiple systems to contain threats in minutes, not hours.</p>
+            </div>
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-filter-circle-xmark text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Reduce Alert Fatigue</h3>
+                <p class="text-sm text-slate-400 flex-grow">Correlate and contextualize alerts from multiple sources into single, high-fidelity incidents that matter.</p>
+            </div>
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-arrow-up-right-dots text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Maximize ROI</h3>
+                <p class="text-sm text-slate-400 flex-grow">Ensure all your security products work together as a cohesive unit, increasing the value and effectiveness of each one.</p>
+            </div>
+        </div>
+    </section>
 
-        <header class="text-center mb-20 md:mb-28">
-            
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 scroll-reveal">
-                Security Solutions <span class="text-accent">Integration</span>
-            </h1>
-            
-            <p class="max-w-3xl mx-auto text-lg text-slate-400 scroll-reveal" style="transition-delay: 200ms;">
-                Connecting your disparate security products into a single, intelligent, and unified ecosystem to break down silos, automate actions, and gain complete visibility.
-            </p>
-        </header>
-
-        <section id="problem" class="mb-20 md:mb-28">
-            <h2 class="text-3xl font-bold text-white text-center mb-12 scroll-reveal">The Problem: Too Many Tools, Not Enough Context</h2>
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <div class="card p-6 scroll-reveal">
-                    <h3 class="font-semibold text-white mb-3">A Stack of Siloed Technology</h3>
-                    <ul class="text-sm text-slate-400 space-y-2">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-fire-wall text-accent"></i> Firewall</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-desktop text-accent"></i> Endpoint Protection (EPP/EDR)</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-accent"></i> Intrusion Detection Systems (IDS/IPS)</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-chart-simple text-accent"></i> SIEM</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-cloud text-accent"></i> Cloud Security Platforms</li>
-                    </ul>
-                </div>
-                
-                <div class="card p-6 scroll-reveal" style="transition-delay: 200ms;">
-                    <h3 class="font-semibold text-white mb-3">Creates Serious Issues</h3>
-                    <ul class="text-sm text-slate-400 space-y-2">
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-bell-slash text-accent mt-1"></i><div><strong>Alert Fatigue:</strong> Analysts are overwhelmed by thousands of disconnected alerts.</div></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-eye-slash text-accent mt-1"></i><div><strong>Blind Spots:</strong> Threats slip through the cracks between non-communicating tools.</div></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-person-running text-accent mt-1"></i><div><strong>Slow Incident Response:</strong> Manually switching between consoles wastes critical time during an attack.</div></li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-battery-empty text-accent mt-1"></i><div><strong>Low Efficiency:</strong> Complex workflows drain limited security resources.</div></li>
-                    </ul>
+    <section id="services" class="mb-20 md:mb-28">
+        <h2 class="section-title text-3xl font-bold text-white text-center mb-16">Our Service Pillars: An Integration Journey</h2>
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">1. Discovery & Strategic Planning</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We start by assessing your existing security technologies, workflows, and business objectives to create a tailored integration roadmap.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A clear, strategic plan that aligns technology integration with your specific security goals.</p>
                 </div>
             </div>
-        </section>
-
-        <section id="how-it-works" class="mb-20 md:mb-28">
-    <h2 class="text-3xl font-bold text-white text-center mb-12 scroll-reveal">How Our Integration Service Works</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="card p-6 text-center scroll-reveal">
-            <i class="fa-solid fa-code-merge text-3xl text-accent mb-4"></i>
-            <h3 class="text-lg font-semibold text-white mb-2">API-Based Integration</h3>
-            <p class="text-sm text-slate-400">We leverage vendor APIs to enable automated data exchange and actions between systems.</p>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">2. API-Based Integration</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We leverage vendor APIs to create robust, two-way connections that enable automated data sharing and actions between your systems.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A seamless flow of information that allows your security tools to communicate and act in concert.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">3. Data Standardization</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We normalize and parse data from diverse sources into a common, understandable format for your central SIEM or analytics platform.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A unified data language that enables effective threat correlation and analysis.</p>
+                </div>
+            </div>
+             <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">4. Centralized Platform Implementation</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We help you implement and configure a central "brain" like a SOAR or XDR platform to aggregate data and orchestrate automated responses.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A single pane of glass for monitoring, investigation, and coordinated incident response.</p>
+                </div>
+            </div>
+             <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">5. Playbook & Workflow Automation</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We build custom security playbooks that automatically execute a series of actions in response to specific triggers, such as isolating an infected endpoint.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A highly efficient, automated security operations process that reduces manual effort and human error.</p>
+                </div>
+            </div>
         </div>
-        <div class="card p-6 text-center scroll-reveal" style="transition-delay: 200ms;">
-            <i class="fa-solid fa-brain text-3xl text-accent mb-4"></i>
-            <h3 class="text-lg font-semibold text-white mb-2">Centralized Platforms (SOAR/XDR)</h3>
-            <p class="text-sm text-slate-400">We implement a central "brain" to collect data from all sources and orchestrate automated responses.</p>
+        <div class="text-center mt-12">
+            <a href="contactus.html" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
+                Contact Us
+            </a>
         </div>
-        <div class="card p-6 text-center scroll-reveal" style="transition-delay: 400ms;">
-            <i class="fa-solid fa-file-invoice text-3xl text-accent mb-4"></i>
-            <h3 class="text-lg font-semibold text-white mb-2">Data Standardization</h3>
-            <p class="text-sm text-slate-400">We normalize data into a common format for easy correlation and analysis in a central platform like a SIEM.</p>
-        </div>
-    </div>
-
-    <!-- === Tombol Contact Us sekarang ada di dalam section === -->
-    <div class="text-center mt-16 scroll-reveal" style="transition-delay: 600ms;">
-        <a href="contactus.html" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
-            Contact Us
-        </a>
-    </div>
-</section>
-    </div>
+    </section>
+</div>
 
 <section id="proactive-support" class="bg-black py-20 sm:py-28">
        <div class="mx-auto max-w-6xl px-6 lg:px-8">
@@ -407,7 +333,7 @@
                                    <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
                                </div>
                                <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
-                               <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                               <div class="mt-4"><a href="AuditRiskCompliance.html" class="font-semibold text-red-500">Explore</a></div>
                            </div>
                        </div>
 
@@ -443,19 +369,6 @@
                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
                                <div class="flex items-center gap-4 mb-4">
                                    <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Managed Security Services</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">24/7 monitoring, management, and incident response for your security infrastructure by our expert team (SOC).</p>
-                               <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
-
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                    </div>
                                    <h3 class="text-xl font-semibold text-white">Application Security</h3>
@@ -478,7 +391,7 @@
                            </div>
                        </div>
 
-                    <div class="swiper-slide h-auto pb-12">
+                       <div class="swiper-slide h-auto pb-12">
                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
                                <div class="flex items-center gap-4 mb-4">
                                    <div class="bg-[#950000] p-3 rounded-lg">
@@ -503,7 +416,7 @@
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
         
         <div class="mb-10">
-            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema">
+            <img class="pt-3 h-16 w-auto" src="asset/sistema_white_font.png" alt="Logo Sistema" onerror="this.style.display='none'">
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -511,7 +424,6 @@
             <div>
                 <h3 class="text-lg font-bold mb-4">Location Office</h3>
                 <div class="space-y-2 text-slate-300">
-                    <p>Menara Batavia, Lantai 26</p>
                     <p>Jl. K.H. Mas Mansyur No.Kav.126</p>
                     <p>Jakarta Pusat, 10220</p>
                     <p>Indonesia</p>
@@ -521,11 +433,11 @@
             <div>
                 <h3 class="text-lg font-bold mb-4">Contact Us</h3>
                 <div class="space-y-3 text-slate-300">
-                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
-                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.211-.998-.552-1.348l-5.116-4.661a1.125 1.125 0 00-1.583.062l-1.065 1.065a1.125 1.125 0 01-1.583 0l-5.462-5.462a1.125 1.125 0 010-1.583l1.065-1.065a1.125 1.125 0 00.062-1.583L7.102 3.802A1.125 1.125 0 006.75 3.25H5.25A2.25 2.25 0 003 5.5v1.25z" />
+                    <a href="tel:+62215741135" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.279-.087.431l4.243 5.93a.75.75 0 00.93.343l.421-.235c.183-.102.413-.102.596 0l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-1.372c-5.082 0-9.682-3.085-11.964-7.522C.971 7.912 1.5 4.5 1.5 4.5z" clip-rule="evenodd" />
                         </svg>
-                        <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
+                        <span>+62 21-5741135</span>
                     </a>
                     <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
                         <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -535,6 +447,7 @@
                     </a>
                 </div>
             </div>
+
                 <div>
                     <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
                     <div class="space-y-3 text-slate-300">
@@ -548,100 +461,40 @@
                 </div>
             </div>
         <div class="site-footer">
-            <p>&copy; Copyright. PT Sistema Datapilar</p>
+            <p>Copyright &copy; Sistema Datapilar 2025</p>
         </div>
     </div>
 </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                threshold: 0.1 // Memicu animasi saat 10% elemen terlihat
-            });
-
-            const elementsToReveal = document.querySelectorAll('.scroll-reveal');
-            elementsToReveal.forEach(el => {
-                observer.observe(el);
-            });
-
-            const swiper = new Swiper('.service-carousel', {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 30,
-            
-            // Responsive breakpoints
-            breakpoints: {
-                // Untuk layar medium, tampilkan 2 slide
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 30
-                },
-                // Untuk layar besar, tampilkan 3 slide
-                1280: { 
-                    slidesPerView: 3,
-                    spaceBetween: 40
+<script>
+    // All JS from your template file
+    document.addEventListener('DOMContentLoaded', function () {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
                 }
-            },
-
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
-            const hamburgerBtn = document.getElementById('hamburger-btn');
-            const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuBtn = document.getElementById('close-menu-btn');
-            
-            const toggleMobileMenu = () => {
-                const isActive = mobileMenu.classList.toggle('is-active');
-                hamburgerIcon.classList.toggle('open', isActive);
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            };
-
-            hamburgerBtn.addEventListener('click', toggleMobileMenu);
-            if (closeMenuBtn) {
-                closeMenuBtn.addEventListener('click', toggleMobileMenu);
-            }
-
-            // --- 2. LOGIKA SUBMENU PADA MENU MOBILE ---
-            const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
-            submenuToggles.forEach(toggle => {
-                toggle.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const submenuId = toggle.dataset.submenuToggle + '-submenu';
-                    const submenu = document.getElementById(submenuId);
-                    const plusIcon = toggle.querySelector('.plus-icon');
-
-                    if (submenu) {
-                        plusIcon.classList.toggle('open');
-                        if (submenu.style.maxHeight) {
-                            submenu.style.maxHeight = null;
-                        } else {
-                            submenu.style.maxHeight = submenu.scrollHeight + "px";
-                        }
-                    }
-                });
             });
+        }, { threshold: 0.1 });
 
+        const scrollItems = document.querySelectorAll('.fade-up-on-scroll, .fade-in-on-load');
+        scrollItems.forEach((item) => {
+            observer.observe(item);
         });
-    </script>
+
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach(item => { observer.observe(item); });
+
+        const swiper = new Swiper('.service-carousel', {
+            loop: true, slidesPerView: 1, spaceBetween: 30,
+            breakpoints: { 768: { slidesPerView: 2 }, 1280: { slidesPerView: 3 } },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        });
+
+        
+    });
+</script>
 </body>
 </html>

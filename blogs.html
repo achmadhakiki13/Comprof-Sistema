@@ -12,96 +12,90 @@
         :root {
             --color-accent: #d21b29;
             --color-accent-hover: #E31A22;
-            
         }
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
+            margin: 0; padding: 0; width: 100%;
             background-color: #030305;
             font-family: 'Inter', 'Roboto', sans-serif;
             color: white;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            scrollbar-width: none; /* For Firefox */
         }
-
-        /* CSS to hide the scrollbar */
-        body {
-            scrollbar-width: none; /* For Firefox */
-        }
-        body::-webkit-scrollbar {
-            display: none; /* For Chrome, Safari, and Opera */
-        }
-
-        .font-outfit {
-            font-family: 'Outfit', sans-serif;
-        }
+        body::-webkit-scrollbar { display: none; }
+        .font-outfit { font-family: 'Outfit', sans-serif; }
         
-        /* NAVBAR & MOBILE MENU */
-        .nav_cus {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 50;
-            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
-            border-bottom: 1px solid transparent;
-        }
-        .nav_cus.nav-scrolled {
-            background-color: rgba(13, 16, 24, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-        .hamburger-icon {
-            position: relative; width: 24px; height: 18px;
-        }
-        .hamburger-icon span {
-            display: block; position: absolute; height: 2px; width: 100%;
-            background: white; border-radius: 9px; opacity: 1; left: 0;
-            transform: rotate(0deg); transition: .25s ease-in-out;
-        }
+        /* NAVBAR & MOBILE MENU STYLES */
+        .nav_cus { position: fixed; top: 0; left: 0; width: 100%; z-index: 50; transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out; border-bottom: 1px solid transparent; }
+        .nav_cus.nav-scrolled { background-color: rgba(13, 16, 24, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom-color: rgba(255, 255, 255, 0.1); }
+        .hamburger-icon { position: relative; width: 24px; height: 18px; }
+        .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: white; border-radius: 9px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out; }
         .hamburger-icon span:nth-child(1) { top: 0px; }
         .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
         .hamburger-icon span:nth-child(4) { top: 16px; }
-        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
-            top: 8px; width: 0%; left: 50%;
-        }
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) { top: 8px; width: 0%; left: 50%; }
         .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
         .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
-        #mobile-menu {
-            position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px;
-            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            z-index: 100; transform: translateX(100%); opacity: 0;
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto;
-        }
+        #mobile-menu { position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 100; transform: translateX(100%); opacity: 0; transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto; }
         #mobile-menu.is-active { transform: translateX(0); opacity: 1; }
-        .mobile-menu-link {
-            display: flex; justify-content: space-between; align-items: center; padding: 12px 0;
-            font-size: 1.125rem; transition: var(--transition);
-        }
+        .mobile-menu-link { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 1.125rem; }
         .mobile-menu-link:hover { color: var(--color-accent); }
         .plus-icon { transition: transform 0.3s ease; }
         .plus-icon.open { transform: rotate(45deg); }
-        .submenu {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding-left: 1rem;
+        .submenu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding-left: 1rem; }
+        .solutions-dropdown { opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(10px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
+        .group:hover .solutions-dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
+        /* ANIMATIONS */
+        .animate-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* FOOTER */
+        .site-footer-container { background-color: #242a30; color: #a9a9a9; padding: 40px 0 20px; text-align: center; position: relative; font-size: 14px; }
+        .site-footer { padding-top: 40px; }
+        .site-footer::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0)); }
+        
+        /* === PERUBAHAN CSS UNTUK BLOG CARD === */
+        .blog-card { 
+            background-color: #0d1018; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; /* <-- DIUBAH: Gambar selalu di atas */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
         }
-        .solutions-dropdown {
-            opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        .blog-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2); 
         }
-        .group:hover .solutions-dropdown {
-            opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+        .blog-card-image { 
+            width: 100%; /* <-- DIUBAH: Lebar gambar 100% */
+            height: 220px; 
+            object-fit: cover; 
+        }
+        .blog-card-content { 
+            padding: 1.5rem; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            flex-grow: 1; /* <-- DITAMBAHKAN: Agar konten mengisi sisa ruang */
+        }
+        .read-more-link { 
+            display: inline-flex; 
+            align-items: center; 
+            color: var(--color-accent); 
+            font-weight: 600; 
+            margin-top: auto; /* <-- DITAMBAHKAN: Mendorong link ke bawah */
+            padding-top: 1rem;
+            transition: all 0.2s ease-in-out; 
+        }
+        .read-more-link:hover { 
+            color: var(--color-accent-hover); 
+            transform: translateX(5px); 
         }
 
-        /* HERO SECTION */
         #blog-hero {
             position: relative;
             display: flex;
@@ -110,13 +104,65 @@
             min-height: 100vh;
             background-color: #030305;
             overflow: hidden;
-            text-align: center;
             padding: 0 1.5rem;
+            text-align: center;
         }
         .hero-content {
             position: relative;
             z-index: 10;
+            max-width: 80rem;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
         }
+        .hero-headline {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 400;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+        .hero-headline .line {
+            display: block;
+        }
+        .hero-headline .highlight {
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--color-accent), #ff6a88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subheadline {
+            margin-top: 2rem;
+            max-width: 48rem; /* Adjusted for better centering */
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.125rem;
+            color: #d1d5db;
+            line-height: 1.75;
+        }
+        .hero-cta {
+            margin-top: 3rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #a31623;
+            transform: scale(1.05);
+        }
+
         .glowing-shape {
             position: absolute;
             top: 50%;
@@ -129,38 +175,7 @@
             pointer-events: none;
             z-index: 1;
         }
-        @keyframes slow-pulse {
-            from { opacity: 0.7; transform: translate(40%, -50%) scale(0.95); }
-            to { opacity: 1; transform: translate(45%, -48%) scale(1.05); }
-        }
-        
-        /* BUTTON STYLE */
-        .styled-btn {
-            display: inline-block; padding: 0.75rem 1.5rem;
-            border-radius: 9999px; font-weight: 600;
-            background-color: var(--color-accent);
-            border: 1px solid var(--color-accent);
-            color: white;
-            transition: var(--transition);
-        }
-        .styled-btn:hover {
-            background-color: var(--color-accent-hover);
-            transform: scale(1.05);
-        }
 
-        /* ANIMATIONS */
-        .animate-in {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .animate-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-content h1.animate-in { transition-delay: 0.2s; }
-        .hero-content p.animate-in { transition-delay: 0.4s; }
-        .hero-content .animate-in-button { transition-delay: 0.6s; }
         .glowing-shape.animate-in {
             opacity: 0;
             transform: translate(40%, -50%) scale(0.8);
@@ -173,16 +188,31 @@
             animation: slow-pulse 10s infinite alternate;
         }
 
-        /* FOOTER */
         .site-footer {
-            background-color: #242a30; color: #a9a9a9; padding: 40px 0 20px;
-            text-align: center; position: relative; font-size: 14px;
+            background-color: #242a30;
+            color: #a9a9a9;
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+            font-size: 14px;
         }
+
         .site-footer::before {
-            content: ''; position: absolute; top: 20px; left: 50%;
-            transform: translateX(-50%); width: 80%; height: 1px;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0));
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0)
+            );
         }
+
+        
     </style>
 </head>
 
@@ -192,7 +222,7 @@
         <div class="flex justify-between items-center h-16">
             <a href="index.html">
                 <div>
-                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14" onerror="this.style.display='none'">
+                    <img src="asset/sistema_white_font.png" alt="Logo" class="h-14 pt-2" onerror="this.style.display='none'">
                 </div>
             </a>
             <div>
@@ -230,7 +260,7 @@
                     </div>
                     <a href="careers.html" class="hover:text-red-500 transition">Careers</a>
                     <a href="blogs.html" class="hover:text-red-500 transition">Blog</a>
-                    <a href="contactus.html" class="hover:text-red-500 transition">Contact Us</a>
+                    <a href="contactus.html" class="hover:text-red-500 transition">Support</a>
                 </div>
                 <div class="flex items-center md:hidden">
                     <button id="hamburger-btn" class="ml-4 p-2 rounded-full cursor-pointer z-50">
@@ -246,106 +276,156 @@
     <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
     <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
         <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
-        <li>
-            <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions">
-                <span>Services & Solutions</span>
-                <span class="plus-icon">+</span>
-            </a>
-            <ul id="solutions-submenu" class="submenu">
-                 <li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li>
-            </ul>
-        </li>
+        <li><a href="#" class="mobile-menu-link" data-submenu-toggle="solutions"><span>Services & Solutions</span><span class="plus-icon">+</span></a><ul id="solutions-submenu" class="submenu"><li><a href="solutions.html" class="mobile-menu-link text-base font-bold">Services & Solution Overview</a></li></ul></li>
         <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
         <li><a href="blogs.html" class="mobile-menu-link">Blog</a></li>
         <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
     </ul>
 </div>
 
-<main class="flex-grow">
-    <section id="blog-hero">
-        <div class="hero-content">
-            <h1 class="text-5xl md:text-7xl font-outfit font-bold tracking-tight text-white animate-in">
-                Blog<span class="text-red-500">*</span>
-            </h1>
-            <p class="mt-6 max-w-3xl mx-auto text-xl md:text-2xl leading-8 text-gray-300 animate-in">
-                This page is currently under construction. Please check back later for exciting updates!
-            </p>
-            <div class="mt-10 animate-in animate-in-button">
-                <a href="index.html" class="styled-btn">
-                    Go Back Home
+<section id="blog-hero">
+    <div class="hero-content">
+        <h1 class="hero-headline animate-in">
+            <span class="line">
+                Our Latest <span class="highlight">Insights</span>
+            </span>
+        </h1>
+        <p class="hero-subheadline animate-in">
+            Explore the latest trends in cybersecurity, fraud prevention, and technology. Our experts share their knowledge to help you stay ahead of the curve and secure your digital landscape.
+        </p>
+        <div class="hero-cta animate-in">
+            <a href="#more-articles" class="btn btn-primary">Explore Articles</a>
+        </div>
+    </div>
+    <div class="glowing-shape animate-in"></div>
+</section>
+
+<main class="flex-grow pt-16">
+    <div class="relative isolate overflow-hidden bg-[#030305] py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mb-16 animate-in" style="transition-delay: 200ms;">
+                <a href="Article1.html" class="group relative block w-full h-[500px] md:h-[450px] rounded-xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-105" style="background-image: url('asset/Blogs/Article1.png');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end p-8 md:p-12 md:w-3/5 lg:w-1/2">
+                        <div>
+                            <p class="text-red-500 text-sm font-semibold mb-2">Technology</p>
+                            <h2 class="font-outfit text-3xl sm:text-4xl font-bold text-white mb-3 leading-tight">Why Digital Security Should Be a Top Priority in the Modern Era</h2>
+                            <div class="flex items-center text-gray-300 text-sm mb-4 flex-wrap">
+                            </div>
+                            <p class="text-gray-200 text-base hidden sm:block line-clamp-2">In an interconnected world, your digital fortress is only as strong as its weakest link. Discover why proactive security is no longer an option, but a necessity.</p>
+                            <span class="read-more-link mt-6">
+                                Read More
+                                <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
                 </a>
             </div>
+
+            <div id="more-articles" class="border-t border-gray-700/50 pt-12 animate-in" style="transition-delay: 400ms;">
+                <h3 class="font-outfit text-3xl font-bold tracking-tight text-white mb-8">More Articles</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <a href="another-blog-post.html" class="blog-card">
+                        <img class="blog-card-image" src="asset/Blogs/Article2.png" alt="Cyber Attack Banner">
+                        <div class="blog-card-content">
+                            <div>
+                                <p class="text-red-500 text-sm font-semibold mb-2">Cybersecurity</p>
+                                <h2 class="font-outfit text-2xl font-bold text-white mb-3 leading-tight">Types of Cyber Attacks Most Commonly Occurring in Indonesia</h2>
+                                <p class="text-gray-300 text-base line-clamp-3">As Indonesia embraces digital transformation, the frequency and scale of cyber attacks is growing rapidly. The National Cyber and Crypto Agency (BSSN) reported that from January to July 2025, Indonesia experienced over 2.37 billion cyber attacks</p>
+                            </div>
+                            <span class="read-more-link">Read More<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg></span>
+                        </div>
+                    </a>
+                    
+                    <a href="another-blog-post.html" class="blog-card">
+                        <img class="blog-card-image" src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ransomware Prevention Banner">
+                        <div class="blog-card-content">
+                            <div>
+                                <p class="text-red-500 text-sm font-semibold mb-2">Business Insights</p>
+                                <h2 class="font-outfit text-2xl font-bold text-white mb-3 leading-tight">Navigating Ransomware: Prevention and Response Strategies</h2>
+                                <p class="text-gray-300 text-base line-clamp-3">Ransomware attacks are on the rise, posing a significant threat to businesses of all sizes. Learn about the most effective prevention techniques and how to build a robust incident response plan.</p>
+                            </div>
+                            <span class="read-more-link">Read More<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path></svg></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="glowing-shape animate-in"></div>
-    </section>
+    </div>
 </main>
 
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        
         <div class="mb-10">
-            <img class="pt-3 h-10 w-auto" src="asset/Sistema Datapilar Tees Width Logo Combine.png" alt="Logo Sistema" onerror="this.style.display='none'">
+            <img class="pt-3 h-16 w-auto" src="asset/sistema_white_font.png" alt="Logo Sistema" onerror="this.style.display='none'">
         </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
             <div>
                 <h3 class="text-lg font-bold mb-4">Location Office</h3>
                 <div class="space-y-2 text-slate-300">
-                    <p>Menara Batavia, Lantai 26</p>
                     <p>Jl. K.H. Mas Mansyur No.Kav.126</p>
                     <p>Jakarta Pusat, 10220</p>
                     <p>Indonesia</p>
                 </div>
             </div>
+
             <div>
                 <h3 class="text-lg font-bold mb-4">Contact Us</h3>
                 <div class="space-y-3 text-slate-300">
-                    <a href="tel:+62215551234" class="flex items-center hover:text-white transition-colors">
-                        <span>( 021 ) 5722381 / ( 021 ) 5722382</span>
+                    <a href="tel:+62215741135" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.279-.087.431l4.243 5.93a.75.75 0 00.93.343l.421-.235c.183-.102.413-.102.596 0l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-1.372c-5.082 0-9.682-3.085-11.964-7.522C.971 7.912 1.5 4.5 1.5 4.5z" clip-rule="evenodd" />
+                        </svg>
+                        <span>+62 21-5741135</span>
                     </a>
                     <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
                         <span>info@sistema.co.id</span>
                     </a>
                 </div>
             </div>
-            <div>
-                <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
-                <div class="space-y-3 text-slate-300">
-                    <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
-                        <span>Sistema Datapilar</span>
-                    </a>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                    <div class="space-y-3 text-slate-300">
+                        <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            <span>Sistema Datapilar</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
         <div class="site-footer">
-            <p>&copy; Copyright. PT Sistema Datapilar</p>
+            <p>Copyright &copy; Sistema Datapilar 2025</p>
         </div>
     </div>
 </footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // --- NAVBAR SCROLL TRANSITION ---
     const nav = document.querySelector('.nav_cus');
     if (nav) {
-        const handleNavScroll = () => {
-            // Make navbar sticky only on this page, not fixed
-            if (this.id !== 'blog-hero') { 
-                 if (window.scrollY > 50) {
-                    nav.classList.add('nav-scrolled');
-                } else {
-                    nav.classList.remove('nav-scrolled');
-                }
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
             }
-        };
-        window.addEventListener('scroll', handleNavScroll);
-        handleNavScroll(); // Run on load
+        });
     }
 
-    // --- MOBILE MENU LOGIC ---
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const hamburgerIcon = hamburgerBtn ? hamburgerBtn.querySelector('.hamburger-icon') : null;
     const mobileMenu = document.getElementById('mobile-menu');
     const closeMenuBtn = document.getElementById('close-menu-btn');
-    const submenuToggles = mobileMenu ? mobileMenu.querySelectorAll('[data-submenu-toggle]') : [];
 
     const toggleMobileMenu = () => {
         if (mobileMenu) {
@@ -358,28 +438,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMobileMenu);
     if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
 
-    submenuToggles.forEach(toggle => {
-        toggle.addEventListener('click', (event) => {
-            event.preventDefault();
-            const submenuId = toggle.dataset.submenuToggle + '-submenu';
-            const submenu = document.getElementById(submenuId);
-            const plusIcon = toggle.querySelector('.plus-icon');
-            if (submenu) {
-                if (plusIcon) plusIcon.classList.toggle('open');
-                if (submenu.style.maxHeight) {
-                    submenu.style.maxHeight = null;
-                } else {
-                    submenu.style.maxHeight = submenu.scrollHeight + "px";
-                }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
-    });
+    }, { threshold: 0.1 });
 
-    // --- HERO ANIMATION ---
-    requestAnimationFrame(() => {
-        document.querySelectorAll('.animate-in').forEach(el => {
-            el.classList.add('visible');
-        });
+    document.querySelectorAll('.animate-in').forEach(el => {
+        observer.observe(el);
     });
 });
 </script>

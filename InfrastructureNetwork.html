@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services: Infrastructure & Network Security</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@100;300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        :root {
+            --color-headline: #d21b29; /* Main Red Accent */
+        }
+        body {
+            font-family: 'Inter', 'Roboto', sans-serif;
+            background-color: #000000; /* Pure Black Background */
+            color: #e5e7eb; /* gray-200 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        .nav_cus {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
+            background-color: rgba(13, 16, 24, 0.5); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hamburger-icon { position: relative; width: 24px; height: 18px; }
+        .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: white; border-radius: 9px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out; }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+        .hamburger-icon span:nth-child(4) { top: 16px; }
+        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) { top: 8px; width: 0%; left: 50%; }
+        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+        #mobile-menu { position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 101; transform: translateX(100%); opacity: 0; transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        #mobile-menu.is-active { transform: translateX(0); opacity: 1; }
+        .mobile-menu-link { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 1.125rem; }
+        .plus-icon { transition: transform 0.3s ease; }
+        .plus-icon.open { transform: rotate(45deg); }
+        .solutions-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        }
+        .group:hover .solutions-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+}
+        .submenu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding-left: 1rem; }
+        .headline { color: var(--color-headline); }
+        .text-accent { color: #d21b29; }
+        .card { background-color: rgba(10, 10, 10, 0.5); border: 1px solid #27272a; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(210, 27, 41, 0.3); }
+        .timeline-container { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline-container::after { content: ''; position: absolute; width: 3px; background-color: #27272a; top: 0; bottom: 0; left: 50%; margin-left: -1.5px; z-index: 1; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; z-index: 2; }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -12.5px; background-color: #000; border: 4px solid var(--color-headline); top: 15px; border-radius: 50%; z-index: 3; }
+        .timeline-item.right::after { left: -12.5px; }
+        .timeline-content { padding: 20px 30px; background-color: #18181b; position: relative; border-radius: 8px; border: 1px solid #27272a; }
+        @media screen and (max-width: 768px) {
+            .timeline-container::after { left: 15.5px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.right { left: 0%; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 2.5px; }
+        }
+        .fade-in-on-load, .fade-up-on-scroll, .timeline-item .timeline-content { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-on-load { transform: translateY(30px); }
+        .fade-up-on-scroll { transform: translateY(50px); }
+        .timeline-item.left .timeline-content { transform: translateX(-100px); }
+        .timeline-item.right .timeline-content { transform: translateX(100px); }
+        .is-visible, .timeline-item.is-visible .timeline-content { opacity: 1; transform: none; }
+        .swiper-button-next, .swiper-button-prev { color: #d21b29; background-color: rgba(31, 41, 55, 0.5); width: 50px; height: 50px; border-radius: 50%; backdrop-filter: blur(5px); transition: all 0.3s ease; }
+        .swiper-button-next:hover, .swiper-button-prev:hover { background-color: rgba(210, 27, 41, 0.5); color: white; }
+        .swiper-button-next::after, .swiper-button-prev::after { font-size: 20px; font-weight: bold; }
+        .swiper-pagination-bullet { background-color: #4b5563; }
+        .swiper-pagination-bullet-active { background-color: #d21b29; }
+        .site-footer { background-color: #242a30; color: #a9a9a9; padding: 40px 0 20px; text-align: center; position: relative; font-size: 14px; }
+        .site-footer::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0)); }
+    </style>
+</head>
+<body class="antialiased">
+<nav class="nav_cus">
+    </nav>
+
+<div id="mobile-menu">
+    </div>
+
+<div class="container mx-auto px-4 py-16 md:py-24">
+    <header class="text-center mb-20 md:mb-28 pt-16">
+        <h1 id="hero-title" class="text-3xl md:text-6xl font-black text-white fade-in-on-load">
+            Infrastructure & Network <span class="text-accent">Security</span>
+        </h1>
+        <p id="hero-subtitle" class="max-w-3xl mx-auto text-lg text-slate-400 fade-in-on-load" style="transition-delay: 200ms;">
+            Building a resilient and secure foundation for your digital operations by protecting your servers, cloud environments, and network from unauthorized access and threats.
+        </p>
+    </header>
+
+    <section id="description" class="mb-20 md:mb-28">
+            <h2 class="section-title text-3xl font-bold text-white text-center mb-12">Securing Your Digital Foundation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="card rounded-xl p-8 fade-up-on-scroll">
+                    <h3 class="text-2xl font-bold text-white mb-4">Infrastructure Security</h3>
+                    <p class="text-slate-400">
+                        This is the practice of securing your core IT components: servers (physical and virtual), cloud instances (IaaS, PaaS), and storage systems. We focus on system hardening, patch management, and secure configurations to minimize the attack surface.
+                    </p>
+                </div>
+                <div class="card rounded-xl p-8 fade-up-on-scroll" style="transition-delay: 150ms;">
+                    <h3 class="text-2xl font-bold text-white mb-4">Network Security</h3>
+                    <p class="text-slate-400">
+                        This is the process of protecting the usability, integrity, and safety of your network and data. We implement robust controls for your network perimeter and internal segments using firewalls, IDS/IPS, and secure architecture principles.
+                    </p>
+                </div>
+            </div>
+    </section>
+
+    <section id="importance" class="mb-20 md:mb-28">
+        <h2 class="section-title text-3xl font-bold text-white text-center mb-12">Why is Foundational Security Crucial?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-user-lock text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Prevent Unauthorized Access</h3>
+                <p class="text-sm text-slate-400 flex-grow">Protect against external attackers and internal threats trying to gain access to your critical systems and data.</p>
+            </div>
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-business-time text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Ensure Business Continuity</h3>
+                <p class="text-sm text-slate-400 flex-grow">A secure and stable infrastructure is essential for keeping your business applications and services running without disruption.</p>
+            </div>
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-shield-virus text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Stop Malware Propagation</h3>
+                <p class="text-sm text-slate-400 flex-grow">A segmented network and hardened servers are your first line of defense against the lateral movement of ransomware and malware.</p>
+            </div>
+            <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
+                <div class="mb-4"><i class="fa-solid fa-cloud-arrow-up text-4xl headline"></i></div>
+                <h3 class="text-lg font-semibold text-white mb-2">Enable Secure Cloud Transformation</h3>
+                <p class="text-sm text-slate-400 flex-grow">As you move to the cloud, securing the underlying virtual infrastructure and network connections is paramount for success.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="mb-20 md:mb-28">
+        <h2 class="section-title text-3xl font-bold text-white text-center mb-16">Our Service Pillars: A Layered Defense Strategy</h2>
+        <div class="timeline-container">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">1. Security Architecture Review</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We analyze your current infrastructure and network architecture to identify design flaws and help you build a secure-by-design foundation.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A robust, scalable, and defensible security architecture aligned with industry best practices.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">2. System & Server Hardening</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We reduce the attack surface of your servers and cloud instances by applying security benchmarks (e.g., CIS) and removing unnecessary services.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> Hardened systems that are resilient against automated scans and common attack vectors.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">3. Network Security & Segmentation</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We implement and configure firewalls, Intrusion Prevention Systems (IPS), and micro-segmentation to control traffic and stop lateral movement.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A controlled network where threats are contained and critical assets are properly isolated.</p>
+                </div>
+            </div>
+             <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">4. Continuous Vulnerability Management</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We establish a continuous process to scan, identify, prioritize, and remediate vulnerabilities across your infrastructure before they are exploited.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A proactive defense posture with a drastically reduced attack surface from known exploits.</p>
+                </div>
+            </div>
+             <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3 class="text-xl font-bold text-white mb-2">5. Cloud Security Posture Management</h3>
+                    <p class="text-slate-400 mb-2"><strong>What we do:</strong> We continuously assess your cloud environments (AWS, Azure, GCP) for misconfigurations, compliance violations, and security risks.</p>
+                    <p class="font-medium text-slate-300"><strong>Result:</strong> A secure and compliant cloud infrastructure that prevents common cloud-related data breaches.</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="contactus.html" class="inline-block rounded-full bg-red-600 px-8 py-3 text-base font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 transition-colors">
+                Fortify Your Foundation
+            </a>
+        </div>
+    </section>
+
+    <section id="proactive-support" class="bg-black py-20 sm:py-28">
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="relative">
+                <div class="swiper service-carousel">
+                    <div class="swiper-wrapper">
+
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.</p>
+                                <div class="mt-4"><a href="PeneterationTesting.html" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
+                                <div class="mt-4"><a href="AuditRiskCompliance.html" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.</p>
+                                <div class="mt-4"><a href="Personaldata.html" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Integrate diverse security products into a unified, effective, and centralized defense system.</p>
+                                <div class="mt-4"><a href="SecuritySolution.html" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Application Security</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.</p>
+                                <div class="mt-4"><a href="AppliactionSecurity.html" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.</p>
+                                <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.</p>
+                                <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination !bottom-0"></div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer class="bg-[#242a30] text-white">
+    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+        
+        <div class="mb-10">
+            <img class="pt-3 h-16 w-auto" src="asset/sistema_white_font.png" alt="Logo Sistema" onerror="this.style.display='none'">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div>
+                <h3 class="text-lg font-bold mb-4">Location Office</h3>
+                <div class="space-y-2 text-slate-300">
+                    <p>Jl. K.H. Mas Mansyur No.Kav.126</p>
+                    <p>Jakarta Pusat, 10220</p>
+                    <p>Indonesia</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                <div class="space-y-3 text-slate-300">
+                    <a href="tel:+62215741135" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.279-.087.431l4.243 5.93a.75.75 0 00.93.343l.421-.235c.183-.102.413-.102.596 0l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-1.372c-5.082 0-9.682-3.085-11.964-7.522C.971 7.912 1.5 4.5 1.5 4.5z" clip-rule="evenodd" />
+                        </svg>
+                        <span>+62 21-5741135</span>
+                    </a>
+                    <a href="mailto:info@sistema.co.id" class="flex items-center hover:text-white transition-colors">
+                        <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                        </svg>
+                        <span>info@sistema.co.id</span>
+                    </a>
+                </div>
+            </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Media Sosial</h3>
+                    <div class="space-y-3 text-slate-300">
+                        <a href="https://www.linkedin.com/company/pt-sistema-datapilar" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition-colors">
+                            <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                            <span>Sistema Datapilar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <div class="site-footer">
+            <p>Copyright &copy; Sistema Datapilar 2025</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // All JS from your template file
+    document.addEventListener('DOMContentLoaded', function () {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const scrollItems = document.querySelectorAll('.fade-up-on-scroll, .fade-in-on-load');
+        scrollItems.forEach((item) => {
+            observer.observe(item);
+        });
+
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach(item => { observer.observe(item); });
+
+        const swiper = new Swiper('.service-carousel', {
+            loop: true, slidesPerView: 1, spaceBetween: 30,
+            breakpoints: { 768: { slidesPerView: 2 }, 1280: { slidesPerView: 3 } },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        });
+    });
+</script>
+</body>
+</html>
