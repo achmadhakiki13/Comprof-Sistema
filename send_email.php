@@ -39,23 +39,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        // --- KONFIGURASI SERVER SMTP (UPDATED WITH YOUR IT ADMIN'S INFO) ---
+        // --- KONFIGURASI SERVER SMTP (UPDATED WITH NEW MAILTRAP INFO) ---
         $mail->SMTPDebug = 0; // Set to 0 for production. Use 2 for temporary debugging.
         $mail->isSMTP();
-        $mail->Host       = 'smtp-relay.brevo.com';
+        $mail->Host       = 'live.smtp.mailtrap.io'; //
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'office365_Admin@sistema.co.id';
+        $mail->Username   = 'api'; //
         
-        // !!! SECURITY WARNING: Do not leave the password hardcoded in a public file.
-        // After testing, move this to a secure configuration file or environment variable.
-        $mail->Password   = 'Sus02654'; 
+        // !!! SECURITY WARNING: This is a secret API key. Do not leave it in a public file.
+        $mail->Password   = '491dcea0926fd1b598a330d6f7bf4ce0'; //
         
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Corresponds to Port 465 (SSL)
-        $mail->Port       = 465;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS for Port 587
+        $mail->Port       = 587; //
 
         // --- PENGIRIM & PENERIMA ---
         
-        // IMPORTANT: Confirm with your IT admin if 'no-reply@sistema.co.id' is an authorized "From" address for this account.
+        // With Mailtrap, you often need to use a verified "From" address.
+        // Confirm with your IT admin what email address should be used here.
         $mail->setFrom('no-reply@sistema.co.id', 'Website Contact Form');
         
         // The recipient email address you requested
