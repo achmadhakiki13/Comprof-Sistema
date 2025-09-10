@@ -3,10 +3,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Sesuaikan path jika nama folder berbeda
-require 'PHPMailer-6.10.0\src\Exception.php';
-require 'PHPMailer-6.10.0\src\PHPMailer.php';
-require 'PHPMailer-6.10.0\src\SMTP.php';
+// Use forward slashes for better server compatibility
+require 'PHPMailer-6.10.0/src/Exception.php';
+require 'PHPMailer-6.10.0/src/PHPMailer.php';
+require 'PHPMailer-6.10.0/src/SMTP.php';
 
 // Set header konten ke JSON
 header('Content-Type: application/json');
@@ -22,12 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $data;
     }
 
-    $firstName = isset($_POST['firstName']) ? sanitize_input($_POST['firstName']) : '';
-    $lastName  = isset($_POST['lastName']) ? sanitize_input($_POST['lastName']) : '';
+    $firstName  = isset($_POST['firstName']) ? sanitize_input($_POST['firstName']) : '';
+    $lastName   = isset($_POST['lastName']) ? sanitize_input($_POST['lastName']) : '';
     $from_email = isset($_POST['email']) ? sanitize_input($_POST['email']) : '';
-    $phone     = isset($_POST['phone']) ? sanitize_input($_POST['phone']) : 'Not provided';
-    $subject   = isset($_POST['subject']) ? sanitize_input($_POST['subject']) : 'No Subject';
-    $message   = isset($_POST['message']) ? sanitize_input($_POST['message']) : '';
+    $phone      = isset($_POST['phone']) ? sanitize_input($_POST['phone']) : 'Not provided';
+    $subject    = isset($_POST['subject']) ? sanitize_input($_POST['subject']) : 'No Subject';
+    $message    = isset($_POST['message']) ? sanitize_input($_POST['message']) : '';
 
     // Validasi dasar
     if (empty($from_email) || empty($message) || !filter_var($from_email, FILTER_VALIDATE_EMAIL)) {
@@ -39,29 +39,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        // --- KONFIGURASI SERVER SMTP ---
-        $mail->SMTPDebug = 2; // Aktifkan untuk melihat log debug jika ada masalah
+        // --- KONFIGURASI SERVER SMTP (UPDATED WITH YOUR IT ADMIN'S INFO) ---
+        $mail->SMTPDebug = 0; // Set to 0 for production. Use 2 for temporary debugging.
         $mail->isSMTP();
-        $mail->Host       = 'bkanayari@sistema.co.id'; // Ganti dengan server SMTP hosting Anda (misal: mail.sistema.co.id)
+        $mail->Host       = 'smtp-relay.brevo.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'bkanayari@sistema.co.id'; // Ganti dengan alamat email untuk mengirim (misal: no-reply@sistema.co.id)
-        $mail->Password   = 'YariSistema05'; // Ganti dengan password email di atas
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Gunakan 'tls' atau 'ssl'
-        $mail->Port       = 465; // Port SMTP (biasanya 465 untuk SSL, 587 untuk TLS)
+        $mail->Username   = 'office365_Admin@sistema.co.id';
+        
+        // !!! SECURITY WARNING: Do not leave the password hardcoded in a public file.
+        // After testing, move this to a secure configuration file or environment variable.
+        $mail->Password   = 'Sus02654'; 
+        
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Corresponds to Port 465 (SSL)
+        $mail->Port       = 465;
 
         // --- PENGIRIM & PENERIMA ---
-        // Set email pengirim. Sebaiknya sama dengan Username SMTP untuk menghindari filter spam
+        
+        // IMPORTANT: Confirm with your IT admin if 'no-reply@sistema.co.id' is an authorized "From" address for this account.
         $mail->setFrom('no-reply@sistema.co.id', 'Website Contact Form');
         
-        // Tambahkan alamat email penerima
-        $mail->addAddress('achmad.hakiki@sistema.co.id');
+        // The recipient email address you requested
+        $mail->addAddress('info@sistema.co.id');
 
         // Atur agar balasan (Reply-To) mengarah ke email pengisi form
         $sender_name = trim($firstName . " " . $lastName) ?: "Anonymous";
         $mail->addReplyTo($from_email, $sender_name);
 
         // --- KONTEN EMAIL ---
-        $mail->isHTML(false); // Set 'true' jika Anda ingin mengirim email format HTML
+        $mail->isHTML(false); 
         $mail->Subject = 'New Contact Form: ' . $subject;
 
         // Buat body email
@@ -81,10 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
 
     } catch (Exception $e) {
-        // Jika terjadi error, kirim pesan gagal
+        // Log the detailed error on the server instead of showing it to the user
+        error_log("Mailer Error: " . $mail->ErrorInfo);
+        
+        // Send a generic, user-friendly error message
         echo json_encode([
             'status' => 'error',
-            'message' => 'Sorry, something went wrong. Message could not be sent. Mailer Error: ' . $mail->ErrorInfo
+            'message' => 'Sorry, something went wrong. Your message could not be sent.'
         ]);
     }
 
