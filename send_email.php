@@ -1,17 +1,20 @@
 <?php
-// Set the content type to application/json for AJAX requests
+// Impor kelas-kelas PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Sesuaikan path jika nama folder berbeda
+require 'PHPMailer-6.10.0\src\Exception.php';
+require 'PHPMailer-6.10.0\src\PHPMailer.php';
+require 'PHPMailer-6.10.0\src\SMTP.php';
+
+// Set header konten ke JSON
 header('Content-Type: application/json');
 
-// Basic security check: Only allow POST requests.
+// Hanya izinkan request metode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // --- CONFIGURATION ---
-    $recipient_email = "info@sistema.co.id"; // The email address where you want to receive messages.
-    $email_subject   = "New Contact Form Submission"; // The subject of the email.
-
-    // --- FORM DATA VALIDATION & SANITIZATION ---
-    
-    // Function to sanitize input data
+    // --- Ambil dan sanitasi data dari form ---
     function sanitize_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -19,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $data;
     }
 
-    // Get and sanitize form fields.
     $firstName = isset($_POST['firstName']) ? sanitize_input($_POST['firstName']) : '';
     $lastName  = isset($_POST['lastName']) ? sanitize_input($_POST['lastName']) : '';
     $from_email = isset($_POST['email']) ? sanitize_input($_POST['email']) : '';
@@ -27,71 +29,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subject   = isset($_POST['subject']) ? sanitize_input($_POST['subject']) : 'No Subject';
     $message   = isset($_POST['message']) ? sanitize_input($_POST['message']) : '';
 
-    // Basic validation: Check if required fields are empty.
-    if (empty($from_email) || empty($message)) {
-        // Send an error response back to the form.
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Please fill in all required fields (Email and Message).'
-        ]);
-        exit; // Stop the script.
+    // Validasi dasar
+    if (empty($from_email) || empty($message) || !filter_var($from_email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['status' => 'error', 'message' => 'Please fill in all required fields with valid data.']);
+        exit;
     }
 
-    // Advanced validation: Check for a valid email format.
-    if (!filter_var($from_email, FILTER_VALIDATE_EMAIL)) {
-        // Send an error response back to the form.
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Please enter a valid email address.'
-        ]);
-        exit; // Stop the script.
-    }
+    // Buat instance PHPMailer
+    $mail = new PHPMailer(true);
 
-    // --- EMAIL CONSTRUCTION ---
+    try {
+        // --- KONFIGURASI SERVER SMTP ---
+        $mail->SMTPDebug = 2; // Aktifkan untuk melihat log debug jika ada masalah
+        $mail->isSMTP();
+        $mail->Host       = 'mail.sistema.co.id'; // Ganti dengan server SMTP hosting Anda (misal: mail.sistema.co.id)
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'no-reply@sistema.co.id'; // Ganti dengan alamat email untuk mengirim (misal: no-reply@sistema.co.id)
+        $mail->Password   = 'PASSWORD_EMAIL_ANDA'; // Ganti dengan password email di atas
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Gunakan 'tls' atau 'ssl'
+        $mail->Port       = 465; // Port SMTP (biasanya 465 untuk SSL, 587 untuk TLS)
 
-    // Combine first and last name
-    $sender_name = trim($firstName . " " . $lastName);
-    if (empty($sender_name)) {
-        $sender_name = "Anonymous";
-    }
+        // --- PENGIRIM & PENERIMA ---
+        // Set email pengirim. Sebaiknya sama dengan Username SMTP untuk menghindari filter spam
+        $mail->setFrom('no-reply@sistema.co.id', 'Website Contact Form');
+        
+        // Tambahkan alamat email penerima
+        $mail->addAddress('achmad.hakiki@sistema.co.id');
 
-    // Create the email body.
-    $email_body = "You have received a new message from your website contact form.\n\n";
-    $email_body .= "Here are the details:\n\n";
-    $email_body .= "Name: " . $sender_name . "\n";
-    $email_body .= "Email: " . $from_email . "\n";
-    $email_body .= "Phone: " . $phone . "\n";
-    $email_body .= "Subject: " . $subject . "\n\n";
-    $email_body .= "Message:\n" . $message . "\n";
+        // Atur agar balasan (Reply-To) mengarah ke email pengisi form
+        $sender_name = trim($firstName . " " . $lastName) ?: "Anonymous";
+        $mail->addReplyTo($from_email, $sender_name);
 
-    // Create the email headers.
-    // This tells the email client who the email is from.
-    $headers = "From: " . $sender_name . " <" . $from_email . ">\r\n";
-    $headers .= "Reply-To: " . $from_email . "\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
+        // --- KONTEN EMAIL ---
+        $mail->isHTML(false); // Set 'true' jika Anda ingin mengirim email format HTML
+        $mail->Subject = 'New Contact Form: ' . $subject;
 
-    // --- SEND EMAIL ---
+        // Buat body email
+        $email_body = "You have received a new message from your website contact form.\n\n";
+        $email_body .= "Name: " . $sender_name . "\n";
+        $email_body .= "Email: " . $from_email . "\n";
+        $email_body .= "Phone: " . $phone . "\n";
+        $email_body .= "Subject: " . $subject . "\n\n";
+        $email_body .= "Message:\n" . $message . "\n";
+        $mail->Body = $email_body;
 
-    // Use the mail() function to send the email.
-    if (mail($recipient_email, $email_subject, $email_body, $headers)) {
-        // If the email is sent successfully, send a success response.
+        // Kirim email
+        $mail->send();
         echo json_encode([
             'status' => 'success',
             'message' => 'Thank you! Your message has been sent successfully.'
         ]);
-    } else {
-        // If the email fails to send, send an error response.
+
+    } catch (Exception $e) {
+        // Jika terjadi error, kirim pesan gagal
         echo json_encode([
             'status' => 'error',
-            'message' => 'Sorry, something went wrong and we could not send your message.'
+            'message' => 'Sorry, something went wrong. Message could not be sent. Mailer Error: ' . $mail->ErrorInfo
         ]);
     }
 
 } else {
-    // If the request method is not POST, send an error.
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Invalid request method.'
-    ]);
+    // Jika metode bukan POST
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
 }
 ?>

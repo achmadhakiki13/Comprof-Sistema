@@ -1,0 +1,1904 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Document API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://mobilebankinguat2.nonprod.hibank.co.id/api/notificationservice",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "paths": {
+    "/notification/updatereadbyuser": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "updateReadByUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReadByUserReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/totalunread": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "totalUnread",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoNotificationTotalUnreadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/singlepush": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "sendSinglePushNotification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncomingTransactionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/list": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "notificationList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationHistoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoNotificationHistoryListRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notification/detail": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "notificationDetail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReadByUserReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoNotificationDetailRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notif/sms/send": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "sms",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotifSmsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notif/push/send": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "pushnotif",
+        "parameters": [
+          {
+            "name": "masterUserDeviceFCM",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/MasterUserDeviceFCM"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotifPushRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fcmToken/save": {
+      "post": {
+        "tags": [
+          "notification-controller"
+        ],
+        "operationId": "fcmSave",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FCMStoreRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/reload": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "execute",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/reload/{cachename}": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "execute_1",
+        "parameters": [
+          {
+            "name": "cachename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/list": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "list",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ISTResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      },
+      "UpdateReadByUserReq": {
+        "required": [
+          "notificationId"
+        ],
+        "type": "object",
+        "properties": {
+          "notificationId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ISTResponseDtoObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      },
+      "ISTResponseDtoNotificationTotalUnreadResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/NotificationTotalUnreadResponse"
+          }
+        }
+      },
+      "NotificationTotalUnreadResponse": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "IncomingTransactionReq": {
+        "required": [
+          "fromAccountNumber",
+          "fromAccountOwnerName",
+          "fromBankCode",
+          "referenceNumber",
+          "toAccountNumber",
+          "totalAmount",
+          "transactionDate",
+          "transferMethod"
+        ],
+        "type": "object",
+        "properties": {
+          "referenceNumber": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "type": "string"
+          },
+          "fromBankCode": {
+            "type": "string"
+          },
+          "fromAccountNumber": {
+            "type": "string"
+          },
+          "fromAccountOwnerName": {
+            "type": "string"
+          },
+          "toAccountNumber": {
+            "type": "string"
+          },
+          "totalAmount": {
+            "type": "number"
+          },
+          "transferMethod": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "transactionSchedule": {
+            "type": "string"
+          }
+        }
+      },
+      "NotificationHistoryRequest": {
+        "required": [
+          "notificationType"
+        ],
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "notificationType": {
+            "type": "string",
+            "enum": [
+              "TRANSACTION",
+              "NON_TRANSACTION"
+            ]
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          }
+        }
+      },
+      "PageableObject": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ISTResponseDtoNotificationHistoryListRes": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/NotificationHistoryListRes"
+          }
+        }
+      },
+      "NotificationHistoryDto": {
+        "type": "object",
+        "properties": {
+          "notificationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "createDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "iconType": {
+            "type": "string"
+          },
+          "read": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NotificationHistoryListRes": {
+        "type": "object",
+        "properties": {
+          "notificationList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotificationHistoryDto"
+            }
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItem": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ISTResponseDtoNotificationDetailRes": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/NotificationDetailRes"
+          }
+        }
+      },
+      "NotificationDetailRes": {
+        "type": "object",
+        "properties": {
+          "referenceNumber": {
+            "type": "string"
+          },
+          "toAccountName": {
+            "type": "string"
+          },
+          "toBankName": {
+            "type": "string"
+          },
+          "toAccountNumber": {
+            "type": "string"
+          },
+          "fromAccountName": {
+            "type": "string"
+          },
+          "fromBankName": {
+            "type": "string"
+          },
+          "fromAccountNumber": {
+            "type": "string"
+          },
+          "totalAmount": {
+            "type": "number"
+          },
+          "transactionSchedule": {
+            "type": "string"
+          },
+          "transferMethod": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "transactionStatus": {
+            "type": "string",
+            "enum": [
+              "TransactionStatus.SUCCESS",
+              "TransactionStatus.FAILED",
+              "TransactionStatus.PROCESSING",
+              "TransactionStatus.SUSPECT"
+            ]
+          },
+          "transactionDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "transactionCategory": {
+            "type": "string",
+            "enum": [
+              "TransactionCategory.TRANSFER_ON_US",
+              "TransactionCategory.TRANSFER_OFF_US",
+              "TransactionCategory.TRANSFER_BI_FAST",
+              "TransactionCategory.TRANSFER_BI_FAST_PROXY",
+              "TransactionCategory.TRANSFER_SKN",
+              "TransactionCategory.TRANSFER_RTGS",
+              "TransactionCategory.TRANSFER_RTO",
+              "TransactionCategory.PURCHASE_TELCO",
+              "TransactionCategory.PURCHASE_PLN",
+              "TransactionCategory.PURCHASE_DATA_PLAN",
+              "TransactionCategory.PURCHASE_EMONEY",
+              "TransactionCategory.PURCHASE_FLAZZ",
+              "TransactionCategory.PAYMENT_PDAM",
+              "TransactionCategory.PAYMENT_PDAM_VA",
+              "TransactionCategory.PAYMENT_TV",
+              "TransactionCategory.PAYMENT_INTERNET",
+              "TransactionCategory.PAYMENT_BPHTB",
+              "TransactionCategory.PAYMENT_PBB",
+              "TransactionCategory.PAYMENT_PDL",
+              "TransactionCategory.QRIS_MPM",
+              "TransactionCategory.PAYMENT_PKB_SIGNAL",
+              "TransactionCategory.PAYMENT_PKB_SAMSAT",
+              "TransactionCategory.PAYMENT_PLN_NONTAGLIS",
+              "TransactionCategory.PAYMENT_PLN",
+              "TransactionCategory.PAYMENT_BPJS_KESEHATAN",
+              "TransactionCategory.PAYMENT_BPJSKETENAGAKERJAAN",
+              "TransactionCategory.PAYMENT_EDUCATION",
+              "TransactionCategory.PAYMENT_EDUCATION_SD",
+              "TransactionCategory.PAYMENT_EDUCATION_SMP",
+              "TransactionCategory.PAYMENT_EDUCATION_SMA",
+              "TransactionCategory.PAYMENT_EDUCATION_PONPES",
+              "TransactionCategory.PAYMENT_EDUCATION_UNIVERSITAS",
+              "TransactionCategory.PAYMENT_TELCO",
+              "TransactionCategory.PURCHASE_EWALLET",
+              "TransactionCategory.EWALLET_GOPAY",
+              "TransactionCategory.EWALLET_OVO",
+              "TransactionCategory.EWALLET_SHOPEEPAY",
+              "TransactionCategory.EWALLET_DANA",
+              "TransactionCategory.EWALLET_LINKAJA",
+              "TransactionCategory.INCOMING_TRANSACTION",
+              "TransactionCategory.HITALANG",
+              "TransactionCategory.HIPINKA",
+              "TransactionCategory.REPAYMENT_HITALANG"
+            ]
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "isPhoneNumber": {
+            "type": "boolean"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "billerCategoryName": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "feeAmount": {
+            "type": "number"
+          },
+          "productValue": {
+            "type": "string"
+          },
+          "transactionGroup": {
+            "type": "string",
+            "enum": [
+              "TRANSFER",
+              "PURCHASE",
+              "PAYMENT",
+              "QRIS",
+              "EWALLET"
+            ]
+          },
+          "transactionType": {
+            "type": "string"
+          },
+          "tokenNumber": {
+            "type": "string"
+          },
+          "notificationType": {
+            "type": "string",
+            "enum": [
+              "TRANSACTION",
+              "NON_TRANSACTION"
+            ]
+          },
+          "templateCode": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "transactionAmount": {
+            "type": "number"
+          },
+          "ppn": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ppj": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "materai": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "angsuran": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jumlahKwh": {
+            "type": "string"
+          },
+          "kodeToken": {
+            "type": "string"
+          },
+          "footer": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "disburseAccountName": {
+            "type": "string"
+          },
+          "disburseAccountNumber": {
+            "type": "string"
+          },
+          "period": {
+            "type": "string"
+          }
+        }
+      },
+      "AdditionalDataNotifDto": {
+        "type": "object",
+        "properties": {
+          "transactionStatus": {
+            "type": "string"
+          },
+          "nik": {
+            "type": "string"
+          },
+          "referenceNumber": {
+            "type": "string"
+          },
+          "srcAccountOwnerName": {
+            "type": "string"
+          },
+          "srcBankCode": {
+            "type": "string"
+          },
+          "srcAccountNumber": {
+            "type": "string"
+          },
+          "dstAccountOwnerName": {
+            "type": "string"
+          },
+          "dstBankCode": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "transactionAmount": {
+            "type": "string"
+          },
+          "feeAmount": {
+            "type": "string"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "type": "string"
+          },
+          "transferMethod": {
+            "type": "string"
+          },
+          "transactionCategory": {
+            "type": "string"
+          },
+          "dstBankName": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "billNumberOwner": {
+            "type": "string"
+          },
+          "billNumberOwnerName": {
+            "type": "string"
+          },
+          "billName": {
+            "type": "string"
+          },
+          "notifGroup": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "templateType": {
+            "type": "string"
+          },
+          "transactionGroup": {
+            "type": "string"
+          },
+          "nonTransactionCategory": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "oldEmail": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "deviceBrand": {
+            "type": "string"
+          },
+          "deviceModel": {
+            "type": "string"
+          },
+          "oldProvince": {
+            "type": "string"
+          },
+          "oldCityOrKabupaten": {
+            "type": "string"
+          },
+          "oldKecamatan": {
+            "type": "string"
+          },
+          "oldKelurahan": {
+            "type": "string"
+          },
+          "oldRt": {
+            "type": "string"
+          },
+          "oldRw": {
+            "type": "string"
+          },
+          "oldAddress": {
+            "type": "string"
+          },
+          "oldPostalCode": {
+            "type": "string"
+          },
+          "newProvince": {
+            "type": "string"
+          },
+          "newCityOrKabupaten": {
+            "type": "string"
+          },
+          "newKecamatan": {
+            "type": "string"
+          },
+          "newKelurahan": {
+            "type": "string"
+          },
+          "newRt": {
+            "type": "string"
+          },
+          "newRw": {
+            "type": "string"
+          },
+          "newAddress": {
+            "type": "string"
+          },
+          "newPostalCode": {
+            "type": "string"
+          },
+          "oldJob": {
+            "type": "string"
+          },
+          "oldCompanyName": {
+            "type": "string"
+          },
+          "oldBusinessField": {
+            "type": "string"
+          },
+          "oldPosition": {
+            "type": "string"
+          },
+          "oldMonthlyIncome": {
+            "type": "string"
+          },
+          "oldSourceOfFund": {
+            "type": "string"
+          },
+          "newJob": {
+            "type": "string"
+          },
+          "newCompanyName": {
+            "type": "string"
+          },
+          "newBusinessField": {
+            "type": "string"
+          },
+          "newPosition": {
+            "type": "string"
+          },
+          "newMonthlyIncome": {
+            "type": "string"
+          },
+          "newSourceOfFund": {
+            "type": "string"
+          },
+          "depositType": {
+            "type": "string"
+          },
+          "depositName": {
+            "type": "string"
+          },
+          "timePeriod": {
+            "type": "string"
+          },
+          "interestRate": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "disbursementAccountName": {
+            "type": "string"
+          },
+          "disbursementAccountNumber": {
+            "type": "string"
+          },
+          "dueDateSelectName": {
+            "type": "string"
+          },
+          "initialDepositAmount": {
+            "type": "string"
+          },
+          "totalAmount": {
+            "type": "string"
+          },
+          "durationLoan": {
+            "type": "string"
+          },
+          "schedule": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ContentParamDto": {
+        "type": "object",
+        "properties": {
+          "referenceNumber": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "type": "string"
+          },
+          "toAccountName": {
+            "type": "string"
+          },
+          "toAccountNumber": {
+            "type": "string"
+          },
+          "toBankName": {
+            "type": "string"
+          },
+          "fromAccountName": {
+            "type": "string"
+          },
+          "fromAccountNumber": {
+            "type": "string"
+          },
+          "fromProductName": {
+            "type": "string"
+          },
+          "fromBankName": {
+            "type": "string"
+          },
+          "currencySymbol": {
+            "type": "string"
+          },
+          "nominal": {
+            "type": "string"
+          },
+          "adminFee": {
+            "type": "string"
+          },
+          "totalAmount": {
+            "type": "string"
+          },
+          "transactionSchedule": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "methodTransfer": {
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "string"
+          },
+          "tarifDaya": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "durationLoan": {
+            "type": "string"
+          },
+          "fullAccountOwnerName": {
+            "type": "string"
+          }
+        }
+      },
+      "NotifSmsRequest": {
+        "type": "object",
+        "properties": {
+          "channelCode": {
+            "type": "string"
+          },
+          "deviceId": {
+            "type": "string"
+          },
+          "deviceInfo": {
+            "type": "string"
+          },
+          "deviceOs": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string",
+            "enum": [
+              "id",
+              "ENGLISH",
+              "ARABIC",
+              "ALBANIAN",
+              "BELARUSIA",
+              "BULGARIA",
+              "CATALAN",
+              "CHINESE",
+              "CROATIA",
+              "CZECH",
+              "DANISH",
+              "DUTCH",
+              "ESTONIAN",
+              "FINNISH",
+              "FRENCH",
+              "GERMAN",
+              "GREEK",
+              "HEBREW",
+              "HINDI",
+              "HUNGARIAN",
+              "IRISH",
+              "ITALIA",
+              "ICELANDIC",
+              "JAPANESE",
+              "KOREAN",
+              "LATVIAN",
+              "LITHUANIAN",
+              "MACEDONIAN",
+              "MALAY",
+              "MALTESE",
+              "NORWEGIAN",
+              "NORWEGIAN_BOKMAL",
+              "NORWEGIAN_NYNORSK",
+              "POLISH",
+              "PORTUGUESE",
+              "ROMANIAN",
+              "RUSSIAN",
+              "SERBIAN",
+              "SLOVAK",
+              "SLOVENIAN",
+              "SPANISH",
+              "SWEDISH",
+              "THAI",
+              "TURKISH",
+              "UKRAINIAN",
+              "VIETNAMESE"
+            ]
+          },
+          "templateCode": {
+            "type": "string"
+          },
+          "templateType": {
+            "type": "string",
+            "enum": [
+              "SMS",
+              "EMAIL",
+              "PUSH",
+              "WHATSAPP",
+              "GENERAL"
+            ]
+          },
+          "templateParam": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "messageContent": {
+            "type": "string"
+          },
+          "messageSubject": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "userProfileId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "messageStatus": {
+            "type": "string"
+          },
+          "contentParamDto": {
+            "$ref": "#/components/schemas/ContentParamDto"
+          },
+          "saveNotifRequest": {
+            "$ref": "#/components/schemas/SaveNotifRequest"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "toEmail": {
+            "type": "string"
+          }
+        }
+      },
+      "SaveNotifRequest": {
+        "type": "object",
+        "properties": {
+          "userProfileId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "templateCode": {
+            "type": "string"
+          },
+          "notificationType": {
+            "type": "string",
+            "enum": [
+              "TRANSACTION",
+              "NON_TRANSACTION"
+            ]
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "additionalData": {
+            "$ref": "#/components/schemas/AdditionalDataNotifDto"
+          }
+        }
+      },
+      "NotifPushRequest": {
+        "type": "object",
+        "properties": {
+          "channelCode": {
+            "type": "string"
+          },
+          "deviceId": {
+            "type": "string"
+          },
+          "deviceInfo": {
+            "type": "string"
+          },
+          "deviceOs": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string",
+            "enum": [
+              "id",
+              "ENGLISH",
+              "ARABIC",
+              "ALBANIAN",
+              "BELARUSIA",
+              "BULGARIA",
+              "CATALAN",
+              "CHINESE",
+              "CROATIA",
+              "CZECH",
+              "DANISH",
+              "DUTCH",
+              "ESTONIAN",
+              "FINNISH",
+              "FRENCH",
+              "GERMAN",
+              "GREEK",
+              "HEBREW",
+              "HINDI",
+              "HUNGARIAN",
+              "IRISH",
+              "ITALIA",
+              "ICELANDIC",
+              "JAPANESE",
+              "KOREAN",
+              "LATVIAN",
+              "LITHUANIAN",
+              "MACEDONIAN",
+              "MALAY",
+              "MALTESE",
+              "NORWEGIAN",
+              "NORWEGIAN_BOKMAL",
+              "NORWEGIAN_NYNORSK",
+              "POLISH",
+              "PORTUGUESE",
+              "ROMANIAN",
+              "RUSSIAN",
+              "SERBIAN",
+              "SLOVAK",
+              "SLOVENIAN",
+              "SPANISH",
+              "SWEDISH",
+              "THAI",
+              "TURKISH",
+              "UKRAINIAN",
+              "VIETNAMESE"
+            ]
+          },
+          "templateCode": {
+            "type": "string"
+          },
+          "templateType": {
+            "type": "string",
+            "enum": [
+              "SMS",
+              "EMAIL",
+              "PUSH",
+              "WHATSAPP",
+              "GENERAL"
+            ]
+          },
+          "templateParam": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "messageContent": {
+            "type": "string"
+          },
+          "messageSubject": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "userProfileId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "messageStatus": {
+            "type": "string"
+          },
+          "contentParamDto": {
+            "$ref": "#/components/schemas/ContentParamDto"
+          },
+          "saveNotifRequest": {
+            "$ref": "#/components/schemas/SaveNotifRequest"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "deviceIdList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tokenList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "multicast": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MasterUserDeviceFCM": {
+        "type": "object",
+        "properties": {
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "deviceId": {
+            "type": "string"
+          },
+          "deviceInfo": {
+            "type": "string"
+          },
+          "fcmToken": {
+            "type": "string"
+          }
+        }
+      },
+      "FCMStoreRequestDto": {
+        "required": [
+          "deviceId",
+          "deviceInfo",
+          "fcmToken"
+        ],
+        "type": "object",
+        "properties": {
+          "fcmToken": {
+            "type": "string"
+          },
+          "deviceId": {
+            "type": "string"
+          },
+          "deviceInfo": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
