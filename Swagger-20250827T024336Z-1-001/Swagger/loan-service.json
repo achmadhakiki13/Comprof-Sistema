@@ -1,0 +1,7021 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Document API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://mobilebankinguat2.nonprod.hibank.co.id/api/loanservice",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "paths": {
+    "/submit/notBinded": {
+      "post": {
+        "tags": [
+          "loan-submit-controller"
+        ],
+        "operationId": "notBinded",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanSubmitResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/submit/binded": {
+      "post": {
+        "tags": [
+          "loan-submit-controller"
+        ],
+        "operationId": "binded",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanSubmitResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/simulation/viewDetailLoanInstallment": {
+      "post": {
+        "tags": [
+          "loan-simulation-controller"
+        ],
+        "operationId": "detail",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoFileResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/simulation/calculate": {
+      "post": {
+        "tags": [
+          "loan-simulation-controller"
+        ],
+        "operationId": "calculate",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanSimulationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanSimulationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/list": {
+      "post": {
+        "tags": [
+          "loan-product-controller"
+        ],
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanProductResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/validate/loan": {
+      "post": {
+        "tags": [
+          "hi-talang-controller"
+        ],
+        "operationId": "validateLoan",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanValidateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/validate/eligible": {
+      "post": {
+        "tags": [
+          "hi-talang-controller"
+        ],
+        "operationId": "validateEligible",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanValidateEligibleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/validate/loan": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "validateLoan_1",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanValidateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/validate/eligible": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "validateEligible_1",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangLoanValidateEligibleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanValidateEligibleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/repayment/validate": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "repaymentValidate",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangRepaymentValidateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangRepaymentValidateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/repayment/posting": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "repaymentPosting",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangLoanPostingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangRepaymentPostingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/repayment/inquiry": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "repaymentInquiry",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangRepaymentInquiryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangRepaymentInquiryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/list": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "list_1",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/history/list": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "listHistory",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/disburse/posting": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "disbursePosting",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangLoanPostingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanPostingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/v2/disburse/inquiry": {
+      "post": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "disburseInquiry",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangLoanInquiryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanInquiryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/posting": {
+      "post": {
+        "tags": [
+          "hi-talang-controller"
+        ],
+        "operationId": "posting",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangLoanPostingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanPostingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/list": {
+      "post": {
+        "tags": [
+          "hi-talang-controller"
+        ],
+        "operationId": "list_2",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/inquiry": {
+      "post": {
+        "tags": [
+          "hi-talang-controller"
+        ],
+        "operationId": "inquiry",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HiTalangLoanInquiryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanInquiryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hitalang/history/list": {
+      "post": {
+        "tags": [
+          "hi-talang-controller"
+        ],
+        "operationId": "listHistory_1",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hipinka/validate/loan": {
+      "post": {
+        "tags": [
+          "hi-pinka-controller"
+        ],
+        "operationId": "validateLoan_2",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanValidateResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hipinka/validate/eligible": {
+      "post": {
+        "tags": [
+          "hi-pinka-controller"
+        ],
+        "operationId": "validateEligible_2",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanValidateEligibleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hipinka/posting": {
+      "post": {
+        "tags": [
+          "hi-pinka-controller"
+        ],
+        "operationId": "posting_1",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanPostingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanPostingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hipinka/list": {
+      "post": {
+        "tags": [
+          "hi-pinka-controller"
+        ],
+        "operationId": "list_3",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanListHiPinkaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hipinka/inquiry": {
+      "post": {
+        "tags": [
+          "hi-pinka-controller"
+        ],
+        "operationId": "inquiry_1",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanInquiryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanInquiryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hipinka/history/list": {
+      "post": {
+        "tags": [
+          "hi-pinka-controller"
+        ],
+        "operationId": "listHistory_2",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/loan/list": {
+      "get": {
+        "tags": [
+          "loan-controller"
+        ],
+        "operationId": "list_4",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoLoanListResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/hitalang/v2/community/list": {
+      "get": {
+        "tags": [
+          "new-hi-talang-controller"
+        ],
+        "operationId": "communityList",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoHiTalangLoanCommunityListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/reload": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "execute",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/reload/{cachename}": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "execute_1",
+        "parameters": [
+          {
+            "name": "cachename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/list": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "list_5",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ISTResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      },
+      "ISTResponseDtoLoanSubmitResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanSubmitResponse"
+          }
+        }
+      },
+      "LoanSubmitResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "FileResponse": {
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileHistory": {
+            "type": "string"
+          }
+        }
+      },
+      "ISTResponseDtoFileResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/FileResponse"
+          }
+        }
+      },
+      "LoanSimulationRequest": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "format": "double"
+          },
+          "term": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "YEAR",
+              "MONTH",
+              "WEEK"
+            ]
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ISTResponseDtoLoanSimulationResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanSimulationResponse"
+          }
+        }
+      },
+      "Installment": {
+        "type": "object",
+        "properties": {
+          "installmentValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "principal": {
+            "type": "number",
+            "format": "double"
+          },
+          "interest": {
+            "type": "number",
+            "format": "double"
+          },
+          "remaining": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "LoanSimulationResponse": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "format": "double"
+          },
+          "rate": {
+            "type": "number",
+            "format": "double"
+          },
+          "term": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "YEAR",
+              "MONTH",
+              "WEEK"
+            ]
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "periodName": {
+            "type": "string"
+          },
+          "installment": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Installment"
+            }
+          }
+        }
+      },
+      "ISTResponseDtoLoanProductResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanProductResponse"
+          }
+        }
+      },
+      "LoanProductResponse": {
+        "type": "object",
+        "properties": {
+          "listProducts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimumLoan": {
+            "type": "number",
+            "format": "double"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "isDefault": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Denom": {
+        "type": "object",
+        "properties": {
+          "loanAmount": {
+            "type": "number"
+          },
+          "adminFee": {
+            "type": "number"
+          },
+          "lateFee": {
+            "type": "number"
+          }
+        }
+      },
+      "HiTalangCommunity": {
+        "type": "object",
+        "properties": {
+          "companyCode": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "logo": {
+            "type": "string"
+          },
+          "isCommunity": {
+            "type": "boolean"
+          }
+        }
+      },
+      "HiTalangLoanValidateResponse": {
+        "type": "object",
+        "properties": {
+          "denomList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Denom"
+            }
+          },
+          "isCommunity": {
+            "type": "boolean"
+          },
+          "community": {
+            "$ref": "#/components/schemas/HiTalangCommunity"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangLoanValidateResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangLoanValidateResponse"
+          }
+        }
+      },
+      "HiTalangLoanValidateEligibleResponse": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "string"
+          },
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "maxLimit": {
+            "type": "number"
+          },
+          "limitLoan": {
+            "type": "number"
+          },
+          "companyLimitLoan": {
+            "type": "number"
+          },
+          "availableDisburseCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "community": {
+            "$ref": "#/components/schemas/HiTalangCommunity"
+          },
+          "isDisburseToPrincipal": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangLoanValidateEligibleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangLoanValidateEligibleResponse"
+          }
+        }
+      },
+      "HiTalangLoanValidateEligibleRequest": {
+        "type": "object",
+        "properties": {
+          "companyCode": {
+            "type": "string"
+          }
+        }
+      },
+      "HiTalangRepaymentValidateRequest": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string"
+          }
+        }
+      },
+      "HiTalangRepaymentValidateResponse": {
+        "type": "object",
+        "properties": {
+          "period": {
+            "type": "string"
+          },
+          "amountLoan": {
+            "type": "number"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangRepaymentValidateResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangRepaymentValidateResponse"
+          }
+        }
+      },
+      "HiTalangLoanPostingRequest": {
+        "required": [
+          "metaData",
+          "mpin",
+          "oaepLabel"
+        ],
+        "type": "object",
+        "properties": {
+          "mpin": {
+            "type": "string"
+          },
+          "metaData": {
+            "type": "string"
+          },
+          "publicKeyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "oaepLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "HiTalangRepaymentPostingResponse": {
+        "type": "object",
+        "properties": {
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "date": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "srcAccountName": {
+            "type": "string"
+          },
+          "srcAccountNumber": {
+            "type": "string"
+          },
+          "dstAccountName": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string"
+          },
+          "amountLoan": {
+            "type": "number"
+          },
+          "totalAmount": {
+            "type": "number"
+          },
+          "noRef": {
+            "type": "string"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangRepaymentPostingResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangRepaymentPostingResponse"
+          }
+        }
+      },
+      "HiTalangRepaymentInquiryRequest": {
+        "type": "object",
+        "properties": {
+          "accountNo": {
+            "type": "string"
+          },
+          "amountLoan": {
+            "type": "number"
+          }
+        }
+      },
+      "HiTalangRepaymentInquiryResponse": {
+        "type": "object",
+        "properties": {
+          "srcAccountName": {
+            "type": "string"
+          },
+          "srcAccountNumber": {
+            "type": "string"
+          },
+          "dstAccountName": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "interestAmount": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string"
+          },
+          "amountLoan": {
+            "type": "number"
+          },
+          "totalAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangRepaymentInquiryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangRepaymentInquiryResponse"
+          }
+        }
+      },
+      "ISTResponseDtoObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      },
+      "HiTalangLoanHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/History"
+            }
+          }
+        }
+      },
+      "History": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "disbursementDate": {
+            "type": "string"
+          },
+          "statusDebet": {
+            "type": "boolean"
+          },
+          "requestDate": {
+            "type": "string"
+          },
+          "amountLoan": {
+            "type": "number"
+          },
+          "accountName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "noRef": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "disbursementAccountName": {
+            "type": "string"
+          },
+          "disbursementAccountNo": {
+            "type": "string"
+          },
+          "isCommunity": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangLoanHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangLoanHistoryResponse"
+          }
+        }
+      },
+      "HiTalangLoanPostingResponse": {
+        "type": "object",
+        "properties": {
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "noRef": {
+            "type": "string"
+          },
+          "date": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dstAccountName": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "disbursementAccountName": {
+            "type": "string"
+          },
+          "disbursementAccountNumber": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "isCommunity": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangLoanPostingResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangLoanPostingResponse"
+          }
+        }
+      },
+      "HiTalangLoanInquiryRequest": {
+        "required": [
+          "dstAccountNo"
+        ],
+        "type": "object",
+        "properties": {
+          "amountLoan": {
+            "type": "number"
+          },
+          "dstAccountNo": {
+            "type": "string"
+          }
+        }
+      },
+      "HiTalangLoanInquiryResponse": {
+        "type": "object",
+        "properties": {
+          "dstAccountName": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "srcAccountName": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "amountLoan": {
+            "type": "number"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "autoDebetDate": {
+            "type": "string"
+          },
+          "companyCode": {
+            "type": "string"
+          },
+          "communityLogo": {
+            "type": "string"
+          },
+          "isCommunity": {
+            "type": "boolean"
+          },
+          "isAdminFeeAccumulated": {
+            "type": "boolean"
+          },
+          "disburseAccountName": {
+            "type": "string"
+          },
+          "disburseAccountNumber": {
+            "type": "string"
+          },
+          "interestAmount": {
+            "type": "number"
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangLoanInquiryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangLoanInquiryResponse"
+          }
+        }
+      },
+      "ISTResponseDtoLoanValidateResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanValidateResponse"
+          }
+        }
+      },
+      "LoanValidateResponse": {
+        "type": "object",
+        "properties": {
+          "denomList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Denom"
+            }
+          }
+        }
+      },
+      "ISTResponseDtoLoanValidateEligibleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanValidateEligibleResponse"
+          }
+        }
+      },
+      "LoanValidateEligibleResponse": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "string"
+          },
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "maxLimit": {
+            "type": "number"
+          }
+        }
+      },
+      "LoanPostingRequest": {
+        "required": [
+          "metaData",
+          "mpin",
+          "oaepLabel"
+        ],
+        "type": "object",
+        "properties": {
+          "mpin": {
+            "type": "string"
+          },
+          "metaData": {
+            "type": "string"
+          },
+          "publicKeyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "oaepLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "ISTResponseDtoLoanPostingResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanPostingResponse"
+          }
+        }
+      },
+      "LoanPostingResponse": {
+        "type": "object",
+        "properties": {
+          "responseCode": {
+            "type": "string"
+          },
+          "responseMessage": {
+            "type": "string"
+          },
+          "noRef": {
+            "type": "string"
+          },
+          "date": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dstAccountName": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          }
+        }
+      },
+      "ISTResponseDtoLoanListHiPinkaResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanListHiPinkaResponse"
+          }
+        }
+      },
+      "Loan": {
+        "type": "object",
+        "properties": {
+          "noRef": {
+            "type": "string"
+          },
+          "amountLoan": {
+            "type": "number"
+          },
+          "statusDebet": {
+            "type": "boolean"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "accountName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "disbursementDate": {
+            "type": "string"
+          }
+        }
+      },
+      "LoanListHiPinkaResponse": {
+        "type": "object",
+        "properties": {
+          "maxLoan": {
+            "type": "number"
+          },
+          "limitLoan": {
+            "type": "number"
+          },
+          "loan": {
+            "$ref": "#/components/schemas/Loan"
+          }
+        }
+      },
+      "LoanInquiryRequest": {
+        "required": [
+          "dstAccountNo"
+        ],
+        "type": "object",
+        "properties": {
+          "amountLoan": {
+            "type": "number"
+          },
+          "dstAccountNo": {
+            "type": "string"
+          }
+        }
+      },
+      "ISTResponseDtoLoanInquiryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanInquiryResponse"
+          }
+        }
+      },
+      "LoanInquiryResponse": {
+        "type": "object",
+        "properties": {
+          "dstAccountName": {
+            "type": "string"
+          },
+          "dstAccountNumber": {
+            "type": "string"
+          },
+          "srcAccountName": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "interest": {
+            "type": "number"
+          },
+          "fee": {
+            "type": "number"
+          },
+          "amountLoan": {
+            "type": "number"
+          },
+          "dueDate": {
+            "type": "string"
+          },
+          "autoDebetDate": {
+            "type": "string"
+          }
+        }
+      },
+      "ISTResponseDtoLoanHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanHistoryResponse"
+          }
+        }
+      },
+      "LoanHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/History"
+            }
+          }
+        }
+      },
+      "ISTResponseDtoLoanListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/LoanListResponse"
+          }
+        }
+      },
+      "LoanListResponse": {
+        "type": "object",
+        "properties": {
+          "loanList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Loan"
+            }
+          }
+        }
+      },
+      "HiTalangLoanCommunityListResponse": {
+        "type": "object",
+        "properties": {
+          "communityList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HiTalangCommunity"
+            }
+          }
+        }
+      },
+      "ISTResponseDtoHiTalangLoanCommunityListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/HiTalangLoanCommunityListResponse"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

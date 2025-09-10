@@ -1,0 +1,1162 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Document API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://mobilebankinguat2.nonprod.hibank.co.id/api/favoriteservice",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ],
+  "paths": {
+    "/favorite/list": {
+      "post": {
+        "tags": [
+          "favorite-controller"
+        ],
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeListFavoriteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoGetFavoriteListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favorite/addAndRemove": {
+      "post": {
+        "tags": [
+          "favorite-controller"
+        ],
+        "operationId": "addAndRemove",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveToFavoriteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favorite/getMetaData": {
+      "get": {
+        "tags": [
+          "favorite-controller"
+        ],
+        "operationId": "getMetaData",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "header",
+            "description": "Channel",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "MB"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-id",
+            "in": "header",
+            "description": "Device ID",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "DeviceId"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-os",
+            "in": "header",
+            "description": "Device OS",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Android"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-model",
+            "in": "header",
+            "description": "Device Model",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Model"
+                }
+              }
+            }
+          },
+          {
+            "name": "device-brand",
+            "in": "header",
+            "description": "Device Brand",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "Device-Brand"
+                }
+              }
+            }
+          },
+          {
+            "name": "app-version",
+            "in": "header",
+            "description": "App Version",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "1.0.0"
+                }
+              }
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "description": "Language",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "IDN"
+                }
+              }
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "header",
+            "description": "Latitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "header",
+            "description": "Longitude",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "default": "0.000000"
+                }
+              }
+            }
+          },
+          {
+            "name": "X-HB-Sess-Auth",
+            "in": "header",
+            "description": "X-HB-Sess-Auth",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/cache/reload": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "execute",
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/reload/{cachename}": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "execute_1",
+        "parameters": [
+          {
+            "name": "cachename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/list": {
+      "get": {
+        "tags": [
+          "cache-controller"
+        ],
+        "operationId": "list_1",
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ISTResponseDtoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ISTResponseDto": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      },
+      "GeListFavoriteRequest": {
+        "type": "object",
+        "properties": {
+          "transactionCategory": {
+            "type": "string",
+            "enum": [
+              "TransactionCategory.TRANSFER_ON_US",
+              "TransactionCategory.TRANSFER_OFF_US",
+              "TransactionCategory.TRANSFER_BI_FAST",
+              "TransactionCategory.TRANSFER_BI_FAST_PROXY",
+              "TransactionCategory.TRANSFER_SKN",
+              "TransactionCategory.TRANSFER_RTGS",
+              "TransactionCategory.TRANSFER_RTO",
+              "TransactionCategory.PURCHASE_TELCO",
+              "TransactionCategory.PURCHASE_PLN",
+              "TransactionCategory.PURCHASE_DATA_PLAN",
+              "TransactionCategory.PURCHASE_EMONEY",
+              "TransactionCategory.PURCHASE_FLAZZ",
+              "TransactionCategory.PAYMENT_PDAM",
+              "TransactionCategory.PAYMENT_PDAM_VA",
+              "TransactionCategory.PAYMENT_TV",
+              "TransactionCategory.PAYMENT_INTERNET",
+              "TransactionCategory.PAYMENT_BPHTB",
+              "TransactionCategory.PAYMENT_PBB",
+              "TransactionCategory.PAYMENT_PDL",
+              "TransactionCategory.QRIS_MPM",
+              "TransactionCategory.PAYMENT_PKB_SIGNAL",
+              "TransactionCategory.PAYMENT_PKB_SAMSAT",
+              "TransactionCategory.PAYMENT_PLN_NONTAGLIS",
+              "TransactionCategory.PAYMENT_PLN",
+              "TransactionCategory.PAYMENT_BPJS_KESEHATAN",
+              "TransactionCategory.PAYMENT_BPJSKETENAGAKERJAAN",
+              "TransactionCategory.PAYMENT_EDUCATION",
+              "TransactionCategory.PAYMENT_EDUCATION_SD",
+              "TransactionCategory.PAYMENT_EDUCATION_SMP",
+              "TransactionCategory.PAYMENT_EDUCATION_SMA",
+              "TransactionCategory.PAYMENT_EDUCATION_PONPES",
+              "TransactionCategory.PAYMENT_EDUCATION_UNIVERSITAS",
+              "TransactionCategory.PAYMENT_TELCO",
+              "TransactionCategory.PURCHASE_EWALLET",
+              "TransactionCategory.EWALLET_GOPAY",
+              "TransactionCategory.EWALLET_OVO",
+              "TransactionCategory.EWALLET_SHOPEEPAY",
+              "TransactionCategory.EWALLET_DANA",
+              "TransactionCategory.EWALLET_LINKAJA",
+              "TransactionCategory.INCOMING_TRANSACTION",
+              "TransactionCategory.HITALANG",
+              "TransactionCategory.HIPINKA"
+            ]
+          },
+          "transactionGroup": {
+            "type": "string",
+            "enum": [
+              "TRANSFER",
+              "PURCHASE",
+              "PAYMENT",
+              "QRIS",
+              "EWALLET"
+            ]
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "FinalListFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userProfileId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "favoriteName": {
+            "type": "string"
+          },
+          "transactionGroup": {
+            "type": "string",
+            "enum": [
+              "TRANSFER",
+              "PURCHASE",
+              "PAYMENT",
+              "QRIS",
+              "EWALLET"
+            ]
+          },
+          "transactionCategory": {
+            "type": "string",
+            "enum": [
+              "TransactionCategory.TRANSFER_ON_US",
+              "TransactionCategory.TRANSFER_OFF_US",
+              "TransactionCategory.TRANSFER_BI_FAST",
+              "TransactionCategory.TRANSFER_BI_FAST_PROXY",
+              "TransactionCategory.TRANSFER_SKN",
+              "TransactionCategory.TRANSFER_RTGS",
+              "TransactionCategory.TRANSFER_RTO",
+              "TransactionCategory.PURCHASE_TELCO",
+              "TransactionCategory.PURCHASE_PLN",
+              "TransactionCategory.PURCHASE_DATA_PLAN",
+              "TransactionCategory.PURCHASE_EMONEY",
+              "TransactionCategory.PURCHASE_FLAZZ",
+              "TransactionCategory.PAYMENT_PDAM",
+              "TransactionCategory.PAYMENT_PDAM_VA",
+              "TransactionCategory.PAYMENT_TV",
+              "TransactionCategory.PAYMENT_INTERNET",
+              "TransactionCategory.PAYMENT_BPHTB",
+              "TransactionCategory.PAYMENT_PBB",
+              "TransactionCategory.PAYMENT_PDL",
+              "TransactionCategory.QRIS_MPM",
+              "TransactionCategory.PAYMENT_PKB_SIGNAL",
+              "TransactionCategory.PAYMENT_PKB_SAMSAT",
+              "TransactionCategory.PAYMENT_PLN_NONTAGLIS",
+              "TransactionCategory.PAYMENT_PLN",
+              "TransactionCategory.PAYMENT_BPJS_KESEHATAN",
+              "TransactionCategory.PAYMENT_BPJSKETENAGAKERJAAN",
+              "TransactionCategory.PAYMENT_EDUCATION",
+              "TransactionCategory.PAYMENT_EDUCATION_SD",
+              "TransactionCategory.PAYMENT_EDUCATION_SMP",
+              "TransactionCategory.PAYMENT_EDUCATION_SMA",
+              "TransactionCategory.PAYMENT_EDUCATION_PONPES",
+              "TransactionCategory.PAYMENT_EDUCATION_UNIVERSITAS",
+              "TransactionCategory.PAYMENT_TELCO",
+              "TransactionCategory.PURCHASE_EWALLET",
+              "TransactionCategory.EWALLET_GOPAY",
+              "TransactionCategory.EWALLET_OVO",
+              "TransactionCategory.EWALLET_SHOPEEPAY",
+              "TransactionCategory.EWALLET_DANA",
+              "TransactionCategory.EWALLET_LINKAJA",
+              "TransactionCategory.INCOMING_TRANSACTION",
+              "TransactionCategory.HITALANG",
+              "TransactionCategory.HIPINKA"
+            ]
+          },
+          "transactionAmount": {
+            "type": "number"
+          },
+          "transactionCurrency": {
+            "type": "string",
+            "enum": [
+              "TransactionCurrency.IDR",
+              "TransactionCurrency.USD",
+              "TransactionCurrency.RP"
+            ]
+          },
+          "additionalData": {
+            "type": "string"
+          },
+          "destinationNumber": {
+            "type": "string"
+          },
+          "destinationOwnerName": {
+            "type": "string"
+          },
+          "destinationCode": {
+            "type": "string"
+          },
+          "destinationName": {
+            "type": "string"
+          },
+          "methodTransfer": {
+            "type": "string"
+          },
+          "sourceOfFund": {
+            "type": "string"
+          },
+          "receiverType": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "isPhoneNumber": {
+            "type": "boolean"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      },
+      "GetFavoriteListResponse": {
+        "type": "object",
+        "properties": {
+          "userFavoriteList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinalListFavoriteResponse"
+            }
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItem": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ISTResponseDtoGetFavoriteListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/GetFavoriteListResponse"
+          }
+        }
+      },
+      "SaveToFavoriteRequest": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string"
+          },
+          "transactionCategory": {
+            "type": "string",
+            "enum": [
+              "TransactionCategory.TRANSFER_ON_US",
+              "TransactionCategory.TRANSFER_OFF_US",
+              "TransactionCategory.TRANSFER_BI_FAST",
+              "TransactionCategory.TRANSFER_BI_FAST_PROXY",
+              "TransactionCategory.TRANSFER_SKN",
+              "TransactionCategory.TRANSFER_RTGS",
+              "TransactionCategory.TRANSFER_RTO",
+              "TransactionCategory.PURCHASE_TELCO",
+              "TransactionCategory.PURCHASE_PLN",
+              "TransactionCategory.PURCHASE_DATA_PLAN",
+              "TransactionCategory.PURCHASE_EMONEY",
+              "TransactionCategory.PURCHASE_FLAZZ",
+              "TransactionCategory.PAYMENT_PDAM",
+              "TransactionCategory.PAYMENT_PDAM_VA",
+              "TransactionCategory.PAYMENT_TV",
+              "TransactionCategory.PAYMENT_INTERNET",
+              "TransactionCategory.PAYMENT_BPHTB",
+              "TransactionCategory.PAYMENT_PBB",
+              "TransactionCategory.PAYMENT_PDL",
+              "TransactionCategory.QRIS_MPM",
+              "TransactionCategory.PAYMENT_PKB_SIGNAL",
+              "TransactionCategory.PAYMENT_PKB_SAMSAT",
+              "TransactionCategory.PAYMENT_PLN_NONTAGLIS",
+              "TransactionCategory.PAYMENT_PLN",
+              "TransactionCategory.PAYMENT_BPJS_KESEHATAN",
+              "TransactionCategory.PAYMENT_BPJSKETENAGAKERJAAN",
+              "TransactionCategory.PAYMENT_EDUCATION",
+              "TransactionCategory.PAYMENT_EDUCATION_SD",
+              "TransactionCategory.PAYMENT_EDUCATION_SMP",
+              "TransactionCategory.PAYMENT_EDUCATION_SMA",
+              "TransactionCategory.PAYMENT_EDUCATION_PONPES",
+              "TransactionCategory.PAYMENT_EDUCATION_UNIVERSITAS",
+              "TransactionCategory.PAYMENT_TELCO",
+              "TransactionCategory.PURCHASE_EWALLET",
+              "TransactionCategory.EWALLET_GOPAY",
+              "TransactionCategory.EWALLET_OVO",
+              "TransactionCategory.EWALLET_SHOPEEPAY",
+              "TransactionCategory.EWALLET_DANA",
+              "TransactionCategory.EWALLET_LINKAJA",
+              "TransactionCategory.INCOMING_TRANSACTION",
+              "TransactionCategory.HITALANG",
+              "TransactionCategory.HIPINKA"
+            ]
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "isPhoneNumber": {
+            "type": "boolean"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ISTResponseDtoObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "codeSystem": {
+            "type": "string"
+          },
+          "waitingTimeMin": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "engMessage": {
+            "type": "string"
+          },
+          "messageError": {
+            "type": "string"
+          },
+          "remainingAttempt": {
+            "type": "string"
+          },
+          "activityRefCode": {
+            "type": "string"
+          },
+          "result": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
