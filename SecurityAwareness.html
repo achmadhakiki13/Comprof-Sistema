@@ -19,6 +19,7 @@
     <style>
         :root {
             --color-headline: #d21b29; /* Main Red Accent */
+            --color-accent-hover: #E31A22;
         }
         body {
             font-family: 'Inter', 'Roboto', sans-serif;
@@ -76,6 +77,23 @@
             .timeline-item.right { left: 0%; }
             .timeline-item.left::after, .timeline-item.right::after { left: 2.5px; }
         }
+        .explore-btn {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(210, 27, 41, 0.6);
+            border-radius: 9999px;
+            color: #e5e7eb;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .explore-btn:hover {
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+            color: white;
+        }
+
         .fade-in-on-load, .fade-up-on-scroll, .timeline-item .timeline-content { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-on-load { transform: translateY(30px); }
         .fade-up-on-scroll { transform: translateY(50px); }
@@ -224,7 +242,7 @@
             <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
                 <div class="mb-4"><i class="fa-solid fa-fish text-4xl headline"></i></div>
                 <h3 class="text-lg font-semibold text-white mb-2">Prevent Phishing Attacks</h3>
-                <p class="text-sm text-slate-400 flex-grow">Empower employees to recognize and report malicious emails and social engineering attempts—the most common attack vectors.</p>
+                <p class="text-sm text-slate-400 flex-grow">Empower employees to recognize and report malicious emails and social engineering attempts the most common attack vectors.</p>
             </div>
             <div class="card-item card rounded-xl p-6 text-center flex flex-col fade-up-on-scroll">
                 <div class="mb-4"><i class="fa-solid fa-file-shield text-4xl headline"></i></div>
@@ -305,7 +323,7 @@
                                     <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.</p>
-                                <div class="mt-4"><a href="PeneterationTesting.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="PeneterationTesting.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -318,7 +336,7 @@
                                     <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
-                                <div class="mt-4"><a href="AuditRiskCompliance.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="AuditRiskCompliance.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -331,7 +349,7 @@
                                     <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.</p>
-                                <div class="mt-4"><a href="Personaldata.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="Personaldata.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -344,7 +362,7 @@
                                     <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Integrate diverse security products into a unified, effective, and centralized defense system.</p>
-                                <div class="mt-4"><a href="SecuritySolution.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="SecuritySolution.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -357,7 +375,7 @@
                                     <h3 class="text-xl font-semibold text-white">Application Security</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.</p>
-                                <div class="mt-4"><a href="AppliactionSecurity.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="AppliactionSecurity.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -370,7 +388,7 @@
                                     <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.</p>
-                                <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="InfrastructureNetwork.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -383,7 +401,7 @@
                                     <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.</p>
-                                <div class="mt-4"><a href="SecurityAwareness.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="SecurityAwareness.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
                     </div>
@@ -454,6 +472,37 @@
 <script>
     // All JS from your template file
     document.addEventListener('DOMContentLoaded', function () {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburgerBtn && mobileMenu) {
+                const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+                const closeMenuBtn = document.getElementById('close-menu-btn');
+                
+                const toggleMobileMenu = () => {
+                    const isActive = mobileMenu.classList.toggle('is-active');
+                    if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                };
+
+                hamburgerBtn.addEventListener('click', toggleMobileMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+                const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+                submenuToggles.forEach(toggle => {
+                    toggle.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const submenuId = toggle.dataset.submenuToggle + '-submenu';
+                        const submenu = document.getElementById(submenuId);
+                        const plusIcon = toggle.querySelector('.plus-icon');
+
+                        if (submenu && plusIcon) {
+                            plusIcon.classList.toggle('open');
+                            submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
+                        }
+                    });
+                });
+            }
+            
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

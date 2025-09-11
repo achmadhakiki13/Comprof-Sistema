@@ -1,0 +1,181 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Contact Form API",
+    "description": "API untuk mengirim email dari formulir kontak di situs web Sistema Datapilar. API ini menerima data formulir melalui permintaan POST dan mengirimkannya sebagai email menggunakan Mailtrap API.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Sistema Datapilar Support",
+      "email": "info@sistema.co.id"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://sistema2.infogram.co.id/",
+      "description": "Server Produksi"
+    }
+  ],
+  "paths": {
+    "/send_email.php": {
+      "post": {
+        "summary": "Kirim Pesan Formulir Kontak",
+        "description": "Memproses dan mengirimkan data yang diserahkan dari formulir kontak ke alamat email yang telah ditentukan.",
+        "operationId": "sendContactEmail",
+        "tags": [
+          "Contact"
+        ],
+        "requestBody": {
+          "description": "Data yang dikirimkan dari formulir kontak.",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "description": "Nama depan pengguna.",
+                    "example": "John"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "description": "Nama belakang pengguna.",
+                    "example": "Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Alamat email pengguna yang valid.",
+                    "example": "john.doe@example.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "description": "Nomor telepon pengguna (opsional).",
+                    "example": "+62 123 4567 890"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "description": "Subjek pesan.",
+                    "example": "Inquiry about WAAP"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Isi pesan dari pengguna.",
+                    "example": "I'd like to know more about your Web App & API Protection services."
+                  }
+                },
+                "required": [
+                  "firstName",
+                  "lastName",
+                  "email",
+                  "subject",
+                  "message"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respons akan selalu 200 OK, tetapi payload JSON akan menunjukkan apakah operasi berhasil atau gagal.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ErrorResponse"
+                    }
+                  ]
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Contoh Berhasil",
+                    "value": {
+                      "status": "success",
+                      "message": "Thank you! Your message has been sent successfully."
+                    }
+                  },
+                  "validationError": {
+                    "summary": "Contoh Kesalahan Validasi",
+                    "value": {
+                      "status": "error",
+                      "message": "Please fill in all required fields with valid data."
+                    }
+                  },
+                  "serverError": {
+                    "summary": "Contoh Kesalahan Server",
+                    "value": {
+                      "status": "error",
+                      "message": "Sorry, something went wrong. Your message could not be sent."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Metode Permintaan Tidak Valid. Terjadi jika metode selain POST digunakan.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidMethod": {
+                    "summary": "Contoh Metode Tidak Valid",
+                    "value": {
+                      "status": "error",
+                      "message": "Invalid request method."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "message": {
+            "type": "string",
+            "example": "Thank you! Your message has been sent successfully."
+          }
+        },
+        "required": [
+          "status",
+          "message"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "error"
+          },
+          "message": {
+            "type": "string",
+            "description": "Pesan deskriptif tentang kesalahan yang terjadi.",
+            "example": "Sorry, something went wrong. Your message could not be sent."
+          }
+        },
+        "required": [
+          "status",
+          "message"
+        ]
+      }
+    }
+  }
+}

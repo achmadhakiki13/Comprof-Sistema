@@ -1,13 +1,4 @@
 <?php
-// Impor kelas-kelas PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-// Use forward slashes for better server compatibility
-require 'PHPMailer-6.10.0/src/Exception.php';
-require 'PHPMailer-6.10.0/src/PHPMailer.php';
-require 'PHPMailer-6.10.0/src/SMTP.php';
-
 // Set header konten ke JSON
 header('Content-Type: application/json');
 
@@ -35,61 +26,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Buat instance PHPMailer
-    $mail = new PHPMailer(true);
+    // --- KONFIGURASI API ---
+    $api_token = '491dcea09261d1b598a330d6f7bf4ce0';
+    $api_url = 'https://send.api.mailtrap.io/api/send';
 
-    try {
-        // --- KONFIGURASI SERVER SMTP (UPDATED WITH NEW MAILTRAP INFO) ---
-        $mail->SMTPDebug = 0; // Set to 0 for production. Use 2 for temporary debugging.
-        $mail->isSMTP();
-        $mail->Host       = 'live.smtp.mailtrap.io'; //
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'api'; //
-        
-        // !!! SECURITY WARNING: This is a secret API key. Do not leave it in a public file.
-        $mail->Password   = '491dcea0926fd1b598a330d6f7bf4ce0'; //
-        
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS for Port 587
-        $mail->Port       = 587; //
+    // --- Buat body email ---
+    $sender_name = trim($firstName . " " . $lastName) ?: "Anonymous";
+    $email_body = "You have received a new message from your website contact form.\n\n";
+    $email_body .= "Name: " . $sender_name . "\n";
+    $email_body .= "Email: " . $from_email . "\n";
+    $email_body .= "Phone: " . $phone . "\n";
+    $email_body .= "Subject: " . $subject . "\n\n";
+    $email_body .= "Message:\n" . $message . "\n";
 
-        // --- PENGIRIM & PENERIMA ---
-        
-        // With Mailtrap, you often need to use a verified "From" address.
-        // Confirm with your IT admin what email address should be used here.
-        $mail->setFrom('no-reply@sistema.co.id', 'Website Contact Form');
-        
-        // The recipient email address you requested
-        $mail->addAddress('info@sistema.co.id');
+    // --- Siapkan data untuk dikirim ke API ---
+    $postData = [
+        'from' => ['email' => 'no-reply@sistema.co.id', 'name' => 'Website Contact Form'],
+        'to' => [['email' => 'info@sistema.co.id']],
+        'subject' => 'New Contact Form Sistema Website: ' . $subject,
+        'text' => $email_body,
+        'headers' => [
+            'Reply-To' => $from_email
+        ]
+    ];
+    
+    // --- Kirim request menggunakan cURL ---
+    $ch = curl_init($api_url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $api_token,
+        'Content-Type: application/json'
+    ]);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        // Atur agar balasan (Reply-To) mengarah ke email pengisi form
-        $sender_name = trim($firstName . " " . $lastName) ?: "Anonymous";
-        $mail->addReplyTo($from_email, $sender_name);
+    $response = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
 
-        // --- KONTEN EMAIL ---
-        $mail->isHTML(false); 
-        $mail->Subject = 'New Contact Form: ' . $subject;
-
-        // Buat body email
-        $email_body = "You have received a new message from your website contact form.\n\n";
-        $email_body .= "Name: " . $sender_name . "\n";
-        $email_body .= "Email: " . $from_email . "\n";
-        $email_body .= "Phone: " . $phone . "\n";
-        $email_body .= "Subject: " . $subject . "\n\n";
-        $email_body .= "Message:\n" . $message . "\n";
-        $mail->Body = $email_body;
-
-        // Kirim email
-        $mail->send();
+    // Periksa response dari API
+    if ($http_code == 200) {
         echo json_encode([
             'status' => 'success',
             'message' => 'Thank you! Your message has been sent successfully.'
         ]);
-
-    } catch (Exception $e) {
-        // Log the detailed error on the server instead of showing it to the user
-        error_log("Mailer Error: " . $mail->ErrorInfo);
-        
-        // Send a generic, user-friendly error message
+    } else {
+        error_log("API Error: HTTP Code " . $http_code . " - Response: " . $response);
         echo json_encode([
             'status' => 'error',
             'message' => 'Sorry, something went wrong. Your message could not be sent.'

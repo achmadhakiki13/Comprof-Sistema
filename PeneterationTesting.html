@@ -19,6 +19,8 @@
     <style>
         :root {
             --color-headline: #d21b29; /* Main Red Accent */
+            --color-accent-hover: #E31A22;
+            --transition: all 0.3s ease;
         }
         body {
             font-family: 'Inter', 'Roboto', sans-serif;
@@ -29,23 +31,95 @@
             overflow-x: hidden;
         }
         .nav_cus {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
-            background-color: rgba(13, 16, 24, 0.5); backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .hamburger-icon { position: relative; width: 24px; height: 18px; }
-        .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: white; border-radius: 9px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out; }
-        .hamburger-icon span:nth-child(1) { top: 0px; }
-        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
-        .hamburger-icon span:nth-child(4) { top: 16px; }
-        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) { top: 8px; width: 0%; left: 50%; }
-        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
-        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
-        #mobile-menu { position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 101; transform: translateX(100%); opacity: 0; transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        #mobile-menu.is-active { transform: translateX(0); opacity: 1; }
-        .mobile-menu-link { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 1.125rem; }
-        .plus-icon { transition: transform 0.3s ease; }
-        .plus-icon.open { transform: rotate(45deg); }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+    border-bottom: 1px solid transparent;
+}
+
+.nav_cus.nav-scrolled {
+    background-color: rgba(13, 16, 24, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-icon {
+    position: relative;
+    width: 24px;
+    height: 18px;
+}
+.hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+.hamburger-icon span:nth-child(1) { top: 0px; }
+.hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+.hamburger-icon span:nth-child(4) { top: 16px; }
+
+.hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+.hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+.hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
+#mobile-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 100;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    overflow-y: auto;
+}
+#mobile-menu.is-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.mobile-menu-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 1.125rem;
+    transition: var(--transition);
+}
+.mobile-menu-link:hover { color: var(--color-accent); }
+.plus-icon {
+    transition: transform 0.3s ease;
+}
+.plus-icon.open {
+    transform: rotate(45deg);
+}
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding-left: 1rem;
+}
         .solutions-dropdown {
             opacity: 0;
             visibility: hidden;
@@ -75,6 +149,22 @@
             .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
             .timeline-item.right { left: 0%; }
             .timeline-item.left::after, .timeline-item.right::after { left: 2.5px; }
+        }
+        .explore-btn {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(210, 27, 41, 0.6);
+            border-radius: 9999px;
+            color: #e5e7eb;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .explore-btn:hover {
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+            color: white;
         }
         .fade-in-on-load, .fade-up-on-scroll, .timeline-item .timeline-content { opacity: 0; transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in-on-load { transform: translateY(30px); }
@@ -183,10 +273,10 @@
     <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
     <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
         <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
-        <li><a href="solutions.html" class="mobile-menu-link">Solutions</a></li>
+        <li><a href="solutions.html" class="mobile-menu-link" >Solutions</a></li>
         <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
-        <li><a href="#blog-page" class="mobile-menu-link">Blog</a></li>
-        <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        <li><a href="blogs.html" class="mobile-menu-link">Blog</a></li>
+        <li><a href="contactus.html" class="mobile-menu-link">Support</a></li>
     </ul>
 </div>
 
@@ -274,114 +364,114 @@
     </section>
 </div>
 
-   <section id="proactive-support" class="bg-black py-20 sm:py-28">
-       <div class="mx-auto max-w-6xl px-6 lg:px-8">
-           <div class="relative">
-               <div class="swiper service-carousel">
-                   <div class="swiper-wrapper">
+    <section id="proactive-support" class="bg-black py-20 sm:py-28">
+        <div class="mx-auto max-w-6xl px-6 lg:px-8">
+            <div class="relative">
+                <div class="swiper service-carousel">
+                    <div class="swiper-wrapper">
 
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.</p>
-                               <div class="mt-4"><a href="PeneterationTesting.html" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.</p>
+                                <div class="mt-4"><a href="PeneterationTesting.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
 
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
-                               <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
+                                <div class="mt-4"><a href="AuditRiskCompliance.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
 
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.</p>
-                               <div class="mt-4"><a href="Personaldata.html" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.</p>
+                                <div class="mt-4"><a href="Personaldata.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
 
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Integrate diverse security products into a unified, effective, and centralized defense system.</p>
-                               <div class="mt-4"><a href="SecuritySolution.html" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Integrate diverse security products into a unified, effective, and centralized defense system.</p>
+                                <div class="mt-4"><a href="SecuritySolution.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Application Security</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.</p>
-                               <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Application Security</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.</p>
+                                <div class="mt-4"><a href="AppliactionSecurity.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.</p>
-                               <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.</p>
+                                <div class="mt-4"><a href="InfrastructureNetwork.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
 
-                       <div class="swiper-slide h-auto pb-12">
-                           <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
-                               <div class="flex items-center gap-4 mb-4">
-                                   <div class="bg-[#950000] p-3 rounded-lg">
-                                       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
-                                   </div>
-                                   <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
-                               </div>
-                               <p class="text-gray-400 text-sm flex-grow">Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.</p>
-                               <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="swiper-pagination !bottom-0"></div>
-               </div>
-               <div class="swiper-button-prev"></div>
-               <div class="swiper-button-next"></div>
-           </div>
-       </div>
-   </section>
+                        <div class="swiper-slide h-auto pb-12">
+                            <div class="h-full bg-[#111111] border border-gray-800/80 rounded-xl p-8 flex flex-col transition-all ease-in-out duration-300">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div class="bg-[#950000] p-3 rounded-lg">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
+                                </div>
+                                <p class="text-gray-400 text-sm flex-grow">Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.</p>
+                                <div class="mt-4"><a href="SecurityAwareness.html" class="explore-btn">Explore</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination !bottom-0"></div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
 
 <footer class="bg-[#242a30] text-white">
     <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">

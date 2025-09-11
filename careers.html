@@ -232,20 +232,10 @@
     <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
     <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
         <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
-        <li>
-            <a href="#" class="mobile-menu-link" data-submenu-toggle="solutions-mobile">
-                <span>Solutions</span>
-                <span class="plus-icon">+</span>
-            </a>
-            <ul id="solutions-mobile-submenu" class="submenu">
-                 <li><a href="solutions.html" class="mobile-menu-link text-base">Solutions Overview</a></li>
-                 <li><a href="solutions.html#proactive-support" class="mobile-menu-link text-base">Our Services</a></li>
-                 <li><a href="solutions.html#streamlined-solutions-section" class="mobile-menu-link text-base">Our Solutions</a></li>
-            </ul>
-        </li>
+        <li><a href="solutions.html" class="mobile-menu-link" >Solutions</a></li>
         <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
         <li><a href="blogs.html" class="mobile-menu-link">Blog</a></li>
-        <li><a href="contactus.html" class="mobile-menu-link">Contact Us</a></li>
+        <li><a href="contactus.html" class="mobile-menu-link">Support</a></li>
     </ul>
 </div>
 
@@ -490,7 +480,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- MOBILE MENU LOGIC ---
-    // (This part remains unchanged)
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburgerBtn && mobileMenu) {
+                const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+                const closeMenuBtn = document.getElementById('close-menu-btn');
+                
+                const toggleMobileMenu = () => {
+                    const isActive = mobileMenu.classList.toggle('is-active');
+                    if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                };
+
+                hamburgerBtn.addEventListener('click', toggleMobileMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+                const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+                submenuToggles.forEach(toggle => {
+                    toggle.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const submenuId = toggle.dataset.submenuToggle + '-submenu';
+                        const submenu = document.getElementById(submenuId);
+                        const plusIcon = toggle.querySelector('.plus-icon');
+
+                        if (submenu && plusIcon) {
+                            plusIcon.classList.toggle('open');
+                            submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
+                        }
+                    });
+                });
+            }
 
     // --- HERO & SCROLL ANIMATIONS ---
     const observer = new IntersectionObserver((entries) => {

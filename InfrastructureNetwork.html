@@ -19,6 +19,7 @@
     <style>
         :root {
             --color-headline: #d21b29; /* Main Red Accent */
+            --color-accent-hover: #E31A22;
         }
         body {
             font-family: 'Inter', 'Roboto', sans-serif;
@@ -29,23 +30,95 @@
             overflow-x: hidden;
         }
         .nav_cus {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 50;
-            background-color: rgba(13, 16, 24, 0.5); backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .hamburger-icon { position: relative; width: 24px; height: 18px; }
-        .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: white; border-radius: 9px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out; }
-        .hamburger-icon span:nth-child(1) { top: 0px; }
-        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
-        .hamburger-icon span:nth-child(4) { top: 16px; }
-        .hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) { top: 8px; width: 0%; left: 50%; }
-        .hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
-        .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
-        #mobile-menu { position: fixed; right: 0; top: 0; bottom: 0; width: 80%; max-width: 400px; background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 101; transform: translateX(100%); opacity: 0; transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; display: flex; flex-direction: column; padding-top: 5rem; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        #mobile-menu.is-active { transform: translateX(0); opacity: 1; }
-        .mobile-menu-link { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; font-size: 1.125rem; }
-        .plus-icon { transition: transform 0.3s ease; }
-        .plus-icon.open { transform: rotate(45deg); }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+    border-bottom: 1px solid transparent;
+}
+
+.nav_cus.nav-scrolled {
+    background-color: rgba(13, 16, 24, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-icon {
+    position: relative;
+    width: 24px;
+    height: 18px;
+}
+.hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: white;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+.hamburger-icon span:nth-child(1) { top: 0px; }
+.hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: 8px; }
+.hamburger-icon span:nth-child(4) { top: 16px; }
+
+.hamburger-icon.open span:nth-child(1), .hamburger-icon.open span:nth-child(4) {
+    top: 8px;
+    width: 0%;
+    left: 50%;
+}
+.hamburger-icon.open span:nth-child(2) { transform: rotate(45deg); }
+.hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg); }
+
+#mobile-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 100;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+    overflow-y: auto;
+}
+#mobile-menu.is-active {
+    transform: translateX(0);
+    opacity: 1;
+}
+.mobile-menu-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 1.125rem;
+    transition: var(--transition);
+}
+.mobile-menu-link:hover { color: var(--color-accent); }
+.plus-icon {
+    transition: transform 0.3s ease;
+}
+.plus-icon.open {
+    transform: rotate(45deg);
+}
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding-left: 1rem;
+}
         .solutions-dropdown {
             opacity: 0;
             visibility: hidden;
@@ -56,7 +129,23 @@
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
-}
+        }
+        .explore-btn {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(210, 27, 41, 0.6);
+            border-radius: 9999px;
+            color: #e5e7eb;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .explore-btn:hover {
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+            color: white;
+        } 
         .submenu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.4s ease-out; padding-left: 1rem; }
         .headline { color: var(--color-headline); }
         .text-accent { color: #d21b29; }
@@ -180,7 +269,15 @@
 </nav>
 
 <div id="mobile-menu">
-    </div>
+    <button id="close-menu-btn" class="absolute top-6 right-8 text-white text-4xl font-light hover:text-gray-400 transition-colors">×</button>
+    <ul class="text-white text-xl font-bold space-y-2 px-8 w-full">
+        <li><a href="about.html" class="mobile-menu-link">About Sistema</a></li>
+        <li><a href="solutions.html" class="mobile-menu-link" >Solutions</a></li>
+        <li><a href="careers.html" class="mobile-menu-link">Careers</a></li>
+        <li><a href="blogs.html" class="mobile-menu-link">Blog</a></li>
+        <li><a href="contactus.html" class="mobile-menu-link">Support</a></li>
+    </ul>
+</div>
 
 <div class="container mx-auto px-4 py-16 md:py-24">
     <header class="text-center mb-20 md:mb-28 pt-16">
@@ -298,7 +395,7 @@
                                     <h3 class="text-xl font-semibold text-white">Penetration Testing & Red Teaming</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Uncover vulnerabilities with simulated cyberattacks to enhance your organization's resilience against real-world threats.</p>
-                                <div class="mt-4"><a href="PeneterationTesting.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="PeneterationTesting.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -312,7 +409,7 @@
                                     <h3 class="text-xl font-semibold text-white">Audit, Risk Assurance & Compliance</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Focus your security investments effectively by identifying gaps, mitigating risks, and ensuring regulatory compliance.</p>
-                                <div class="mt-4"><a href="AuditRiskCompliance.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="AuditRiskCompliance.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -326,7 +423,7 @@
                                     <h3 class="text-xl font-semibold text-white">Personal Data Protection</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Ensure the confidentiality and integrity of personal data through a robust and compliant protection framework.</p>
-                                <div class="mt-4"><a href="Personaldata.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="Personaldata.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -340,7 +437,7 @@
                                     <h3 class="text-xl font-semibold text-white">Security Solutions Integration</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Integrate diverse security products into a unified, effective, and centralized defense system.</p>
-                                <div class="mt-4"><a href="SecuritySolution.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="SecuritySolution.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -353,7 +450,7 @@
                                     <h3 class="text-xl font-semibold text-white">Application Security</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Protect your applications from threats with comprehensive testing, code analysis, and DevSecOps practices.</p>
-                                <div class="mt-4"><a href="AppliactionSecurity.html" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="AppliactionSecurity.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -366,7 +463,7 @@
                                     <h3 class="text-xl font-semibold text-white">Infrastructure & Network Security</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Secure your servers, cloud, and network with a layered defense architecture to prevent unauthorized access.</p>
-                                <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="InfrastructureNetwork.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
 
@@ -379,7 +476,7 @@
                                     <h3 class="text-xl font-semibold text-white">Security Awareness Training</h3>
                                 </div>
                                 <p class="text-gray-400 text-sm flex-grow">Build a strong 'human firewall' by training your employees to recognize and respond to cyber threats.</p>
-                                <div class="mt-4"><a href="#" class="font-semibold text-red-500">Explore</a></div>
+                                <div class="mt-4"><a href="SecurityAwareness.html" class="explore-btn">Explore</a></div>
                             </div>
                         </div>
                     </div>
@@ -450,6 +547,37 @@
 <script>
     // All JS from your template file
     document.addEventListener('DOMContentLoaded', function () {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburgerBtn && mobileMenu) {
+                const hamburgerIcon = hamburgerBtn.querySelector('.hamburger-icon');
+                const closeMenuBtn = document.getElementById('close-menu-btn');
+                
+                const toggleMobileMenu = () => {
+                    const isActive = mobileMenu.classList.toggle('is-active');
+                    if (hamburgerIcon) hamburgerIcon.classList.toggle('open', isActive);
+                    document.body.style.overflow = isActive ? 'hidden' : '';
+                };
+
+                hamburgerBtn.addEventListener('click', toggleMobileMenu);
+                if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMobileMenu);
+
+                const submenuToggles = mobileMenu.querySelectorAll('[data-submenu-toggle]');
+                submenuToggles.forEach(toggle => {
+                    toggle.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const submenuId = toggle.dataset.submenuToggle + '-submenu';
+                        const submenu = document.getElementById(submenuId);
+                        const plusIcon = toggle.querySelector('.plus-icon');
+
+                        if (submenu && plusIcon) {
+                            plusIcon.classList.toggle('open');
+                            submenu.style.maxHeight = submenu.style.maxHeight ? null : submenu.scrollHeight + "px";
+                        }
+                    });
+                });
+            }
+
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
